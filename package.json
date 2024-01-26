@@ -1,0 +1,20 @@
+{
+  "name": "mupin.dev",
+  "private": true,
+  "scripts": {
+    "build": "turbo build",
+    "dev": "turbo dev",
+    "lint": "turbo lint",
+    "format": "prettier -w -c \"**/*.{ts,tsx,md}\""
+  },
+  "devDependencies": {
+    "@mupin.dev/eslint-config": "workspace:*",
+    "@mupin.dev/typescript-config": "workspace:*",
+    "prettier": "^3.1.1",
+    "turbo": "latest"
+  },
+  "packageManager": "pnpm@8.9.0",
+  "engines": {
+    "node": ">=18"
+  }
+}
