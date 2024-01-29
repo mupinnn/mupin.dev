@@ -1,13 +1,22 @@
+import { PostList } from "@/components/post";
+
 export default function Home() {
   return (
-    <div className="flex flex-col justify-center items-center h-screen">
-      <h1 className="font-serif">
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Recusandae, ea.
-      </h1>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam, mollitia.</p>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam, mollitia.</p>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam, mollitia.</p>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam, mollitia.</p>
-    </div>
+    <main className="p-6 max-w-3xl mx-auto flex-1">
+      <header className="flex flex-col gap-4">
+        <h1 className="font-serif text-5xl font-bold">
+          Faqih's
+          <br />
+          Memoir
+        </h1>
+        <h2>
+          Documenting life and all things happening. Occasions, thoughts or reflections. Anything.
+        </h2>
+      </header>
+
+      <hr />
+
+      <PostList />
+    </main>
   );
 }

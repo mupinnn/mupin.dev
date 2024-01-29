@@ -1,5 +1,9 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans, Lora } from "next/font/google";
+
+import { Footer } from "@/components";
+import { ThemeProvider } from "@/providers";
+
 import "./globals.css";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
@@ -27,7 +31,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${plusJakartaSans.variable} ${lora.variable}`}>
-      <body>{children}</body>
+      <body className="flex flex-col min-h-screen bg-slate-50 text-slate-900 dark:bg-slate-900 dark:text-slate-50">
+        <ThemeProvider>
+          {children}
+          <Footer />
+        </ThemeProvider>
+      </body>
     </html>
   );
 }
