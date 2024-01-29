@@ -17,8 +17,8 @@ export default function PostList() {
     <section className="flex flex-col gap-6">
       {dummyPost.length > 0 ? (
         dummyPost.map((post, i) => (
-          <Link href={post.slug}>
-            <PostItem key={i} {...post} />
+          <Link href={post.slug} key={i}>
+            <PostItem {...post} />
           </Link>
         ))
       ) : (
