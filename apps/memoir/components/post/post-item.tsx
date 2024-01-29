@@ -1,4 +1,5 @@
 export interface PostItemProps {
+  slug: string;
   title: string;
   excerpt: string;
   createdAt: string;

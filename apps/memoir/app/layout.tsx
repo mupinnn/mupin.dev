@@ -33,7 +33,7 @@ export default function RootLayout({
     <html lang="en" className={`${plusJakartaSans.variable} ${lora.variable}`}>
       <body className="flex flex-col min-h-screen bg-slate-50 text-slate-900 dark:bg-slate-900 dark:text-slate-50">
         <ThemeProvider>
-          {children}
+          <main className="p-6 max-w-3xl w-full mx-auto flex-1">{children}</main>
           <Footer />
         </ThemeProvider>
       </body>
