@@ -20,7 +20,8 @@
   "devDependencies": {
     "@mupin.dev/eslint-config": "workspace:*",
     "@mupin.dev/typescript-config": "workspace:*",
-    "@tailwindcss/typography": "^0.5.10",
+    "@mupin.dev/tailwind-config": "workspace:*",
+    "@mupin.dev/shared": "workspace:*",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

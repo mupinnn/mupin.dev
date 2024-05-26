@@ -1,10 +1,6 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans, Lora } from "next/font/google";
-
-import { Footer } from "@/components";
-import { ThemeProvider } from "@/providers";
-
-import "./globals.css";
+import "@mupin.dev/tailwind-config/style";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -31,11 +27,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${plusJakartaSans.variable} ${lora.variable}`}>
-      <body className="flex flex-col min-h-screen bg-slate-50 text-slate-900 dark:bg-slate-900 dark:text-slate-50">
-        <ThemeProvider>
-          <main className="p-6 max-w-3xl w-full mx-auto flex-1">{children}</main>
-          <Footer />
-        </ThemeProvider>
+      <body className="flex min-h-screen flex-col bg-slate-50 text-slate-900 dark:bg-slate-900 dark:text-slate-50">
+        <main className="mx-auto w-full max-w-prose flex-1 p-6">{children}</main>
       </body>
     </html>
   );
