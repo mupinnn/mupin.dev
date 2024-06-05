@@ -1,3 +1,6 @@
+import { twMerge } from "tailwind-merge";
+import { ClassValue, clsx } from "clsx";
+
 export const hexToRgb = (hex: string) => {
   hex = hex.replace("#", "");
   hex = hex.length === 3 ? hex.replace(/./g, "$&$&") : hex;
@@ -6,4 +9,8 @@ export const hexToRgb = (hex: string) => {
   const b = parseInt(hex.substring(4, 6), 16);
 
   return `${r} ${g} ${b}`;
+};
+
+export const cn = (...inputs: ClassValue[]) => {
+  return twMerge(clsx(...inputs));
 };

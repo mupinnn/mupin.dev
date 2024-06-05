@@ -1,16 +1,17 @@
 import type { Config } from "tailwindcss";
 import colors from "tailwindcss/colors";
-import { hexToRgb } from "@mupin.dev/utils";
 import typography from "@tailwindcss/typography";
+import { hexToRgb } from "./src";
 
 const config = {
   darkMode: "class",
-  content: [
-    "./pages/**/*.{js,ts,jsx,tsx,mdx,md}",
-    "./components/**/*.{js,ts,jsx,tsx,mdx,md}",
-    "./app/**/*.{js,ts,jsx,tsx,mdx,md}",
-    "../../packages/shared/**/*.{js,ts,jsx,tsx,mdx.md}",
-  ],
+  content: [],
+  // content: [
+  //   "./pages/**/*.{js,ts,jsx,tsx,mdx,md}",
+  //   "./components/**/*.{js,ts,jsx,tsx,mdx,md}",
+  //   "./app/**/*.{js,ts,jsx,tsx,mdx,md}",
+  //   "../../packages/shared/**/*.{js,ts,jsx,tsx,mdx.md}",
+  // ],
   theme: {
     colors: {
       slate: colors.slate,
