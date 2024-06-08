@@ -16,9 +16,8 @@ const lora = Lora({
 });
 
 export const metadata: Metadata = {
-  title: "Faqih's Memoir",
-  description:
-    "A Faqih personal memoir. Documenting life and all things happening. Occasions, thoughts or reflections. Anything.",
+  title: "Ahmad Muwaffaq | Front-End Developer",
+  description: "I'm a web developer that tinkering the front of the web.",
 };
 
 export default function RootLayout({

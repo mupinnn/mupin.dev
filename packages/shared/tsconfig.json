@@ -1,0 +1,12 @@
+{
+  "extends": "@mupin.dev/typescript-config/react-library.json",
+  "include": [
+    "src",
+    "**/*.ts",
+    "**/*.tsx"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
+}
