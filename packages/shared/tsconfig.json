@@ -1,8 +1,5 @@
 {
   "extends": "@mupin.dev/typescript-config/react-library.json",
-  "compilerOptions": {
-    "outDir": "dist"
-  },
   "include": [
     "src",
     "**/*.ts",

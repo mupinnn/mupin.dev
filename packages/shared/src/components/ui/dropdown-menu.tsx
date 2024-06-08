@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import * as DropdownMenuPrimitive from "@radix-ui/react-dropdown-menu";
 import { cn } from "../../utils";
 
@@ -44,7 +45,7 @@ const DropdownMenuRadioItem = React.forwardRef<
   <DropdownMenuPrimitive.RadioItem
     ref={ref}
     className={cn(
-      "inline-flex items-center gap-2 rounded p-1 data-[highlighted]:bg-slate-200 data-[state=checked]:bg-slate-300 data-[state=checked]:font-semibold dark:data-[highlighted]:bg-slate-900 dark:data-[state=checked]:bg-slate-900",
+      "inline-flex cursor-pointer items-center gap-2 rounded p-1 data-[highlighted]:bg-slate-200 data-[state=checked]:bg-slate-300 data-[state=checked]:font-semibold dark:data-[highlighted]:bg-slate-900 dark:data-[state=checked]:bg-slate-900",
       className
     )}
     {...props}
