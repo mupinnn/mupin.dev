@@ -8,4 +8,5 @@ module.exports = {
   endOfLine: "lf",
   quoteProps: "preserve",
   trailingComma: "es5",
+  plugins: ["prettier-plugin-tailwindcss"],
 };
