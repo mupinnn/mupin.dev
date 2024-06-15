@@ -1,141 +1,111 @@
 {
   "$schema": "https://raw.githubusercontent.com/jsonresume/resume-schema/v1.0.0/schema.json",
   "basics": {
-    "name": "John Doe",
-    "label": "Programmer",
+    "name": "Ahmad <b>Muwaffaq</b>",
+    "label": "Front-End Developer",
     "image": "",
-    "email": "richard.hendriks@mail.com",
-    "phone": "(912) 555-4321",
-    "url": "http://richardhendricks.example.com",
-    "summary": "Richard hails from Tulsa. He has earned degrees from the University of Oklahoma and Stanford. (Go Sooners and Cardinal!) Before starting Pied Piper, he worked for Hooli as a part time software developer. While his work focuses on applied information theory, mostly optimizing lossless compression schema of both the length-limited and adaptive variants, his non-work interests range widely, everything from quantum computing to chaos theory. He could tell you about it, but THAT would NOT be a “length-limited” conversation!",
-    "location": {
-      "address": "2712 Broadway St",
-      "postalCode": "CA 94115",
-      "city": "San Francisco",
-      "countryCode": "US",
-      "region": "California"
-    },
+    "email": "itsmupin@gmail.com",
+    "phone": "",
+    "url": "https://mupin.dev",
+    "summary": "<p>A passionate front-end developer with 2+ years of experience developing user interfaces around the web. I'm helping to bridge the gap between design and technical implementation for crafting seamless user experiences.</p><p>I'm experienced in the React ecosystem from barebone React to full-fledged Next.js. I also had a nice experience using Vue and Nuxt, and I'm always eager to explore new tools that can strengthen my skills.</p>",
     "profiles": [
       {
-        "network": "Twitter",
-        "username": "neutralthoughts",
-        "url": ""
+        "network": "LinkedIn",
+        "username": "ahmad-muwaffaq",
+        "url": "https://www.linkedin.com/in/ahmad-muwaffaq/"
       },
       {
-        "network": "SoundCloud",
-        "username": "dandymusicnl",
-        "url": "https://soundcloud.example.com/dandymusicnl"
+        "network": "GitHub",
+        "username": "mupinnn",
+        "url": "https://github.com/mupinnn"
       }
     ]
   },
   "work": [
     {
-      "name": "Pied Piper",
-      "location": "Palo Alto, CA",
-      "description": "Awesome compression company",
-      "position": "CEO/President",
-      "url": "http://piedpiper.example.com",
-      "startDate": "2013-12-01",
-      "endDate": "2014-12-01",
-      "summary": "Pied Piper is a multi-platform technology based on a proprietary universal compression algorithm that has consistently fielded high Weisman Scores™ that are not merely competitive, but approach the theoretical limit of lossless compression.",
+      "name": "Juragan Material",
+      "position": "Front-End Developer",
+      "url": "https://juraganmaterial.id",
+      "startDate": "2022-06-01",
+      "endDate": "2022-06-01",
+      "location": "Jakarta, Indonesia",
       "highlights": [
-        "Build an algorithm for artist to detect if their music was violating copy right infringement laws",
-        "Successfully won Techcrunch Disrupt",
-        "Optimized an algorithm that holds the current world record for Weisman Scores"
+        "Develop and maintain in-house content management system (CMS) and e-commerce platform to serve our primary business processes.",
+        "Develop and maintain Juragan Vendor, inventory management system for our 200+ happy registered vendor.",
+        "Refactor and redesign the architecture of our e-commerce platform, from Nuxt v2 to Nuxt v3. Resulting in ~50% performance gain.",
+        "Develop, maintain and architecturing in-house UI component library to reduce repetitive components across repositories and to standardize our products look and feel."
       ]
-    }
-  ],
-  "volunteer": [
+    },
     {
-      "organization": "CoderDojo",
-      "position": "Teacher",
-      "url": "http://coderdojo.example.com/",
-      "startDate": "2012-01-01",
-      "endDate": "2013-01-01",
-      "summary": "Global movement of free coding clubs for young people.",
-      "highlights": ["Awarded 'Teacher of the Month'"]
+      "name": "Freelance",
+      "position": "Front-End Developer",
+      "startDate": "2020-09-01",
+      "endDate": "2022-03-01",
+      "location": "Remote",
+      "highlights": [
+        "Hired for 3 months to help build a dashboard for a school management system using Ant Design and React.",
+        "Trusted by digital solutions company to slice design to code in 6 microsite projects; utilizing Gulp, Tailwind CSS and jQuery.",
+        "Develop and maintain 5 landing page  sites for local convection company sub-business. | Taking advantage of GatsbyJS to maximize performance. | Integrating Google Spreadsheet with Google App Script to gather order form information.",
+        "Handling revamp for a company profile website and integrating Google App Script with Spreadsheet and Drive."
+      ]
+    },
+    {
+      "name": "Garena",
+      "position": "Front-End Developer, Intern",
+      "startDate": "2019-12-01",
+      "endDate": "2020-10-01",
+      "location": "Jakarta, Indonesia",
+      "highlights": [
+        "Mainly responsible for translating design into front-end code and integrating with back-end services utilizing React, Redux and SCSS.",
+        "Maintain and improve web and animation performance.",
+        "Contributed to the in-house front-end project boilerplate by creating an error reporting helper for an API call.",
+        "Handled 15 projects which each project has daily active users ranging from 10K to over 50K."
+      ]
     }
   ],
   "education": [
     {
-      "institution": "University of Oklahoma",
-      "url": "https://www.ou.edu/",
-      "area": "Information Technology",
-      "studyType": "Bachelor",
-      "startDate": "2011-06-01",
-      "endDate": "2014-01-01",
-      "score": "4.0",
-      "courses": ["DB1101 - Basic SQL", "CS2011 - Java Introduction"]
-    }
-  ],
-  "awards": [
-    {
-      "title": "Digital Compression Pioneer Award",
-      "date": "2014-11-01",
-      "awarder": "Techcrunch",
-      "summary": "There is no spoon."
-    }
-  ],
-  "publications": [
-    {
-      "name": "Video compression for 3d media",
-      "publisher": "Hooli",
-      "releaseDate": "2014-10-01",
-      "url": "http://en.wikipedia.org/wiki/Silicon_Valley_(TV_series)",
-      "summary": "Innovative middle-out compression algorithm that changes the way we store data."
+      "institution": "SMK Negeri 24 Jakarta",
+      "url": "https://smkn24jkt.sch.id/",
+      "area": "Rekayasa Perangkat Lunak<br />(Software Engineering)",
+      "studyType": "Vocational High School",
+      "startDate": "2016-06-01",
+      "endDate": "2019-06-01",
+      "location": "Jakarta, Indonesia"
     }
   ],
   "skills": [
     {
-      "name": "Web Development",
-      "level": "Master",
-      "keywords": ["HTML", "CSS", "Javascript"]
+      "name": "Languages",
+      "keywords": ["HTMl", "CSS", "SCSS", "JavaScript"]
     },
     {
-      "name": "Compression",
-      "level": "Master",
-      "keywords": ["Mpeg", "MP4", "GIF"]
-    }
-  ],
-  "languages": [
+      "name": "Frameworks & Libraries",
+      "keywords": ["React", "Vue", "Next.js", "Nuxt", "Quasar", "Tailwind CSS"]
+    },
     {
-      "language": "English",
-      "fluency": "Native speaker"
-    }
-  ],
-  "interests": [
+      "name": "Tools",
+      "keywords": [
+        "Vite",
+        "Vitest",
+        "Jest",
+        "Webpack",
+        "Gulp",
+        "PNPM/NPM/Yarn",
+        "Turborepo",
+        "Git"
+      ]
+    },
     {
-      "name": "Wildlife",
-      "keywords": ["Ferrets", "Unicorns"]
-    }
-  ],
-  "references": [
-    {
-      "name": "Erlich Bachman",
-      "reference": "It is my pleasure to recommend Richard, his performance working as a consultant for Main St. Company proved that he will be a valuable addition to any company."
+      "name": "Familiar",
+      "keywords": ["TypeScript", "Node.js", "Gatsby", "Redux", "GraphQL"]
     }
   ],
   "projects": [
     {
-      "name": "Miss Direction",
-      "description": "A mapping engine that misguides you",
-      "highlights": [
-        "Won award at AIHacks 2016",
-        "Built by all women team of newbie programmers",
-        "Using modern technologies such as GoogleMaps, Chrome Extension and Javascript"
-      ],
-      "keywords": ["GoogleMaps", "Chrome Extension", "Javascript"],
-      "startDate": "2016-08-24",
-      "endDate": "2016-08-24",
-      "url": "missdirection.example.com",
-      "roles": ["Team lead", "Designer"],
-      "entity": "Smoogle",
-      "type": "application"
+      "name": "Garena Intern Projects",
+      "url": "http://bit.ly/4bRyvBk",
+      "description": "I'm handling 15 projects during my intern period as a Front-End Developer Intern at Garena Indonesia. (Stack: React, Redux, SCSS)."
     }
-  ],
-  "meta": {
-    "canonical": "https://raw.githubusercontent.com/jsonresume/resume-schema/master/sample.resume.json",
-    "version": "v1.0.0",
-    "lastModified": "2017-12-24T15:53:00"
-  }
+  ]
 }
