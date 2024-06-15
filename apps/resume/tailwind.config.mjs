@@ -8,10 +8,6 @@ export default {
       typography: {
         DEFAULT: {
           css: {
-            fontWeight: "500",
-            fontSize: "0.625rem",
-            lineHeight: 1,
-
             "p:first-child": {
               marginTop: 0,
             },

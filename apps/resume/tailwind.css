@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.prose {
+  font-weight: 500;
+  font-size: 0.625rem;
+  line-height: 1;
+}
+
+@media screen(sm) {
+  .prose {
+    font-size: 0.875rem;
+  }
+}
