@@ -25,5 +25,8 @@
   },
   "lint-staged": {
     "**/*.{ts,tsx,md,mdx,js,jsx,json,yaml,yml,html,css,scss,sass,astro}": "prettier -w"
+  },
+  "dependencies": {
+    "vercel": "^34.2.7"
   }
 }
