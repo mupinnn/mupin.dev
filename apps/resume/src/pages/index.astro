@@ -34,7 +34,7 @@ const containerClasses = cn(
           >
             {resume.basics.email}
           </a>
-          <span>{resume.basics.phone}</span>
+          <span>{import.meta.env.PRIVATE_PHONE_NUMBER}</span>
           {
             resume.basics.profiles.map((profile) => {
               const url = new URL(profile.url);
