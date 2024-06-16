@@ -1,6 +1,5 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "buildCommand": "cd ../../ && pnpm build --filter @mupin.dev/main",
-  "framework": "nextjs",
-  "outputDirectory": "apps/main/out"
+  "framework": "nextjs"
 }
