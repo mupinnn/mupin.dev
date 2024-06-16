@@ -2,9 +2,11 @@
 
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 
-export default function ThemeProvider({ children }: Readonly<{ children: React.ReactNode }>) {
+type ThemeProviderProps = Parameters<typeof NextThemesProvider>[0];
+
+export default function ThemeProvider({ children, ...props }: ThemeProviderProps) {
   return (
-    <NextThemesProvider attribute="class" defaultTheme="dark" enableSystem>
+    <NextThemesProvider attribute="class" defaultTheme="dark" enableSystem {...props}>
       {children}
     </NextThemesProvider>
   );

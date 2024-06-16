@@ -24,6 +24,6 @@
     "node": ">=18"
   },
   "lint-staged": {
-    "**/*.{ts,tsx,md,mdx,js,jsx,json,yaml,yml,html,css,scss,sass}": "prettier -w"
+    "**/*.{ts,tsx,md,mdx,js,jsx,json,yaml,yml,html,css,scss,sass,astro}": "prettier -w"
   }
 }

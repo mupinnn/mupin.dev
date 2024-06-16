@@ -1,6 +1,7 @@
 import type { Config } from "tailwindcss";
 import colors from "tailwindcss/colors";
 import typography from "@tailwindcss/typography";
+import defaultTheme from "tailwindcss/defaultTheme";
 
 // TODO: observe compile error when moving `hexToRgb` to utils folder.
 const hexToRgb = (hex: string) => {
@@ -16,10 +17,11 @@ const hexToRgb = (hex: string) => {
 const config = {
   darkMode: "class",
   content: [
-    "./pages/**/*.{js,ts,jsx,tsx,mdx,md}",
-    "./components/**/*.{js,ts,jsx,tsx,mdx,md}",
-    "./app/**/*.{js,ts,jsx,tsx,mdx,md}",
-    "../../packages/shared/**/*.{js,ts,jsx,tsx,mdx.md}",
+    "./pages/**/*.{js,ts,jsx,tsx,mdx,md,astro,html,svelte,vue}",
+    "./components/**/*.{js,ts,jsx,tsx,mdx,md,astro,html,svelte,vue}",
+    "./app/**/*.{js,ts,jsx,tsx,mdx,md,astro,html,svelte,vue}",
+    "./src/**/*.{js,ts,jsx,tsx,mdx,md,astro,html,svelte,vue}",
+    "../../packages/shared/**/*.{js,ts,jsx,tsx,mdx,md,astro,html,svelte,vue}",
   ],
   theme: {
     colors: {
@@ -28,8 +30,11 @@ const config = {
 
     extend: {
       fontFamily: {
-        sans: ["var(--font-plus-jakarta-sans)"],
-        serif: ["var(--font-lora)"],
+        sans: [
+          "var(--font-plus-jakarta-sans, 'Plus Jakarta Sans')",
+          ...defaultTheme.fontFamily.sans,
+        ],
+        serif: ["var(--font-lora, 'Lora')", ...defaultTheme.fontFamily.serif],
       },
 
       typography: {
