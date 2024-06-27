@@ -1,9 +1,13 @@
 {
   "extends": "@mupin.dev/typescript-config/nextjs.json",
   "compilerOptions": {
+    "declaration": false,
     "paths": {
       "@/*": [
         "./*"
+      ],
+      "#content": [
+        "./.velite"
       ]
     },
     "plugins": [
