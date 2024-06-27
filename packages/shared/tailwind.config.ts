@@ -37,6 +37,13 @@ const config = {
         serif: ["var(--font-lora, 'Lora')", ...defaultTheme.fontFamily.serif],
       },
 
+      container: {
+        center: true,
+        screens: {
+          sm: "640px",
+        },
+      },
+
       typography: {
         slate: {
           css: {

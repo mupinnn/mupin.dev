@@ -29,12 +29,12 @@ const navLinks: NavItem[] = [
 
 export default function Navbar() {
   return (
-    <nav className="flex items-center justify-between p-4">
+    <nav className="container flex items-center justify-between gap-2 p-4">
       <Link href="/" title="Home">
         <Avatar width={32} height={32} aria-hidden="true" focusable={false} />
         <span className="sr-only">Home</span>
       </Link>
-      <ol className="flex items-center gap-4 font-serif font-semibold">
+      <ol className="flex items-center gap-4 overflow-auto font-serif font-semibold">
         {navLinks.map((link, index) => (
           <li
             key={link.path}
