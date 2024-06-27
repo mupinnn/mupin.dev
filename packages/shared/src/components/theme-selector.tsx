@@ -2,11 +2,11 @@
 
 import { useState, useEffect } from "react";
 import {
-  SunIcon,
-  MoonIcon,
-  ComputerDesktopIcon,
-  EllipsisHorizontalIcon,
-} from "@heroicons/react/24/outline";
+  HiOutlineSun,
+  HiOutlineMoon,
+  HiOutlineComputerDesktop,
+  HiOutlineEllipsisHorizontal,
+} from "react-icons/hi2";
 import { useTheme } from "next-themes";
 import {
   DropdownMenu,
@@ -17,9 +17,9 @@ import {
 } from "./ui";
 
 const themeIconMap = {
-  light: SunIcon,
-  dark: MoonIcon,
-  system: ComputerDesktopIcon,
+  light: HiOutlineSun,
+  dark: HiOutlineMoon,
+  system: HiOutlineComputerDesktop,
 };
 
 export default function ThemeSelector() {
@@ -41,7 +41,7 @@ export default function ThemeSelector() {
           {mounted ? (
             <CurrentThemeIcon className="size-5" />
           ) : (
-            <EllipsisHorizontalIcon className="size-5" />
+            <HiOutlineEllipsisHorizontal className="size-5" />
           )}
         </button>
       </DropdownMenuTrigger>

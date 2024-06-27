@@ -4,18 +4,7 @@ module.exports = {
     "scope-enum": [
       2,
       "always",
-      [
-        "deps",
-        "docs",
-        "release",
-        "turbo",
-        "config",
-        "main",
-        "memoir",
-        "resume",
-        "components",
-        "utils",
-      ],
+      ["deps", "docs", "release", "turbo", "config", "main", "memoir", "resume", "shared"],
     ],
     "type-enum": [
       2,

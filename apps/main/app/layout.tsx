@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans, Lora } from "next/font/google";
-import { ThemeProvider } from "@mupin.dev/shared";
+import { ThemeProvider, Footer } from "@mupin.dev/shared";
+import { Navbar } from "@/components";
 import "./globals.css";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
@@ -29,7 +30,9 @@ export default function RootLayout({
     <html lang="en" className={`${plusJakartaSans.variable} ${lora.variable}`}>
       <body className="flex min-h-screen flex-col bg-slate-50 text-slate-900 dark:bg-slate-900 dark:text-slate-50">
         <ThemeProvider>
-          <main className="mx-auto flex w-full max-w-prose flex-1 p-6">{children}</main>
+          <Navbar />
+          <main className="container mx-auto flex w-full flex-1 p-4">{children}</main>
+          <Footer />
         </ThemeProvider>
       </body>
     </html>
