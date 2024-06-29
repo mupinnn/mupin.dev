@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans, Lora } from "next/font/google";
-import { unstable_setRequestLocale } from "next-intl/server";
-import { NextIntlClientProvider, useMessages } from "next-intl";
+import { getMessages, unstable_setRequestLocale } from "next-intl/server";
+import { NextIntlClientProvider } from "next-intl";
 import { ThemeProvider, Footer } from "@mupin.dev/shared";
 import { Navbar } from "@/components";
 import { locales } from "@/i18n";
@@ -18,16 +18,16 @@ const lora = Lora({
   variable: "--font-lora",
 });
 
+export function generateStaticParams() {
+  return locales.map(locale => ({ locale }));
+}
+
 export const metadata: Metadata = {
   title: "Ahmad Muwaffaq | Front-End Developer",
   description: "I'm a web developer that tinkering the front of the web.",
 };
 
-export async function generateStaticParams() {
-  return locales.map(locale => ({ locale }));
-}
-
-export default function RootLayout({
+export default async function RootLayout({
   children,
   params: { locale },
 }: Readonly<{
@@ -37,7 +37,7 @@ export default function RootLayout({
   };
 }>) {
   unstable_setRequestLocale(locale);
-  const messages = useMessages();
+  const messages = await getMessages();
 
   return (
     <html lang={locale} className={`${plusJakartaSans.variable} ${lora.variable}`}>

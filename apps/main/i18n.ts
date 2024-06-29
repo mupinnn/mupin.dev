@@ -1,12 +1,37 @@
-import { NextPage } from "next";
 import { notFound } from "next/navigation";
 import { getRequestConfig } from "next-intl/server";
+import { Pathnames, LocalePrefix } from "next-intl/routing";
 
-export const locales = ["en", "id"];
-export type NextPageWithLocale = NextPage<{ params: { locale: (typeof locales)[number] } }>;
+export const locales = ["en", "id"] as const;
+export type Locales = typeof locales;
+
+export const defaultLocale = "en" as const;
+export const localePrefix: LocalePrefix<Locales> = "always";
+
+export const pathnames: Pathnames<Locales> = {
+  "/": "/",
+  "/blog": "/blog",
+  "/about": {
+    en: "/about",
+    id: "/tentang",
+  },
+  "/now": {
+    en: "/now",
+    id: "/kini",
+  },
+  "/projects": {
+    en: "/projects",
+    id: "/proyek",
+  },
+  "/projects/[projectSlug]": {
+    en: "/projects/[projectSlug]",
+    id: "/proyek/[projectSlug]",
+  },
+};
 
 export default getRequestConfig(async ({ locale }) => {
-  if (!locales.includes(locale)) notFound();
+  // TODO: Of course this casting need to be fixed.
+  if (!locales.includes(locale as any)) notFound();
 
   return {
     messages: (await import(`./messages/${locale}.json`)).default,

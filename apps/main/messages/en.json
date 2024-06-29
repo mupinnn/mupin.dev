@@ -1,10 +1,32 @@
 {
-  "Nav": {
-    "link": {
-      "blog": "Blog",
-      "projects": "Projects",
-      "now": "Now",
-      "about": "About"
-    }
+  "GeneralMeta": {
+    "description": "Saya adalah seorang web developer yang mengutak-atik bagian depan dari web."
+  },
+  "HomePage": {
+    "title": "<smaller>Yo! Saya</smaller>Ahmad<br />Muwaffaq,",
+    "subtitle": "kalian boleh memanggil saya 'Faqih' jika memanggil dengan nama lengkap saya cukup merepotkan, XD."
+  },
+  "NowPage": {
+    "title": "Kini",
+    "subtitle": "Pembaruan terakhir pada {lastUpdatedAt}."
+  },
+  "AboutPage": {
+    "title": "Tentang"
+  },
+  "BlogPage": {
+    "title": "Blog",
+    "subtitle": "Beberapa tulisan tentang apa yang sedang saya pelajari."
+  },
+  "ProjectsPage": {
+    "title": "Proyek",
+    "subtitle": "Saya tidak menaruh semua proyek saya di sini, tapi berikut adalah beberapa favorit saya:"
+  },
+  "Footer": "dibuat dan didesain dengan ✨ penuh sukacita ✨ oleh saya <3 © {currentYear}",
+  "Navigation": {
+    "home": "Beranda",
+    "blog": "Blog",
+    "projects": "Proyek",
+    "now": "Kini",
+    "about": "Tentang"
   }
 }

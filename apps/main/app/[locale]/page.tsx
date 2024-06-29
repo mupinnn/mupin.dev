@@ -1,6 +1,10 @@
+import { useTranslations } from "next-intl";
+import { unstable_setRequestLocale } from "next-intl/server";
 import { SocialLinks } from "@/components";
 
-export default function Home() {
+export default function Home({ params: { locale } }: { params: { locale: string } }) {
+  unstable_setRequestLocale(locale);
+
   return (
     <div className="flex flex-col justify-center gap-6">
       <div className="flex flex-col gap-2">
