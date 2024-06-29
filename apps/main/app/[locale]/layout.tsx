@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans, Lora } from "next/font/google";
-import { getMessages, unstable_setRequestLocale } from "next-intl/server";
+import { getMessages, getTranslations, unstable_setRequestLocale } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
 import { ThemeProvider, Footer } from "@mupin.dev/shared";
 import { Navbar } from "@/components";
@@ -38,6 +38,7 @@ export default async function RootLayout({
 }>) {
   unstable_setRequestLocale(locale);
   const messages = await getMessages();
+  const t = await getTranslations();
 
   return (
     <html lang={locale} className={`${plusJakartaSans.variable} ${lora.variable}`}>
@@ -46,7 +47,21 @@ export default async function RootLayout({
           <ThemeProvider>
             <Navbar />
             <main className="container mx-auto flex w-full flex-1 p-4">{children}</main>
-            <Footer />
+            <Footer>
+              {t.rich("Footer", {
+                sourcecode: chunks => (
+                  <a
+                    href="https://github.com/mupinnn/mupin.dev"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline decoration-slate-300 decoration-dashed"
+                  >
+                    {chunks}
+                  </a>
+                ),
+                currentYear: new Date().getFullYear(),
+              })}
+            </Footer>
           </ThemeProvider>
         </NextIntlClientProvider>
       </body>

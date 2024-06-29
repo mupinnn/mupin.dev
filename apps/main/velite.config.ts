@@ -6,12 +6,18 @@ const pages = defineCollection({
   schema: s
     .object({
       title: s.string(),
-      slug: s.slug("post"),
       path: s.path(),
       description: s.string().optional(),
       body: s.mdx(),
     })
-    .transform(data => ({ ...data, locale: data.path.split("/").pop() })),
+    .transform(data => {
+      const splittedPath = data.path.split("/");
+      return {
+        ...data,
+        locale: splittedPath[2],
+        slug: splittedPath[1],
+      };
+    }),
 });
 
 export default defineConfig({

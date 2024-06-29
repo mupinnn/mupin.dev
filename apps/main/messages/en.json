@@ -1,32 +1,32 @@
 {
   "GeneralMeta": {
-    "description": "Saya adalah seorang web developer yang mengutak-atik bagian depan dari web."
+    "description": "I'm a web developer that tinkering the front of the web."
   },
   "HomePage": {
-    "title": "<smaller>Yo! Saya</smaller>Ahmad<br />Muwaffaq,",
-    "subtitle": "kalian boleh memanggil saya 'Faqih' jika memanggil dengan nama lengkap saya cukup merepotkan, XD."
+    "title": "<span>Yo! I'm</span>Ahmad<br></br>Muwaffaq,",
+    "subtitle": "you can call me 'Faqih' if calling with my full name is too complicated, XD."
   },
   "NowPage": {
-    "title": "Kini",
-    "subtitle": "Pembaruan terakhir pada {lastUpdatedAt}."
+    "title": "Now",
+    "subtitle": "Last updated on {lastUpdatedAt}."
   },
   "AboutPage": {
-    "title": "Tentang"
+    "title": "About"
   },
   "BlogPage": {
     "title": "Blog",
-    "subtitle": "Beberapa tulisan tentang apa yang sedang saya pelajari."
+    "subtitle": "Some writeups about what I learned."
   },
   "ProjectsPage": {
-    "title": "Proyek",
-    "subtitle": "Saya tidak menaruh semua proyek saya di sini, tapi berikut adalah beberapa favorit saya:"
+    "title": "Projects",
+    "subtitle": "I'm not putting all of my projects here, but here are some of my favorite:"
   },
-  "Footer": "dibuat dan didesain dengan ✨ penuh sukacita ✨ oleh saya <3 © {currentYear}",
+  "Footer": "built and designed with ✨ full of joy ✨ by <sourcecode>me <3</sourcecode> © {currentYear}",
   "Navigation": {
-    "home": "Beranda",
+    "home": "Home",
     "blog": "Blog",
-    "projects": "Proyek",
-    "now": "Kini",
-    "about": "Tentang"
+    "projects": "Projects",
+    "now": "Now",
+    "about": "About"
   }
 }

@@ -1,8 +1,7 @@
 import { createElement } from "react";
 import { FiGithub, FiTwitter, FiLinkedin, FiMail } from "react-icons/fi";
-import { NavItem } from "./navbar";
 
-const socialLinks: NavItem[] = [
+const socialLinks = [
   {
     path: "https://github.com/mupinnn",
     label: "GitHub",
@@ -30,6 +29,7 @@ export default function SocialLinks() {
     <div className="flex gap-4">
       {socialLinks.map(link => (
         <a key={link.path} href={link.path} rel="noopener noreferrer" target="_blank">
+          <span className="sr-only">{link.label}</span>
           {link.icon &&
             createElement(link.icon, {
               size: 24,
