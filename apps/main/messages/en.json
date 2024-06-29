@@ -1,0 +1,10 @@
+{
+  "Nav": {
+    "link": {
+      "blog": "Blog",
+      "projects": "Projects",
+      "now": "Now",
+      "about": "About"
+    }
+  }
+}

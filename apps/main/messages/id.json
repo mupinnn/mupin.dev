@@ -1,0 +1,10 @@
+{
+  "Nav": {
+    "link": {
+      "blog": "Blog",
+      "projects": "Proyek",
+      "now": "Kini",
+      "about": "Tentang"
+    }
+  }
+}
