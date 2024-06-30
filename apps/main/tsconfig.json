@@ -1,9 +1,14 @@
 {
   "extends": "@mupin.dev/typescript-config/nextjs.json",
   "compilerOptions": {
+    "declaration": false,
+    "declarationMap": false,
     "paths": {
       "@/*": [
         "./*"
+      ],
+      "#content": [
+        "./.velite"
       ]
     },
     "plugins": [
@@ -19,7 +24,8 @@
     "**/*.tsx",
     "**/*.js",
     "**/*.jsx",
-    ".next/types/**/*.ts"
+    ".next/types/**/*.ts",
+    "global.d.ts"
   ],
   "exclude": [
     "node_modules"

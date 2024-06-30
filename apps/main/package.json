@@ -6,28 +6,31 @@
     "dev": "next dev -p 9090",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "clean:content": "velite --clean"
   },
   "dependencies": {
     "@heroicons/react": "^2.1.1",
     "@mupin.dev/shared": "workspace:*",
     "next": "14.1.0",
+    "next-intl": "^3.15.3",
     "next-themes": "^0.2.1",
-    "react": "^18",
-    "react-dom": "^18",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "react-icons": "^5.2.1"
   },
   "devDependencies": {
     "@mupin.dev/eslint-config": "workspace:*",
     "@mupin.dev/typescript-config": "workspace:*",
     "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
     "autoprefixer": "^10.0.1",
     "eslint": "^8",
     "eslint-config-next": "14.1.0",
     "postcss": "^8",
     "tailwindcss": "^3.4.3",
-    "typescript": "^5"
+    "typescript": "^5",
+    "velite": "^0.1.0"
   }
 }

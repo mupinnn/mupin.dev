@@ -4,7 +4,8 @@
   "private": true,
   "exports": {
     ".": "./src/index.ts",
-    "./tw-config": "./tailwind.config.ts"
+    "./tw-config": "./tailwind.config.ts",
+    "./data/": "./src/data/"
   },
   "scripts": {
     "lint": "eslint . --max-warnings 0"

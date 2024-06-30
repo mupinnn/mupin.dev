@@ -1,0 +1,36 @@
+{
+  "GeneralMeta": {
+    "description": "I'm a web developer that tinkering the front of the web."
+  },
+  "HomePage": {
+    "title": "<span>Yo! I'm</span>Ahmad<br></br>Muwaffaq,",
+    "subtitle": "you can call me 'Faqih' if calling with my full name is too complicated, XD."
+  },
+  "NowPage": {
+    "title": "Now",
+    "subtitle": "Last updated on {lastUpdatedAt}."
+  },
+  "AboutPage": {
+    "title": "About"
+  },
+  "BlogPage": {
+    "title": "Blog",
+    "subtitle": "Some writeups about what I learned."
+  },
+  "ProjectsPage": {
+    "title": "Projects",
+    "subtitle": "I'm not putting all of my projects here, but here are some of my favorite:"
+  },
+  "Footer": "built and designed with ✨ full of joy ✨ by <sourcecode>me <3</sourcecode> © {currentYear}",
+  "Navigation": {
+    "home": "Home",
+    "blog": "Blog",
+    "projects": "Projects",
+    "now": "Now",
+    "about": "About"
+  },
+  "Experience": {
+    "present": "Present",
+    "intern": "Intern"
+  }
+}

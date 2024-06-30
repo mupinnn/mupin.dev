@@ -1,0 +1,111 @@
+{
+  "$schema": "https://raw.githubusercontent.com/jsonresume/resume-schema/v1.0.0/schema.json",
+  "basics": {
+    "name": "Ahmad <b>Muwaffaq</b>",
+    "label": "Front-End Developer",
+    "image": "",
+    "email": "itsmupin@gmail.com",
+    "phone": "",
+    "url": "https://mupin.dev",
+    "summary": "<p>A passionate front-end developer with 2+ years of experience developing user interfaces around the web. I'm helping to bridge the gap between design and technical implementation for crafting seamless user experiences.</p><p>I'm experienced in the React ecosystem from barebone React to full-fledged Next.js. I also had a nice experience using Vue and Nuxt, and I'm always eager to explore new tools that can strengthen my skills.</p>",
+    "profiles": [
+      {
+        "network": "LinkedIn",
+        "username": "ahmad-muwaffaq",
+        "url": "https://linkedin.com/in/ahmad-muwaffaq/"
+      },
+      {
+        "network": "GitHub",
+        "username": "mupinnn",
+        "url": "https://github.com/mupinnn"
+      }
+    ]
+  },
+  "work": [
+    {
+      "name": "Juragan Material",
+      "position": "Front-End Developer",
+      "url": "https://juraganmaterial.id",
+      "startDate": "2022-06-01",
+      "endDate": "2022-06-01",
+      "location": "Jakarta, Indonesia",
+      "highlights": [
+        "Develop and maintain in-house content management system (CMS) and e-commerce platform to serve our primary business processes.",
+        "Develop and maintain Juragan Vendor, inventory management system for our 200+ happy registered vendor.",
+        "Refactor and redesign the architecture of our e-commerce platform, from Nuxt v2 to Nuxt v3. Resulting in ~50% performance gain.",
+        "Develop, maintain and architecturing in-house UI component library to reduce repetitive components across repositories and to standardize our products look and feel."
+      ]
+    },
+    {
+      "name": "Freelance",
+      "position": "Front-End Developer",
+      "startDate": "2020-09-01",
+      "endDate": "2022-03-01",
+      "location": "Remote",
+      "highlights": [
+        "Hired for 3 months to help build a dashboard for a school management system using Ant Design and React.",
+        "Trusted by digital solutions company to slice design to code in 6 microsite projects; utilizing Gulp, Tailwind CSS and jQuery.",
+        "Develop and maintain 5 landing page  sites for local convection company sub-business. | Taking advantage of GatsbyJS to maximize performance. | Integrating Google Spreadsheet with Google App Script to gather order form information.",
+        "Handling revamp for a company profile website and integrating Google App Script with Spreadsheet and Drive."
+      ]
+    },
+    {
+      "name": "Garena",
+      "position": "Front-End Developer, Intern",
+      "startDate": "2019-12-01",
+      "endDate": "2020-10-01",
+      "location": "Jakarta, Indonesia",
+      "highlights": [
+        "Mainly responsible for translating design into front-end code and integrating with back-end services utilizing React, Redux and SCSS.",
+        "Maintain and improve web and animation performance.",
+        "Contributed to the in-house front-end project boilerplate by creating an error reporting helper for an API call.",
+        "Handled 15 projects which each project has daily active users ranging from 10K to over 50K."
+      ]
+    }
+  ],
+  "education": [
+    {
+      "institution": "SMK Negeri 24 Jakarta",
+      "url": "https://smkn24jkt.sch.id/",
+      "area": "Rekayasa Perangkat Lunak<br /><i>(Software Engineering)</i>",
+      "studyType": "Vocational High School",
+      "startDate": "2016-06-01",
+      "endDate": "2019-06-01",
+      "location": "Jakarta, Indonesia"
+    }
+  ],
+  "skills": [
+    {
+      "name": "Languages",
+      "keywords": ["HTMl", "CSS", "SCSS", "JavaScript"]
+    },
+    {
+      "name": "Frameworks & Libraries",
+      "keywords": ["React", "Vue", "Next.js", "Nuxt", "Quasar", "Tailwind CSS"]
+    },
+    {
+      "name": "Tools",
+      "keywords": [
+        "Vite",
+        "Vitest",
+        "Jest",
+        "Webpack",
+        "Gulp",
+        "PNPM/NPM/Yarn",
+        "Turborepo",
+        "Git"
+      ]
+    },
+    {
+      "name": "Familiar",
+      "keywords": ["TypeScript", "Node.js", "Gatsby", "Redux", "GraphQL"]
+    }
+  ],
+  "projects": [
+    {
+      "name": "Garena Intern Projects",
+      "url": "http://bit.ly/4bRyvBk",
+      "description": "I'm handling 15 projects during my intern period as a Front-End Developer Intern at Garena Indonesia. (Stack: React, Redux, SCSS)."
+    }
+  ]
+}
