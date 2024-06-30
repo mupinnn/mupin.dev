@@ -1,3 +1,4 @@
+import React from "react";
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans, Lora } from "next/font/google";
 import { getMessages, getTranslations, unstable_setRequestLocale } from "next-intl/server";

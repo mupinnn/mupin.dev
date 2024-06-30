@@ -2,6 +2,7 @@
   "extends": "@mupin.dev/typescript-config/nextjs.json",
   "compilerOptions": {
     "declaration": false,
+    "declarationMap": false,
     "paths": {
       "@/*": [
         "./*"
