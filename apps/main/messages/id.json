@@ -28,5 +28,9 @@
     "projects": "Proyek",
     "now": "Kini",
     "about": "Tentang"
+  },
+  "Experience": {
+    "present": "Sekarang",
+    "intern": "Magang"
   }
 }

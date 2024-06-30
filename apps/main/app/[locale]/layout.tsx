@@ -47,7 +47,7 @@ export default async function RootLayout({
         <NextIntlClientProvider messages={messages}>
           <ThemeProvider>
             <Navbar />
-            <main className="container mx-auto flex w-full flex-1 p-4">{children}</main>
+            <main className="container mx-auto flex w-full flex-1 p-4 pb-6">{children}</main>
             <Footer>
               {t.rich("Footer", {
                 sourcecode: chunks => (

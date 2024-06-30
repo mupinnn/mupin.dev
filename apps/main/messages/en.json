@@ -28,5 +28,9 @@
     "projects": "Projects",
     "now": "Now",
     "about": "About"
+  },
+  "Experience": {
+    "present": "Present",
+    "intern": "Intern"
   }
 }
