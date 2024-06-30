@@ -13,7 +13,8 @@
         ".vercel/output/**",
         ".nuxt/**",
         ".out/**",
-        "dist/**"
+        "dist/**",
+        ".velite/**"
       ]
     },
     "lint": {
