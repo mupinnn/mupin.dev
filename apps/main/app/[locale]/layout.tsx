@@ -1,16 +1,16 @@
 import React from "react";
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans, Lora } from "next/font/google";
+import { Inter, Lora } from "next/font/google";
 import { getMessages, getTranslations, unstable_setRequestLocale } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
 import { ThemeProvider, Footer } from "@mupin.dev/shared";
 import { Navbar } from "@/components";
 import { locales } from "@/i18n";
 
-const plusJakartaSans = Plus_Jakarta_Sans({
+const inter = Inter({
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-plus-jakarta-sans",
+  variable: "--font-inter",
 });
 
 const lora = Lora({
@@ -42,7 +42,7 @@ export default async function RootLayout({
   const t = await getTranslations();
 
   return (
-    <html lang={locale} className={`${plusJakartaSans.variable} ${lora.variable}`}>
+    <html lang={locale} className={`${inter.variable} ${lora.variable}`}>
       <body className="flex min-h-screen flex-col bg-slate-50 text-slate-900 dark:bg-slate-900 dark:text-slate-50">
         <NextIntlClientProvider messages={messages}>
           <ThemeProvider>
