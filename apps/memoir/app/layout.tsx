@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Lora } from "next/font/google";
-import { ThemeProvider } from "@mupin.dev/shared";
+import { Footer, ThemeProvider } from "@mupin.dev/shared";
 import "./globals.css";
 
 const inter = Inter({
@@ -30,7 +30,8 @@ export default function RootLayout({
     <html lang="en" className={`${inter.variable} ${lora.variable}`}>
       <body className="flex min-h-screen flex-col bg-slate-50 text-slate-900 dark:bg-slate-900 dark:text-slate-50">
         <ThemeProvider>
-          <main className="mx-auto flex w-full max-w-prose flex-1 p-6">{children}</main>
+          <main className="container mx-auto flex w-full flex-1 p-4 pb-6">{children}</main>
+          <Footer />
         </ThemeProvider>
       </body>
     </html>
