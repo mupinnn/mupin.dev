@@ -30,10 +30,7 @@ const config = {
 
     extend: {
       fontFamily: {
-        sans: [
-          "var(--font-plus-jakarta-sans, 'Plus Jakarta Sans')",
-          ...defaultTheme.fontFamily.sans,
-        ],
+        sans: ["var(--font-inter, 'Inter')", ...defaultTheme.fontFamily.sans],
         serif: ["var(--font-lora, 'Lora')", ...defaultTheme.fontFamily.serif],
       },
 

@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans, Lora } from "next/font/google";
+import { Inter, Lora } from "next/font/google";
 import { ThemeProvider } from "@mupin.dev/shared";
 import "./globals.css";
 
-const plusJakartaSans = Plus_Jakarta_Sans({
+const inter = Inter({
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-plus-jakarta-sans",
+  variable: "--font-inter",
 });
 
 const lora = Lora({
@@ -27,7 +27,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${plusJakartaSans.variable} ${lora.variable}`}>
+    <html lang="en" className={`${inter.variable} ${lora.variable}`}>
       <body className="flex min-h-screen flex-col bg-slate-50 text-slate-900 dark:bg-slate-900 dark:text-slate-50">
         <ThemeProvider>
           <main className="mx-auto flex w-full max-w-prose flex-1 p-6">{children}</main>

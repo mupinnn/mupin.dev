@@ -1,3 +1,4 @@
+import defaultTheme from "tailwindcss/defaultTheme";
 import tailwindConfig from "@mupin.dev/shared/tw-config";
 
 /** @type {import('tailwindcss').Config} */
@@ -5,6 +6,12 @@ export default {
   presets: [tailwindConfig],
   theme: {
     extend: {
+      fontFamily: {
+        sans: [
+          "var(--font-plus-jakarta-sans, 'Plus Jakarta Sans')",
+          ...defaultTheme.fontFamily.sans,
+        ],
+      },
       typography: {
         DEFAULT: {
           css: {
