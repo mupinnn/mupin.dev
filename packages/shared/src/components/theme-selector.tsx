@@ -15,6 +15,7 @@ import {
   DropdownMenuRadioGroup,
   DropdownMenuRadioItem,
 } from "./ui";
+import { cn } from "../utils";
 
 const themeIconMap = {
   light: HiOutlineSun,
@@ -22,7 +23,7 @@ const themeIconMap = {
   system: HiOutlineComputerDesktop,
 };
 
-export default function ThemeSelector() {
+export default function ThemeSelector({ className }: { className?: string }) {
   const [mounted, setMounted] = useState(false);
   const { theme, themes, setTheme } = useTheme();
   const CurrentThemeIcon = themeIconMap[theme as keyof typeof themeIconMap];
@@ -35,7 +36,10 @@ export default function ThemeSelector() {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <button
-          className="inline-flex h-8 w-8 items-center justify-center rounded border-2 border-slate-800 bg-slate-300 dark:border-slate-300 dark:bg-slate-800"
+          className={cn(
+            "inline-flex h-8 w-8 items-center justify-center rounded border-2 border-slate-800 bg-slate-300 dark:border-slate-300 dark:bg-slate-800",
+            className
+          )}
           aria-label="Select a theme"
         >
           {mounted ? (
