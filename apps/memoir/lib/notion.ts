@@ -3,6 +3,12 @@ import { NotionToMarkdown } from "notion-to-md";
 
 const notion = new Client({
   auth: process.env.NOTION_MEMOIR_TOKEN,
+  fetch: (url, opts) => {
+    return fetch(url, {
+      ...opts,
+      next: { tags: ["notion"], revalidate: 3600 },
+    });
+  },
 });
 
 const n2m = new NotionToMarkdown({ notionClient: notion });
@@ -23,12 +29,12 @@ const generateMemoirMetadata = (memoir: any) => {
 export const getAllMemoirs = async () => {
   const allMemoirs = await notion.databases.query({
     database_id: databaseId,
-    // filter: {
-    //   property: "Status",
-    //   select: {
-    //     equals: "Published",
-    //   },
-    // },
+    filter: {
+      property: "Status",
+      select: {
+        equals: "Published",
+      },
+    },
   });
 
   return allMemoirs.results.map((memoir: any) => generateMemoirMetadata(memoir));
@@ -46,6 +52,8 @@ export const getMemoirBySlug = async (slug: string) => {
       },
     },
   });
+
+  if (memoirBySlug.results.length === 0) return null;
 
   const page = memoirBySlug.results[0]!;
   const metadata = generateMemoirMetadata(page);

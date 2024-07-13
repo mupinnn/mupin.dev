@@ -1,8 +1,11 @@
+import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 import { getMemoirBySlug } from "@/lib/notion";
 
 export default async function Detail({ params }: { params: { slug: string } }) {
   const memoirBySlug = await getMemoirBySlug(params.slug);
+
+  if (!memoirBySlug) notFound();
 
   return (
     <div className="relative flex w-full flex-col gap-6">
