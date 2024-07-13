@@ -32,5 +32,12 @@
   "Experience": {
     "present": "Sekarang",
     "intern": "Magang"
+  },
+  "LocaleSwitcher": {
+    "label": "Ganti bahasa"
+  },
+  "DevelopmentNotice": {
+    "message": "Situs ini masih dalam pengembangan intensif di waktu luang saya.",
+    "bored": "Coba ganti bahasa-nya jika kalian merasa bosan: "
   }
 }

@@ -26,6 +26,7 @@ const config = {
   theme: {
     colors: {
       slate: colors.slate,
+      yellow: colors.yellow,
     },
 
     extend: {
