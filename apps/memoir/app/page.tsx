@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ThemeSelector, cn } from "@mupin.dev/shared";
+import { ThemeSelector, cn, formatDate } from "@mupin.dev/shared";
 import { getAllMemoirs } from "@/lib/notion";
 
 export default async function Home() {
@@ -31,7 +31,20 @@ export default async function Home() {
               key={memoir.slug}
             >
               <Link href={`/${memoir.slug}`}>
-                <p className="text-xs text-slate-500 dark:text-slate-300">{memoir.created_at}</p>
+                <p className="text-xs text-slate-500 dark:text-slate-300">
+                  {formatDate(
+                    memoir.created_at,
+                    {
+                      day: "numeric",
+                      month: "long",
+                      hour: "numeric",
+                      minute: "numeric",
+                      second: "2-digit",
+                      timeZoneName: "short",
+                    },
+                    "id-ID"
+                  ).replace("pukul", "-")}
+                </p>
                 <h2 className="font-serif font-semibold">{memoir.title}</h2>
               </Link>
             </li>

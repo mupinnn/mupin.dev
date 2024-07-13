@@ -23,12 +23,12 @@ const generateMemoirMetadata = (memoir: any) => {
 export const getAllMemoirs = async () => {
   const allMemoirs = await notion.databases.query({
     database_id: databaseId,
-    filter: {
-      property: "Status",
-      select: {
-        equals: "Published",
-      },
-    },
+    // filter: {
+    //   property: "Status",
+    //   select: {
+    //     equals: "Published",
+    //   },
+    // },
   });
 
   return allMemoirs.results.map((memoir: any) => generateMemoirMetadata(memoir));
