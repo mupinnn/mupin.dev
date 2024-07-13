@@ -4,7 +4,7 @@ import { Inter, Lora } from "next/font/google";
 import { getMessages, getTranslations, unstable_setRequestLocale } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
 import { ThemeProvider, Footer } from "@mupin.dev/shared";
-import { Navbar } from "@/components";
+import { LocaleSwitcher, Navbar } from "@/components";
 import { locales } from "@/i18n";
 
 const inter = Inter({
@@ -47,6 +47,19 @@ export default async function RootLayout({
         <NextIntlClientProvider messages={messages}>
           <ThemeProvider>
             <Navbar />
+
+            <div className="p-4">
+              <div
+                role="alert"
+                className="container flex flex-col gap-4 rounded border border-yellow-500 bg-yellow-700/30 p-4"
+              >
+                <p>{t("DevelopmentNotice.message")}</p>
+                <p>
+                  {t("DevelopmentNotice.bored")} <LocaleSwitcher />
+                </p>
+              </div>
+            </div>
+
             <main className="container mx-auto flex w-full flex-1 p-4 pb-6">{children}</main>
             <Footer>
               {t.rich("Footer", {

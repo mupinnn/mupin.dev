@@ -32,5 +32,12 @@
   "Experience": {
     "present": "Present",
     "intern": "Intern"
+  },
+  "LocaleSwitcher": {
+    "label": "Change language"
+  },
+  "DevelopmentNotice": {
+    "message": "This site is still under intensive development in my spare time.",
+    "bored": "Try to change the language if you feel bored: "
   }
 }

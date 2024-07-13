@@ -8,7 +8,7 @@ export type Locales = typeof locales;
 export const defaultLocale = "en" as const;
 export const localePrefix: LocalePrefix<Locales> = "always";
 
-export const pathnames: Pathnames<Locales> = {
+export const pathnames = {
   "/": "/",
   "/blog": "/blog",
   "/about": {
@@ -27,7 +27,7 @@ export const pathnames: Pathnames<Locales> = {
     en: "/projects/[projectSlug]",
     id: "/proyek/[projectSlug]",
   },
-};
+} satisfies Pathnames<Locales>;
 
 export default getRequestConfig(async ({ locale }) => {
   // TODO: Of course this casting need to be fixed.
