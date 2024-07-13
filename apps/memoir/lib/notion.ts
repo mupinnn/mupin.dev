@@ -1,12 +1,13 @@
 import { Client } from "@notionhq/client";
 import { NotionToMarkdown } from "notion-to-md";
 
+const DAY_IN_SECONDS = 86400;
 const notion = new Client({
   auth: process.env.NOTION_MEMOIR_TOKEN,
   fetch: (url, opts) => {
     return fetch(url, {
       ...opts,
-      next: { tags: ["notion"], revalidate: 3600 },
+      next: { tags: ["notion"], revalidate: DAY_IN_SECONDS },
     });
   },
 });
