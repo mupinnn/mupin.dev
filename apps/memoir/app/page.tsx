@@ -1,6 +1,10 @@
-import { ThemeSelector, cn } from "@mupin.dev/shared";
+import Link from "next/link";
+import { ThemeSelector, cn, formatDate } from "@mupin.dev/shared";
+import { getAllMemoirs } from "@/lib/notion";
 
-export default function Home() {
+export default async function Home() {
+  const allMemoirs = await getAllMemoirs();
+
   return (
     <div className="relative flex flex-col gap-6">
       <ThemeSelector className="absolute right-0 top-0" />
@@ -12,22 +16,42 @@ export default function Home() {
           Apa pun.
         </p>
       </header>
+
       <hr className="text-slate-300 dark:text-slate-500" />
-      <ul className="flex flex-col gap-6">
-        {[...Array(10).keys()].map(i => (
-          <li
-            className={cn(
-              "relative flex flex-col gap-1",
-              i < 9 &&
-                "after:absolute after:-bottom-5 after:block after:h-4 after:border-r after:border-dashed after:border-slate-300 after:dark:border-slate-500"
-            )}
-            key={i}
-          >
-            <p className="text-xs text-slate-500 dark:text-slate-300">26 April 2001 - 17.00 WIB</p>
-            <h2 className="font-serif font-semibold">This is title {i}</h2>
-          </li>
-        ))}
-      </ul>
+
+      {allMemoirs.length > 0 ? (
+        <ul className="flex flex-col gap-6">
+          {allMemoirs.map((memoir, i) => (
+            <li
+              className={cn(
+                "relative flex flex-col gap-1",
+                i < allMemoirs.length - 1 &&
+                  "after:absolute after:-bottom-5 after:block after:h-4 after:border-r after:border-dashed after:border-slate-300 after:dark:border-slate-500"
+              )}
+              key={memoir.slug}
+            >
+              <Link href={`/${memoir.slug}`}>
+                <p className="text-xs text-slate-500 dark:text-slate-300">
+                  {formatDate(
+                    memoir.created_at,
+                    {
+                      day: "numeric",
+                      month: "long",
+                      hour: "numeric",
+                      minute: "numeric",
+                      timeZoneName: "short",
+                    },
+                    "id-ID"
+                  ).replace("pukul", "-")}
+                </p>
+                <h2 className="font-serif font-semibold">{memoir.title}</h2>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>Belum ada apa pun nih . . .</p>
+      )}
     </div>
   );
 }
