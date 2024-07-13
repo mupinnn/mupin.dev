@@ -39,7 +39,6 @@ export default async function Home() {
                       month: "long",
                       hour: "numeric",
                       minute: "numeric",
-                      second: "2-digit",
                       timeZoneName: "short",
                     },
                     "id-ID"
