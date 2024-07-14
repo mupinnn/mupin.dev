@@ -3,6 +3,11 @@ import { unstable_setRequestLocale } from "next-intl/server";
 import { PageLayout, MDXContent } from "@/components";
 import { getPageBySlug } from "@/content";
 import { notFound } from "next/navigation";
+import { createMetadata } from "@/utils/create-metadata";
+
+export const metadata = createMetadata({
+  title: "About",
+});
 
 export default function AboutPage({ params: { locale } }: { params: { locale: string } }) {
   unstable_setRequestLocale(locale);

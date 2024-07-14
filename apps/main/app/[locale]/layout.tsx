@@ -1,5 +1,5 @@
 import React from "react";
-import type { Metadata } from "next";
+import type { Metadata, ResolvingMetadata } from "next";
 import Script from "next/script";
 import { Inter, Lora } from "next/font/google";
 import { getMessages, getTranslations, unstable_setRequestLocale } from "next-intl/server";
@@ -7,6 +7,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { ThemeProvider, Footer } from "@mupin.dev/shared";
 import { LocaleSwitcher, Navbar } from "@/components";
 import { locales } from "@/i18n";
+import { createMetadata } from "@/utils/create-metadata";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -24,10 +25,7 @@ export function generateStaticParams() {
   return locales.map(locale => ({ locale }));
 }
 
-export const metadata: Metadata = {
-  title: "Ahmad Muwaffaq | Front-End Developer",
-  description: "I'm a web developer that tinkering the front of the web.",
-};
+export const metadata = createMetadata({});
 
 export default async function RootLayout({
   children,

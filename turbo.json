@@ -2,6 +2,8 @@
   "$schema": "https://turbo.build/schema.json",
   "globalDependencies": ["**/.env.*local"],
   "globalEnv": [
+    "PORT",
+    "VERCEL_URL",
     "VELITE_STARTED",
     "NOTION_MEMOIR_TOKEN",
     "NOTION_MEMOIR_DATABASE_ID",
