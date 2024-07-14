@@ -1,5 +1,6 @@
 import React from "react";
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Inter, Lora } from "next/font/google";
 import { getMessages, getTranslations, unstable_setRequestLocale } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
@@ -43,6 +44,13 @@ export default async function RootLayout({
 
   return (
     <html lang={locale} className={`${inter.variable} ${lora.variable}`}>
+      <Script
+        defer
+        async
+        src="https://umami.mupin.dev/script.js"
+        data-website-id={process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID || ""}
+        data-domains="mupin.dev"
+      />
       <body className="flex min-h-screen flex-col bg-slate-50 text-slate-900 dark:bg-slate-900 dark:text-slate-50">
         <NextIntlClientProvider messages={messages}>
           <ThemeProvider>
