@@ -21,7 +21,10 @@ export function generateMetadata(): Metadata {
   const description =
     "A Faqih personal memoir. Documenting life and all things happening. Occasions, thoughts or reflections. Anything.";
   const ogImage = `https://mupin.dev/api/og?title=${title}&description=${description}`;
-  const siteURL = new URL(process.env.VERCEL_URL || `http://localhost:${process.env.PORT || 3000}`);
+  const siteURL = new URL(
+    `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` ||
+      `http://localhost:${process.env.PORT || 3000}`
+  );
 
   return {
     metadataBase: siteURL,

@@ -5,7 +5,10 @@ type CreateMetadata = Metadata & {
 };
 
 export const createMetadata = ({ canonical = "", ...meta }: CreateMetadata): Metadata => {
-  const siteURL = new URL(process.env.VERCEL_URL || `http://localhost:${process.env.PORT || 3000}`);
+  const siteURL = new URL(
+    `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` ||
+      `http://localhost:${process.env.PORT || 3000}`
+  );
   const siteName = "mupin.dev";
   const title = meta.title ?? "Ahmad Muwaffaq | Front-End Developer";
   const description =
