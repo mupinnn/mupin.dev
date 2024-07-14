@@ -6,7 +6,7 @@ import { notFound } from "next/navigation";
 import { createMetadata } from "@/utils/create-metadata";
 
 export const metadata = createMetadata({
-  title: "About",
+  canonical: "about",
 });
 
 export default function AboutPage({ params: { locale } }: { params: { locale: string } }) {

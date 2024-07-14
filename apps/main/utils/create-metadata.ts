@@ -36,7 +36,7 @@ export const createMetadata = ({ canonical = "", ...meta }: CreateMetadata): Met
       description,
       images: ogImage,
       siteName,
-      url: siteURL,
+      url: canonicalURL.toString(),
       type: "website",
     },
     twitter: {

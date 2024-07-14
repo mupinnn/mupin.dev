@@ -8,14 +8,14 @@ export default function ExperienceList() {
 
   return (
     <ul>
-      {resume.work.map(work => {
+      {resume.work.map((work, i) => {
         const formattedStartDate = formatDate(work.startDate, {}, locale);
         const formattedEndDate =
           work.startDate === work.endDate ? t("present") : formatDate(work.endDate, {}, locale);
         const position = work.position.split(",");
 
         return (
-          <li className="space-y-0.5 text-xs *:m-0">
+          <li key={i} className="space-y-0.5 text-xs *:m-0">
             <h3 className="text-lg font-bold">{work.name}</h3>
             <p>
               <span className="font-semibold">{position[0]}</span>{" "}
