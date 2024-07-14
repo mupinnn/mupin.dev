@@ -16,11 +16,33 @@ const lora = Lora({
   variable: "--font-lora",
 });
 
-export const metadata: Metadata = {
-  title: "Faqih's Memoir",
-  description:
-    "A Faqih personal memoir. Documenting life and all things happening. Occasions, thoughts or reflections. Anything.",
-};
+export function generateMetadata(): Metadata {
+  const title = "Faqih's Memoir";
+  const description =
+    "A Faqih personal memoir. Documenting life and all things happening. Occasions, thoughts or reflections. Anything.";
+  const ogImage = `https://mupin.dev/api/og?title=${title}&description=${description}`;
+  const siteURL = new URL(process.env.VERCEL_URL || `http://localhost:${process.env.PORT || 3000}`);
+
+  return {
+    metadataBase: siteURL,
+    title,
+    description,
+    openGraph: {
+      images: ogImage,
+      siteName: "memoir.mupin.dev",
+      title,
+      description,
+      url: siteURL.toString(),
+    },
+    twitter: {
+      images: [ogImage],
+      card: "summary_large_image",
+      title,
+      description,
+      creator: "@itsmupinnn",
+    },
+  };
+}
 
 export default function RootLayout({
   children,
