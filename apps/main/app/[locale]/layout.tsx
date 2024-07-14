@@ -56,10 +56,10 @@ export default async function RootLayout({
           <ThemeProvider>
             <Navbar />
 
-            <div className="p-4">
+            <div className="container p-4">
               <div
                 role="alert"
-                className="container flex flex-col gap-4 rounded border border-yellow-500 bg-yellow-700/30 p-4"
+                className="flex flex-col gap-4 rounded border border-yellow-500 bg-yellow-700/30 p-4"
               >
                 <p>{t("DevelopmentNotice.message")}</p>
                 <p>
