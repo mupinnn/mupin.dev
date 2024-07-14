@@ -1,13 +1,16 @@
 import { Client } from "@notionhq/client";
 import { NotionToMarkdown } from "notion-to-md";
 
-const DAY_IN_SECONDS = 86400;
+const HOUR_IN_SECONDS = 3600;
 const notion = new Client({
   auth: process.env.NOTION_MEMOIR_TOKEN,
   fetch: (url, opts) => {
     return fetch(url, {
       ...opts,
-      next: { tags: ["notion"], revalidate: DAY_IN_SECONDS },
+
+      // Revalidate the cache in hour to match with
+      // Notion file public URL that expired in one hour.
+      next: { tags: ["notion"], revalidate: HOUR_IN_SECONDS },
     });
   },
 });
