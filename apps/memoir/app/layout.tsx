@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Inter, Lora } from "next/font/google";
 import { Footer, ThemeProvider } from "@mupin.dev/shared";
 import "./globals.css";
@@ -28,6 +29,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable} ${lora.variable}`}>
+      <Script
+        defer
+        async
+        src="https://umami.mupin.dev/script.js"
+        data-website-id={process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID || ""}
+        data-domains="memoir.mupin.dev"
+      />
       <body className="flex min-h-screen flex-col bg-slate-50 text-slate-900 dark:bg-slate-900 dark:text-slate-50">
         <ThemeProvider>
           <main className="container mx-auto flex w-full flex-1 p-4 pb-6">{children}</main>
