@@ -27,6 +27,7 @@ export const pathnames = {
     en: "/projects/[projectSlug]",
     id: "/proyek/[projectSlug]",
   },
+  "[...rest]": "[...rest]",
 } satisfies Pathnames<Locales>;
 
 export default getRequestConfig(async ({ locale }) => {

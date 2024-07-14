@@ -1,5 +1,4 @@
 import React from "react";
-import type { Metadata, ResolvingMetadata } from "next";
 import Script from "next/script";
 import { Inter, Lora } from "next/font/google";
 import { getMessages, getTranslations, unstable_setRequestLocale } from "next-intl/server";
