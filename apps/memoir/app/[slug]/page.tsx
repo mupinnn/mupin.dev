@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { Metadata } from "next";
+import { Metadata, ResolvingMetadata } from "next";
 import ReactMarkdown from "react-markdown";
 import { formatDate } from "@mupin.dev/shared";
 import { getMemoirBySlug } from "@/lib/notion";
@@ -11,10 +11,33 @@ type PageProps = {
   };
 };
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export async function generateMetadata(
+  { params }: PageProps,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
   const memoirBySlug = await getMemoirBySlug(params.slug);
+  const parentMeta = await parent;
+  const title = memoirBySlug?.title;
+  const description = memoirBySlug?.excerpt;
+  const ogImage = `https://mupin.dev/api/og?title=${title}&description=${description}`;
+
   return {
-    title: memoirBySlug?.title,
+    title,
+    description,
+    openGraph: {
+      ...parentMeta.openGraph,
+      images: ogImage,
+      title,
+      description,
+      url: new URL(params.slug, parentMeta.metadataBase?.toString()),
+    },
+    twitter: {
+      title,
+      description,
+      images: [ogImage],
+      card: "summary_large_image",
+      creator: "@itsmupinnn",
+    },
   };
 }
 
@@ -35,6 +58,7 @@ export default async function Detail({ params }: PageProps) {
             month: "long",
             hour: "numeric",
             minute: "numeric",
+            timeZone: "Asia/Jakarta",
             timeZoneName: "short",
           },
           "id-ID"
