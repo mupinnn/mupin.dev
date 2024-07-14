@@ -21,6 +21,10 @@
     "title": "Proyek",
     "subtitle": "Saya tidak menaruh semua proyek saya di sini, tapi berikut adalah beberapa favorit saya:"
   },
+  "NotFoundPage": {
+    "title": "Halaman tidak ditemukan.",
+    "description": "Jangan nangis :(. Coba kasih tau Ibu kalian kalau kalian tidak menemukan halaman yang diinginkan."
+  },
   "Footer": "dibuat dan didesain dengan ✨ penuh sukacita ✨ oleh <sourcecode>saya <3</sourcecode> © {currentYear}",
   "Navigation": {
     "home": "Beranda",

@@ -1,7 +1,12 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "globalDependencies": ["**/.env.*local"],
-  "globalEnv": ["VELITE_STARTED", "NOTION_MEMOIR_TOKEN", "NOTION_MEMOIR_DATABASE_ID"],
+  "globalEnv": [
+    "VELITE_STARTED",
+    "NOTION_MEMOIR_TOKEN",
+    "NOTION_MEMOIR_DATABASE_ID",
+    "NEXT_PUBLIC_UMAMI_WEBSITE_ID"
+  ],
   "pipeline": {
     "build": {
       "dependsOn": ["^build"],
