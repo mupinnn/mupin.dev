@@ -39,6 +39,7 @@ export default async function Home() {
                       month: "long",
                       hour: "numeric",
                       minute: "numeric",
+                      timeZone: "Asia/Jakarta",
                       timeZoneName: "short",
                     },
                     "id-ID"
