@@ -31,7 +31,7 @@ const pages = defineCollection({
       path: s.path(),
       description: s.string().optional(),
       body: s.mdx(),
-      lastUpdatedAt: gitTimestamp().optional(),
+      lastUpdatedAt: gitTimestamp(),
     })
     .transform(data => {
       const splittedPath = data.path.split("/");

@@ -22,7 +22,7 @@ export default function NowPage({ params: { locale } }: { params: { locale: stri
       title={t("title")}
       subtitle={t("subtitle", {
         lastUpdatedAt: formatDate(
-          content.lastUpdatedAt!,
+          content.lastUpdatedAt,
           { month: "long", day: "numeric", timeZone: "Asia/Jakarta" },
           locale
         ),
