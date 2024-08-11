@@ -7,7 +7,7 @@ import { createMetadata } from "@/utils/create-metadata";
 import { formatDate } from "@mupin.dev/shared";
 
 export const metadata = createMetadata({
-  canonical: "about",
+  canonical: "now",
 });
 
 export default function NowPage({ params: { locale } }: { params: { locale: string } }) {

@@ -43,6 +43,28 @@ const pages = defineCollection({
     }),
 });
 
+const blog = defineCollection({
+  name: "Blog",
+  pattern: "blog/**/*.mdx",
+  schema: s
+    .object({
+      title: s.string(),
+      path: s.path(),
+      description: s.string(),
+      body: s.mdx(),
+      publishedAt: s.isodate(),
+      lastUpdatedAt: gitTimestamp(),
+      slug: s.slug("blog"),
+    })
+    .transform(data => {
+      const splittedPath = data.path.split("/");
+      return {
+        ...data,
+        locale: splittedPath[2],
+      };
+    }),
+});
+
 export default defineConfig({
-  collections: { pages },
+  collections: { pages, blog },
 });
