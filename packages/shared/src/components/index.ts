@@ -5,3 +5,4 @@ export { default as Footer } from "./footer";
 
 export * from "./ui";
 export * from "./providers";
+export * from "./post";

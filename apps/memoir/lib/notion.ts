@@ -1,16 +1,20 @@
 import { Client } from "@notionhq/client";
 import { NotionToMarkdown } from "notion-to-md";
 
-const HOUR_IN_SECONDS = 3600;
+const FIFTY_MINUTE_IN_SECONDS = 3600;
 const notion = new Client({
   auth: process.env.NOTION_MEMOIR_TOKEN,
   fetch: (url, opts) => {
     return fetch(url, {
       ...opts,
 
-      // Revalidate the cache in hour to match with
-      // Notion file public URL that expired in one hour.
-      next: { tags: ["notion"], revalidate: HOUR_IN_SECONDS },
+      // Revalidate the cache in 50 minute to match with ISR nature,
+      // that the subsequent request will get the fresh data.
+      //
+      // Notion file public URL will expired in 1 hour.
+      // If we revalidate in 1 hour too, user will see image not found first
+      // and then after refreshing the page will get the fresh data.
+      next: { tags: ["notion"], revalidate: FIFTY_MINUTE_IN_SECONDS },
     });
   },
 });

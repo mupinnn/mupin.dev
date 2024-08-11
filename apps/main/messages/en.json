@@ -15,7 +15,8 @@
   },
   "BlogPage": {
     "title": "Blog",
-    "subtitle": "Some writeups about what I learned."
+    "subtitle": "Some writeups about what I learned.",
+    "noPost": "No wrtings yet."
   },
   "ProjectsPage": {
     "title": "Projects",
