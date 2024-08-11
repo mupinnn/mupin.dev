@@ -15,7 +15,8 @@
   },
   "BlogPage": {
     "title": "Blog",
-    "subtitle": "Beberapa tulisan tentang apa yang sedang saya pelajari."
+    "subtitle": "Beberapa tulisan tentang apa yang sedang saya pelajari.",
+    "noPost": "Belum ada tulisan."
   },
   "ProjectsPage": {
     "title": "Proyek",

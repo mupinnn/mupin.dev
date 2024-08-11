@@ -1,7 +1,7 @@
 import { PostListItem, PostListItemProps } from "./post-list-item";
 
 export interface PostListProps {
-  data: Pick<PostListItemProps, "title" | "slug" | "createdAt">[];
+  data: Pick<PostListItemProps, "title" | "slug" | "createdAt" | "locale">[];
   emptyMessage: string;
 }
 

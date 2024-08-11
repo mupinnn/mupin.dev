@@ -21,7 +21,7 @@ const config = {
     "./components/**/*.{js,ts,jsx,tsx,mdx,md,astro,html,svelte,vue}",
     "./app/**/*.{js,ts,jsx,tsx,mdx,md,astro,html,svelte,vue}",
     "./src/**/*.{js,ts,jsx,tsx,mdx,md,astro,html,svelte,vue}",
-    "../../packages/shared/**/*.{js,ts,jsx,tsx,mdx,md,astro,html,svelte,vue}",
+    "../../packages/shared/src/**/*.{js,ts,jsx,tsx,mdx,md,astro,html,svelte,vue}",
   ],
   theme: {
     colors: {

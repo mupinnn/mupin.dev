@@ -14,13 +14,14 @@ export default function BlogPage({ params: { locale } }: { params: { locale: str
   const t = useTranslations("BlogPage");
   const allBlogPost = getAllBlogPostByLocale(locale).map(post => ({
     title: post.title,
-    slug: post.slug,
+    slug: `${locale}/blog/${post.slug}`,
     createdAt: post.publishedAt,
+    locale,
   }));
 
   return (
     <PageLayout title={t("title")} subtitle={t("subtitle")}>
-      <PostList emptyMessage="No writings yet." data={allBlogPost} />
+      <PostList emptyMessage={t("noPost")} data={allBlogPost} />
     </PageLayout>
   );
 }
