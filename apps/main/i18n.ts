@@ -11,6 +11,7 @@ export const localePrefix: LocalePrefix<Locales> = "always";
 export const pathnames = {
   "/": "/",
   "/blog": "/blog",
+  "/blog/[blogSlug]": "/blog/[blogSlug]",
   "/about": {
     en: "/about",
     id: "/tentang",
