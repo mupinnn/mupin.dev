@@ -52,7 +52,9 @@ Here is an example of a plugin in action
 Here is an example of a plugin to highlight code:
 [`rehype-highlight`](https://github.com/rehypejs/rehype-highlight).
 
-```js title="This is title" caption="This is caption" {1-3,4} showLineNumbers
+> The quick brown fox jumps over the lazy dog
+
+```js title="src/themes/token.ts" caption="The quick brown fox jumps over the lazy dog" {1-3,4} showLineNumbers
 import React from 'react'
 import ReactDOM from 'react-dom'
 import Markdown from 'react-markdown'
@@ -68,7 +70,7 @@ ReactDOM.render(
 )
 ```
 
-```js {4} showLineNumbers
+```js {4-6} "useFloating" /refs.setReference/
 import { useFloating } from "@floating-ui/react";
 
 function MyComponent() {
@@ -82,6 +84,8 @@ function MyComponent() {
   );
 }
 ```
+
+This is an array `[1, 2, 3]{:js}` of numbers 1 through 3.
 
 Pretty neat, eh?
 

@@ -15,7 +15,7 @@ interface MDXContentProps {
 export const MDXContent = ({ code, components }: MDXContentProps) => {
   const Component = useMdxComponent(code);
   return (
-    <div className="prose prose-slate prose-headings:scroll-mt-6 dark:prose-invert">
+    <div className="prose prose-slate prose-headings:scroll-mt-6 prose-pre:px-0 dark:prose-invert">
       <Component components={{ ...components, SocialLinks, ExperienceList }} />
     </div>
   );

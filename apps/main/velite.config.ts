@@ -109,7 +109,7 @@ export default defineConfig({
   mdx: {
     rehypePlugins: [
       rehypeSlug,
-      [rehypePrettyCode, { theme: "catppuccin-frappe" }],
+      [rehypePrettyCode, { theme: "catppuccin-frappe", defaultLang: "plaintext" }],
       [
         rehypeAutolinkHeadings,
         {
