@@ -40,7 +40,7 @@ export default async function RootLayout({
   const t = await getTranslations();
 
   return (
-    <html lang={locale} className={`${inter.variable} ${lora.variable}`}>
+    <html lang={locale} className={`${inter.variable} ${lora.variable} scroll-smooth`}>
       <Script
         defer
         async
