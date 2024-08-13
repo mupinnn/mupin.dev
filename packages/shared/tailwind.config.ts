@@ -22,6 +22,7 @@ const config = {
     "./app/**/*.{js,ts,jsx,tsx,mdx,md,astro,html,svelte,vue}",
     "./src/**/*.{js,ts,jsx,tsx,mdx,md,astro,html,svelte,vue}",
     "../../packages/shared/src/**/*.{js,ts,jsx,tsx,mdx,md,astro,html,svelte,vue}",
+    "./velite.config.ts",
   ],
   theme: {
     colors: {
