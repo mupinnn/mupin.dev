@@ -6,9 +6,9 @@ interface PageLayoutProps {
 
 export const PageLayout = ({ children, title, subtitle }: PageLayoutProps) => {
   return (
-    <div className="flex w-full flex-col gap-8">
+    <div className="flex w-full flex-col gap-6">
       <div className="flex flex-col gap-1">
-        <h1 className="text-[32px] font-bold">{title}</h1>
+        <h1 className="text-[32px] font-bold leading-tight">{title}</h1>
         {subtitle && <p className="text-xs text-slate-500 dark:text-slate-300">{subtitle}</p>}
       </div>
       {children}

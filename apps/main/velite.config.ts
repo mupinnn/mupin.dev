@@ -92,7 +92,8 @@ function rehypei18nAutolinkHeadings() {
       if (
         isParentHeading &&
         node.tagName === "a" &&
-        node.properties?.className === "heading-anchor"
+        typeof node.properties?.className === "string" &&
+        node.properties?.className?.includes("heading-anchor")
       ) {
         // TODO: create util like `getTranslations` from `next-intl/server` but without requiring Next.js
         node.properties.ariaLabel =
@@ -116,6 +117,8 @@ export default defineConfig({
           behavior: "wrap",
           properties: {
             className: "heading-anchor group",
+            target: "_blank",
+            rel: "noopener noreferrer",
           },
           content: fromHtmlIsomorphic(
             `
