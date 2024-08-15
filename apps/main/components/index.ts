@@ -4,3 +4,4 @@ export * from "./navbar";
 export * from "./mdx-content";
 export * from "./layout";
 export * from "./locale-switcher";
+export * from "./cloudinary-img";

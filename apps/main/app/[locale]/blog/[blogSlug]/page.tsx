@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { unstable_setRequestLocale } from "next-intl/server";
-import { MDXContent, PageLayout } from "@/components";
+import { MDXContent, PageLayout, CloudinaryImg } from "@/components";
 import { getBlogPostDetail } from "@/content";
 import { createMetadata } from "@/utils/create-metadata";
 
@@ -20,6 +20,10 @@ export default function BlogDetailPage({
 
   return (
     <PageLayout title={content.title}>
+      <CloudinaryImg
+        src="blog/dummy-article/retrosupply-jLwVAUtLOAQ-unsplash.jpg"
+        alt="Photo by RetroSupply"
+      />
       <MDXContent code={content.body} />
     </PageLayout>
   );

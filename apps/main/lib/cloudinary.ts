@@ -47,6 +47,6 @@ export async function batchUpload({ folder, overwrite, invalidate, type }: Argv)
   }
 }
 
-if (argv.folder) {
+if (argv.folder && argv.type) {
   await batchUpload(argv);
 }
