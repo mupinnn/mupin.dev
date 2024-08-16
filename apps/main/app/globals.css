@@ -34,12 +34,16 @@ code[data-line-numbers-max-digits="4"] > [data-line]::before {
   @apply rounded bg-slate-600 shadow-slate-600;
 }
 
+[data-rehype-pretty-code-figure] {
+  @apply -mx-4;
+}
+
 [data-rehype-pretty-code-title] {
-  @apply rounded-t-md bg-slate-500 p-2 text-sm text-slate-100;
+  @apply bg-slate-500 p-2 text-sm text-slate-100 sm:rounded-t-md;
 }
 
 [data-rehype-pretty-code-title] + pre {
-  @apply rounded-t-none;
+  @apply rounded-none;
 }
 
 [data-rehype-pretty-code-caption] {

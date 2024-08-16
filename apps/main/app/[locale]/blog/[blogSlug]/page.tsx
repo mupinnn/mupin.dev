@@ -1,8 +1,12 @@
 import { notFound } from "next/navigation";
 import { unstable_setRequestLocale } from "next-intl/server";
-import { MDXContent, PageLayout, CloudinaryImg } from "@/components";
-import { getBlogPostDetail } from "@/content";
+import { MDXContent, PageLayout } from "@/components";
+import { allBlogPosts, getBlogPostDetail } from "@/content";
 import { createMetadata } from "@/utils/create-metadata";
+
+export function generateStaticParams() {
+  return allBlogPosts.map(post => ({ locale: post.locale, blogSlug: post.slug }));
+}
 
 export const metadata = createMetadata({
   canonical: "blog",
@@ -10,9 +14,9 @@ export const metadata = createMetadata({
 
 export default function BlogDetailPage({
   params: { locale, blogSlug },
-}: {
+}: Readonly<{
   params: { locale: string; blogSlug: string };
-}) {
+}>) {
   unstable_setRequestLocale(locale);
   const content = getBlogPostDetail(blogSlug, locale);
 
@@ -20,10 +24,6 @@ export default function BlogDetailPage({
 
   return (
     <PageLayout title={content.title}>
-      <CloudinaryImg
-        src="blog/dummy-article/retrosupply-jLwVAUtLOAQ-unsplash.jpg"
-        alt="Photo by RetroSupply"
-      />
       <MDXContent code={content.body} />
     </PageLayout>
   );

@@ -33,10 +33,8 @@ export default function CloudinaryImgClient({
   return (
     <Image
       {...props}
-      className={cn("rounded", imgClassName)}
+      className={cn("aspect-video sm:rounded", imgClassName)}
       loader={cloudinaryLoader}
-      width={640}
-      height={428}
       placeholder="blur"
       blurDataURL={blurDataURL}
     />

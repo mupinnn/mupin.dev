@@ -5,15 +5,19 @@ import CloudinaryImgClient from "./cloudinary-img-client";
 
 export type CloudinaryImgProps = {
   imgClassName?: string;
-  caption?: string;
+  caption?: React.ReactNode;
 } & ImageProps;
 
 export const CloudinaryImg = async ({
   caption,
   imgClassName,
   className,
+  width = 640,
+  height = 428,
+  src,
   ...props
 }: CloudinaryImgProps) => {
+  const normalizedSrc = typeof src === "string" && src.startsWith("/") ? src.slice(1) : src;
   const blurSourceURL = constructCloudinaryUrl({
     config: {
       cloud: {
@@ -21,7 +25,7 @@ export const CloudinaryImg = async ({
       },
     },
     options: {
-      src: props.src as string,
+      src: normalizedSrc as string,
       blur: "1000",
       width: 10,
       crop: "scale",
@@ -38,9 +42,12 @@ export const CloudinaryImg = async ({
       <CloudinaryImgClient
         imgClassName={imgClassName}
         blurDataURL={blurImgBase64DataUrl}
+        width={width}
+        src={normalizedSrc}
+        height={height}
         {...props}
       />
-      {caption && <figcaption>{caption}</figcaption>}
+      {caption && <figcaption className="text-center text-xs">{caption}</figcaption>}
     </figure>
   );
 };
