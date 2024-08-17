@@ -24,4 +24,24 @@ const getBlogPostDetail = (slug: string, locale: string = "en") => {
   return matchByLocale;
 };
 
-export { allPages, getPageBySlug, allBlogPosts, getBlogPostDetail, getAllBlogPostByLocale };
+const getAllBlogPostTagByLocale = (locale: string = "en") => {
+  const tagsByLocale = allBlogPosts
+    .filter(post => post.locale === locale)
+    .map(post => post.tags)
+    .flat();
+  return Array.from(new Set(tagsByLocale));
+};
+
+const getAllBlogPostByTag = (tagSlug: string, locale: string = "en") => {
+  return getAllBlogPostByLocale(locale).filter(post => post.tags.includes(tagSlug));
+};
+
+export {
+  allPages,
+  getPageBySlug,
+  allBlogPosts,
+  getBlogPostDetail,
+  getAllBlogPostByLocale,
+  getAllBlogPostTagByLocale,
+  getAllBlogPostByTag,
+};

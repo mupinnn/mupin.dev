@@ -27,6 +27,11 @@
     "title": "Proyek",
     "subtitle": "Saya tidak menaruh semua proyek saya di sini, tapi berikut adalah beberapa favorit saya:"
   },
+  "TagsPage": {
+    "list": "Tagar",
+    "detail": "Tagar",
+    "noTags": "Belum ada tagar."
+  },
   "NotFoundPage": {
     "title": "Halaman tidak ditemukan.",
     "description": "Jangan nangis :(. Coba kasih tau Ibu kalian kalau kalian tidak menemukan halaman yang diinginkan."

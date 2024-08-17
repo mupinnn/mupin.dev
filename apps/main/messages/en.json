@@ -27,6 +27,11 @@
     "title": "Projects",
     "subtitle": "I'm not putting all of my projects here, but here are some of my favorite:"
   },
+  "TagsPage": {
+    "list": "Tags",
+    "detail": "Tag",
+    "noTags": "No tags yet."
+  },
   "NotFoundPage": {
     "title": "Page not found",
     "description": "Don't cry :(. Tell your mom if you can't find the page you want."
