@@ -29,11 +29,24 @@ const getAllBlogPostTagByLocale = (locale: string = "en") => {
     .filter(post => post.locale === locale)
     .map(post => post.tags)
     .flat();
-  return Array.from(new Set(tagsByLocale));
+  return [...new Set(tagsByLocale)].sort();
 };
 
 const getAllBlogPostByTag = (tagSlug: string, locale: string = "en") => {
   return getAllBlogPostByLocale(locale).filter(post => post.tags.includes(tagSlug));
+};
+
+const getAllBlogPostTag = () => {
+  const allTags = allBlogPosts
+    .map(post => ({ locale: post.locale, tags: post.tags }))
+    .reduce<Array<{ tagSlug: string; locale: string | undefined }>>((acc, curr) => {
+      curr.tags.forEach(tag => {
+        acc.push({ tagSlug: tag, locale: curr.locale });
+      });
+
+      return acc;
+    }, []);
+  return allTags;
 };
 
 export {
@@ -44,4 +57,5 @@ export {
   getAllBlogPostByLocale,
   getAllBlogPostTagByLocale,
   getAllBlogPostByTag,
+  getAllBlogPostTag,
 };

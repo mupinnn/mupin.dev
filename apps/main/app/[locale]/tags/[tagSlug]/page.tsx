@@ -2,8 +2,12 @@ import { useTranslations } from "next-intl";
 import { unstable_setRequestLocale } from "next-intl/server";
 import { PageLayout } from "@/components";
 import { createMetadata } from "@/utils/create-metadata";
-import { getAllBlogPostByTag } from "@/content";
+import { getAllBlogPostByTag, getAllBlogPostTag } from "@/content";
 import { PostList } from "@mupin.dev/shared";
+
+export function generateStaticParams() {
+  return getAllBlogPostTag();
+}
 
 export const metadata = createMetadata({
   canonical: "tags",
