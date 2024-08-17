@@ -1,3 +1,51 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* rehype-pretty-code */
+pre [data-line] {
+  padding: 0 1rem;
+}
+
+code {
+  counter-reset: line;
+}
+
+code[data-line-numbers] > [data-line]::before {
+  counter-increment: line;
+  content: counter(line);
+  @apply mr-4 inline-block w-4 text-right text-slate-500;
+}
+
+code[data-line-numbers] > [data-highlighted-line]::before {
+  @apply text-slate-300;
+}
+
+code[data-line-numbers-max-digits="4"] > [data-line]::before {
+  @apply w-8;
+}
+
+[data-highlighted-line] {
+  @apply border-l-4 border-yellow-500 bg-slate-700;
+}
+
+[data-highlighted-chars] {
+  box-shadow: 0 0 0 2px var(--tw-shadow-color);
+  @apply rounded bg-slate-600 shadow-slate-600;
+}
+
+figure[data-rehype-pretty-code-figure] {
+  @apply -mx-4;
+}
+
+[data-rehype-pretty-code-title] {
+  @apply bg-slate-800 p-2 font-mono text-xs text-slate-50 sm:rounded-t-md;
+}
+
+[data-rehype-pretty-code-title] + pre {
+  @apply rounded-t-none;
+}
+
+[data-rehype-pretty-code-caption] {
+  @apply text-center text-xs;
+}

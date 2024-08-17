@@ -18,6 +18,11 @@
     "subtitle": "Beberapa tulisan tentang apa yang sedang saya pelajari.",
     "noPost": "Belum ada tulisan."
   },
+  "BlogDetailPage": {
+    "publishedAt": "Dipublikasikan pada tanggal {publishedAt}",
+    "lastUpdatedAt": "Pembaruan terakhir pada {lastUpdatedAt}",
+    "readingTime": "Waktu baca {min} menit"
+  },
   "ProjectsPage": {
     "title": "Proyek",
     "subtitle": "Saya tidak menaruh semua proyek saya di sini, tapi berikut adalah beberapa favorit saya:"

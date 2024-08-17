@@ -4,3 +4,5 @@ export * from "./navbar";
 export * from "./mdx-content";
 export * from "./layout";
 export * from "./locale-switcher";
+export * from "./images";
+export * from "./ui";
