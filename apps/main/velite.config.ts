@@ -41,6 +41,7 @@ const pages = defineCollection({
       description: s.string().optional(),
       body: s.mdx(),
       lastUpdatedAt: gitTimestamp(),
+      metadata: s.metadata(),
     })
     .transform(data => {
       const splittedPath = data.path.split("/");
@@ -64,6 +65,9 @@ const blog = defineCollection({
       publishedAt: s.isodate(),
       lastUpdatedAt: gitTimestamp(),
       slug: s.slug("blog"),
+      isPublished: s.boolean({ coerce: true }).optional().default(false),
+      tags: s.array(s.string()).default([]),
+      metadata: s.metadata(),
     })
     .transform(data => {
       const splittedPath = data.path.split("/");

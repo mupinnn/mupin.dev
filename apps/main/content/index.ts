@@ -1,7 +1,7 @@
 import { pages, blog } from "#content";
 
 const allPages = pages;
-const allBlogPosts = blog;
+const allBlogPosts = blog.filter(post => post.isPublished);
 
 const getPageBySlug = (slug: string, locale: string = "en") => {
   return allPages.find(page => page.slug === slug && page.locale === locale);

@@ -28,6 +28,14 @@ export const pathnames = {
     en: "/projects/[projectSlug]",
     id: "/proyek/[projectSlug]",
   },
+  "/tags": {
+    en: "/tags",
+    id: "/tagar",
+  },
+  "/tags/[tagSlug]": {
+    en: "/tags/[tagSlug]",
+    id: "/tagar/[tagSlug]",
+  },
   "[...rest]": "[...rest]",
 } satisfies Pathnames<Locales>;
 
