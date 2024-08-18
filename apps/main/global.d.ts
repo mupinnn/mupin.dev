@@ -12,6 +12,8 @@ declare global {
       NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME: string;
       CLOUDINARY_API_KEY: string;
       CLOUDINARY_API_SECRET: string;
+      VERCEL_ENV: "production" | "preview" | "development";
+      VERCEL_PROJECT_PRODUCTION_URL: string;
     }
   }
 }

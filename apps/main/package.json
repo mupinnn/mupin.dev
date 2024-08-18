@@ -15,6 +15,7 @@
     "@mupin.dev/shared": "workspace:*",
     "cloudinary": "^2.4.0",
     "cloudinary-build-url": "^0.2.4",
+    "defu": "^6.1.4",
     "hast": "^1.0.0",
     "hast-util-from-html-isomorphic": "^2.0.0",
     "hast-util-to-string": "^3.0.0",

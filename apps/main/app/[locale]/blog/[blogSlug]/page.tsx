@@ -4,15 +4,24 @@ import { unstable_setRequestLocale } from "next-intl/server";
 import { formatDate } from "@mupin.dev/shared";
 import { MDXContent, PageLayout } from "@/components";
 import { allBlogPosts, getBlogPostDetail } from "@/content";
-import { createMetadata } from "@/utils/create-metadata";
+import { createMetadata, gethPathnameFromMetadataState } from "@/utils/create-metadata";
+import { Metadata } from "next";
 
 export function generateStaticParams() {
   return allBlogPosts.map(post => ({ locale: post.locale, blogSlug: post.slug }));
 }
 
-export const metadata = createMetadata({
-  canonical: "blog",
-});
+// export const metadata = createMetadata({
+//   canonical: "blog",
+// });
+
+export function generateMetadata(_: any, state: any): Metadata {
+  const pathname = gethPathnameFromMetadataState(state) ?? "";
+
+  return {
+    title: pathname,
+  };
+}
 
 export default function BlogDetailPage({
   params: { locale, blogSlug },

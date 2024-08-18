@@ -57,6 +57,9 @@ importers:
       cloudinary-build-url:
         specifier: ^0.2.4
         version: 0.2.4
+      defu:
+        specifier: ^6.1.4
+        version: 6.1.4
       hast:
         specifier: ^1.0.0
         version: 1.0.0
@@ -4413,6 +4416,10 @@ packages:
       has-property-descriptors: 1.0.2
       object-keys: 1.1.1
     dev: true
+
+  /defu@6.1.4:
+    resolution: {integrity: sha512-mEQCMmwJu317oSz8CwdIOdwf3xMif1ttiM8LTufzc3g6kR+9Pe236twL8j3IYT1F7GfRgGcW6MWxzZjLIkuHIg==}
+    dev: false
 
   /delayed-stream@1.0.0:
     resolution: {integrity: sha512-ZySD7Nf91aLB0RxL4KGrKHBXl7Eds1DAmEdcoVawXnLD7SDhpNgtuII2aAkg7a7QS41jxPSZ17p4VdGnMHk3MQ==}
