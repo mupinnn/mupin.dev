@@ -12,11 +12,12 @@ type CreateMetadata = Metadata & {
 export const createMetadata = ({ canonical = "", ...meta }: CreateMetadata): Metadata => {
   const siteURL = new URL(
     process.env.VERCEL_ENV === "development"
-      ? `http://localhost:${process.env.PORT || 3000}`
+      ? `http://localhost:${process.env.PORT ?? 3000}`
       : `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
   );
   const siteName = "mupin.dev";
-  const ogImage = `/api/og?title=&description=`;
+  const canonicalURL = new URL(canonical, siteURL);
+  const canonicalURLPathname = canonicalURL.pathname === "/" ? "" : canonicalURL.pathname;
   const defaultMetadata: Metadata = {
     title: {
       template: `%s | ${siteName}`,
@@ -24,16 +25,34 @@ export const createMetadata = ({ canonical = "", ...meta }: CreateMetadata): Met
     },
     description:
       "I'm a web developer that tinkering the front of the web. Sharing my learnings and projects.",
-    metadataBase: siteURL,
     robots: {
       index: true,
       follow: true,
     },
+    alternates: {
+      languages: {
+        id: "id",
+        en: "en"
+      }
+    },
+    openGraph: {
+      images: "api/og?title=Test"
+    }
   };
 
+  // return defu(meta, defaultMetadata);
   return {
-    title: "cobain",
-  };
+    alternates: {
+      canonical: '/',
+      languages: {
+        id: '/id',
+        en: "/en",
+      },
+    },
+    openGraph: {
+      images: "/api/og?title=Test",
+    },
+  }
 };
 
 // maybe unsafe, but it works
