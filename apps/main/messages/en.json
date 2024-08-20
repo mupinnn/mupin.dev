@@ -1,14 +1,16 @@
 {
   "GeneralMeta": {
-    "description": "I'm a web developer that tinkering the front of the web."
+    "description": "Faqih is a web developer that tinkering the front of the web"
   },
   "HomePage": {
     "title": "<span>Yo! I'm</span>Ahmad<br></br>Muwaffaq,",
-    "subtitle": "you can call me 'Faqih' if calling with my full name is too complicated, XD."
+    "subtitle": "you can call me 'Faqih' if calling with my full name is too complicated, XD.",
+    "description": "I'm a web developer that tinkering the front of the web."
   },
   "NowPage": {
     "title": "Now",
-    "subtitle": "Last updated on {lastUpdatedAt}."
+    "subtitle": "Last updated on {lastUpdatedAt}.",
+    "description": "Faqih's current state"
   },
   "AboutPage": {
     "title": "About"
@@ -25,7 +27,14 @@
   },
   "ProjectsPage": {
     "title": "Projects",
-    "subtitle": "I'm not putting all of my projects here, but here are some of my favorite:"
+    "subtitle": "I'm not putting all of my projects here, but here are some of my favorite:",
+    "description": "Faqih's projects"
+  },
+  "TagsPage": {
+    "list": "Tags",
+    "detail": "Tag: {tag}",
+    "noTags": "No tags yet.",
+    "description": "Tagged posts"
   },
   "NotFoundPage": {
     "title": "Page not found",

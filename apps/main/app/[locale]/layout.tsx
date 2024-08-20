@@ -7,6 +7,7 @@ import { ThemeProvider, Footer } from "@mupin.dev/shared";
 import { LocaleSwitcher, Navbar } from "@/components";
 import { locales } from "@/i18n";
 import { createMetadata } from "@/utils/create-metadata";
+import type { PageProps } from "@/types";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -24,17 +25,27 @@ export function generateStaticParams() {
   return locales.map(locale => ({ locale }));
 }
 
-export const metadata = createMetadata({});
+export async function generateMetadata({ params: { locale } }: PageProps) {
+  const t = await getTranslations({ locale, namespace: "GeneralMeta" });
+  return createMetadata({
+    description: t("description"),
+    keywords: [
+      "ahmad muwaffaq",
+      "portfolio",
+      "web developer",
+      "frontend",
+      "react",
+      "next.js",
+      "blog",
+      "dev blog",
+    ],
+  });
+}
 
 export default async function RootLayout({
   children,
   params: { locale },
-}: Readonly<{
-  children: React.ReactNode;
-  params: {
-    locale: string;
-  };
-}>) {
+}: PageProps & { children: React.ReactNode }) {
   unstable_setRequestLocale(locale);
   const messages = await getMessages();
   const t = await getTranslations();

@@ -1,8 +1,9 @@
 import { useTranslations } from "next-intl";
 import { unstable_setRequestLocale } from "next-intl/server";
 import { SocialLinks } from "@/components";
+import type { PageProps } from "@/types";
 
-export default function Home({ params: { locale } }: { params: { locale: string } }) {
+export default function Home({ params: { locale } }: PageProps) {
   unstable_setRequestLocale(locale);
   const t = useTranslations();
 
@@ -16,7 +17,7 @@ export default function Home({ params: { locale } }: { params: { locale: string 
           })}
         </h1>
         <p className="text-xs">{t("HomePage.subtitle")}</p>
-        <p className="text-xs">{t("GeneralMeta.description")}</p>
+        <p className="text-xs">{t("HomePage.description")}</p>
       </div>
       <SocialLinks />
     </div>

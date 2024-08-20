@@ -1,15 +1,28 @@
+import type { Metadata, ResolvingMetadata } from "next";
 import { useTranslations } from "next-intl";
-import { unstable_setRequestLocale } from "next-intl/server";
+import { unstable_setRequestLocale, getTranslations } from "next-intl/server";
 import { PageLayout, MDXContent } from "@/components";
 import { getPageBySlug } from "@/content";
 import { notFound } from "next/navigation";
-import { createMetadata } from "@/utils/create-metadata";
+import { createMetadata, getPathnameFromMetadataState } from "@/utils/create-metadata";
+import { PageProps } from "@/types";
 
-export const metadata = createMetadata({
-  canonical: "about",
-});
+export async function generateMetadata(
+  { params: { locale } }: PageProps,
+  state: ResolvingMetadata
+): Promise<Metadata> {
+  const t = await getTranslations({ locale, namespace: "AboutPage" });
+  const parentMeta = await state;
+  const pathname = getPathnameFromMetadataState(state);
 
-export default function AboutPage({ params: { locale } }: { params: { locale: string } }) {
+  return createMetadata({
+    canonical: pathname,
+    title: t("title"),
+    description: parentMeta.description,
+  });
+}
+
+export default function AboutPage({ params: { locale } }: PageProps) {
   unstable_setRequestLocale(locale);
   const t = useTranslations("AboutPage");
   const content = getPageBySlug("about", locale);

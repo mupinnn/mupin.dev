@@ -25,13 +25,13 @@ export async function GET(request: Request) {
     const { searchParams } = new URL(request.url);
 
     const title = searchParams.get("title");
-    const description = searchParams.get("description");
+    const description = searchParams.get("description") ?? searchParams.get("amp;description");
 
     return new ImageResponse(
       (
         <div
           style={{
-            fontSize: 16,
+            fontSize: 24,
             fontFamily: '"Inter"',
             color: "#0F1721",
             background: "#F1f5f9",
@@ -47,7 +47,7 @@ export async function GET(request: Request) {
             position: "relative",
           }}
         >
-          <span style={{ fontWeight: 700, fontSize: 32 }}>{title}</span>
+          <span style={{ fontWeight: 700, fontSize: 40 }}>{title}</span>
           <span>{description}</span>
 
           <div

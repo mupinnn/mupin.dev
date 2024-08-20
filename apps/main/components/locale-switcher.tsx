@@ -1,5 +1,6 @@
 "use client";
 
+import { startTransition } from "react";
 import Image from "next/image";
 import { useParams } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
@@ -32,10 +33,12 @@ export const LocaleSwitcher = () => {
   const t = useTranslations("LocaleSwitcher");
 
   const onLocaleChange = (selectedLocale: string) => {
-    // @ts-expect-error
-    // @see https://github.com/amannn/next-intl/issues/643
-    // @see https://github.com/amannn/next-intl/issues/726#issuecomment-1859914146
-    router.replace({ pathname, params }, { locale: selectedLocale as "id" | "en" });
+    startTransition(() => {
+      // @ts-expect-error
+      // @see https://github.com/amannn/next-intl/issues/643
+      // @see https://github.com/amannn/next-intl/issues/726#issuecomment-1859914146
+      router.replace({ pathname, params }, { locale: selectedLocale as "id" | "en" });
+    });
   };
 
   return (

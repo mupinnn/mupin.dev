@@ -3,7 +3,10 @@
   "globalDependencies": ["**/.env.*local"],
   "globalEnv": [
     "PORT",
+    "VERCEL_ENV",
     "VERCEL_PROJECT_PRODUCTION_URL",
+    "VERCEL_BRANCH_URL",
+    "VERCEL_URL",
     "VELITE_STARTED",
     "NOTION_MEMOIR_TOKEN",
     "NOTION_MEMOIR_DATABASE_ID",

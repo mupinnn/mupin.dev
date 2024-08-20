@@ -36,7 +36,6 @@ export const pathnames = {
     en: "/tags/[tagSlug]",
     id: "/tagar/[tagSlug]",
   },
-  "[...rest]": "[...rest]",
 } satisfies Pathnames<Locales>;
 
 export default getRequestConfig(async ({ locale }) => {
