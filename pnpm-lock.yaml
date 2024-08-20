@@ -111,6 +111,9 @@ importers:
       shiki:
         specifier: ^1.12.1
         version: 1.12.1
+      ts-pattern:
+        specifier: ^5.3.1
+        version: 5.3.1
       unified:
         specifier: ^11.0.5
         version: 11.0.5
@@ -9970,6 +9973,10 @@ packages:
       typescript: 4.9.5
       v8-compile-cache-lib: 3.0.1
       yn: 3.1.1
+    dev: false
+
+  /ts-pattern@5.3.1:
+    resolution: {integrity: sha512-1RUMKa8jYQdNfmnK4jyzBK3/PS/tnjcZ1CW0v1vWDeYe5RBklc/nquw03MEoB66hVBm4BnlCfmOqDVxHyT1DpA==}
     dev: false
 
   /ts-toolbelt@6.15.5:

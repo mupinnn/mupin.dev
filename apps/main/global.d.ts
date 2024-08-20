@@ -14,6 +14,8 @@ declare global {
       CLOUDINARY_API_SECRET: string;
       VERCEL_ENV: "production" | "preview" | "development";
       VERCEL_PROJECT_PRODUCTION_URL: string;
+      VERCEL_BRANCH_URL: string;
+      VERCEL_URL: string;
     }
   }
 }

@@ -1,15 +1,27 @@
+import type { Metadata, ResolvingMetadata } from "next";
 import { useTranslations } from "next-intl";
-import { unstable_setRequestLocale } from "next-intl/server";
+import { unstable_setRequestLocale, getTranslations } from "next-intl/server";
 import { PageLayout, Tag } from "@/components";
-import { createMetadata } from "@/utils/create-metadata";
+import { createMetadata, getPathnameFromMetadataState } from "@/utils/create-metadata";
 import { getAllBlogPostTagByLocale } from "@/content";
 import { Link } from "@/navigation";
+import type { PageProps } from "@/types";
 
-export const metadata = createMetadata({
-  canonical: "tags",
-});
+export async function generateMetadata(
+  { params: { locale } }: PageProps,
+  state: ResolvingMetadata
+): Promise<Metadata> {
+  const t = await getTranslations({ locale, namespace: "TagsPage" });
+  const pathname = getPathnameFromMetadataState(state);
 
-export default function TagsPage({ params: { locale } }: { params: { locale: string } }) {
+  return createMetadata({
+    title: t("list"),
+    description: t("description"),
+    canonical: pathname,
+  });
+}
+
+export default function TagsPage({ params: { locale } }: PageProps) {
   unstable_setRequestLocale(locale);
   const t = useTranslations("TagsPage");
   const tags = getAllBlogPostTagByLocale(locale);

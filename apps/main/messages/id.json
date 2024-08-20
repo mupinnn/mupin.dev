@@ -1,14 +1,16 @@
 {
   "GeneralMeta": {
-    "description": "Saya adalah seorang web developer yang mengutak-atik bagian depan dari web."
+    "description": "Faqih adalah seorang web developer yang mengutak-atik bagian depan dari web"
   },
   "HomePage": {
     "title": "<span>Yo! Saya</span>Ahmad<br></br>Muwaffaq,",
-    "subtitle": "kalian boleh memanggil saya 'Faqih' jika memanggil dengan nama lengkap saya cukup merepotkan, XD."
+    "subtitle": "kalian boleh memanggil saya 'Faqih' jika memanggil dengan nama lengkap saya cukup merepotkan, XD.",
+    "description": "Saya adalah seorang web developer yang mengutak-atik bagian depan dari web."
   },
   "NowPage": {
     "title": "Kini",
-    "subtitle": "Pembaruan terakhir pada {lastUpdatedAt}."
+    "subtitle": "Pembaruan terakhir pada {lastUpdatedAt}.",
+    "description": "Kondisi Faqih saat ini"
   },
   "AboutPage": {
     "title": "Tentang"
@@ -25,12 +27,14 @@
   },
   "ProjectsPage": {
     "title": "Proyek",
-    "subtitle": "Saya tidak menaruh semua proyek saya di sini, tapi berikut adalah beberapa favorit saya:"
+    "subtitle": "Saya tidak menaruh semua proyek saya di sini, tapi berikut adalah beberapa favorit saya:",
+    "description": "Proyek-proyek Faqih"
   },
   "TagsPage": {
     "list": "Tagar",
-    "detail": "Tagar",
-    "noTags": "Belum ada tagar."
+    "detail": "Tagar: {tag}",
+    "noTags": "Belum ada tagar.",
+    "description": "Tulisan yang diberi tagar"
   },
   "NotFoundPage": {
     "title": "Halaman tidak ditemukan.",
