@@ -1,7 +1,8 @@
-import { pages, blog } from "#content";
+import { pages, blog, projects } from "#content";
 
 const allPages = pages;
 const allBlogPosts = blog.filter(post => post.isPublished);
+const allProjects = projects;
 
 const getPageBySlug = (slug: string, locale: string = "en") => {
   return allPages.find(page => page.slug === slug && page.locale === locale);
@@ -49,6 +50,23 @@ const getAllBlogPostTag = () => {
   return allTags;
 };
 
+const getAllProjectsByLocale = (locale: string = "en") => {
+  return allProjects.filter(project => project.locale === locale);
+};
+
+const getProjectDetail = (slug: string, locale: string = "en") => {
+  const matchBySlug = allProjects.find(project => project.slug === slug);
+  const matchByLocale = allProjects.find(project => {
+    return project.locale === locale && project.slugByDefaultLocale === slug;
+  });
+
+  if (matchBySlug?.slug === slug && matchByLocale?.slug === slug) {
+    return matchBySlug;
+  }
+
+  return matchByLocale;
+};
+
 export {
   allPages,
   getPageBySlug,
@@ -58,4 +76,7 @@ export {
   getAllBlogPostTagByLocale,
   getAllBlogPostByTag,
   getAllBlogPostTag,
+  allProjects,
+  getAllProjectsByLocale,
+  getProjectDetail,
 };

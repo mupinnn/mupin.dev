@@ -79,6 +79,29 @@ const blog = defineCollection({
     }),
 });
 
+const projects = defineCollection({
+  name: "Projects",
+  pattern: "projects/**/*.mdx",
+  schema: s
+    .object({
+      title: s.string(),
+      path: s.path(),
+      description: s.string(),
+      body: s.mdx(),
+      stacks: s.array(s.string()).default([]),
+      thumbnail: s.string(),
+    })
+    .transform(data => {
+      const splittedPath = data.path.split("/");
+      return {
+        ...data,
+        locale: splittedPath[2],
+        slugByDefaultLocale: splittedPath[1],
+        slug: splittedPath[1],
+      };
+    }),
+});
+
 /**
  * borrowed from Astro
  * @see https://github.com/withastro/docs/blob/5b765bbaf08c52f2c2281f5f0c6413117a8cc126/plugins/rehype-autolink.ts#L50
@@ -110,7 +133,7 @@ function rehypei18nAutolinkHeadings() {
 }
 
 export default defineConfig({
-  collections: { pages, blog },
+  collections: { pages, blog, projects },
   mdx: {
     rehypePlugins: [
       rehypeSlug,

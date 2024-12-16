@@ -6,3 +6,4 @@ export * from "./layout";
 export * from "./locale-switcher";
 export * from "./images";
 export * from "./ui";
+export * from "./projects";

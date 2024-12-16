@@ -28,7 +28,8 @@
   "ProjectsPage": {
     "title": "Proyek",
     "subtitle": "Saya tidak menaruh semua proyek saya di sini, tapi berikut adalah beberapa favorit saya:",
-    "description": "Proyek-proyek Faqih"
+    "description": "Proyek-proyek Faqih",
+    "noProject": "Belum ada proyek."
   },
   "TagsPage": {
     "list": "Tagar",
