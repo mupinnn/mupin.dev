@@ -109,6 +109,24 @@ function rehypei18nAutolinkHeadings() {
   return transformer;
 }
 
+// @see https://dan.salvagni.io/b/astro-plugin-open-external-links-in-new-tab/
+function rehypeExternalLinkNewTab() {
+  const transformer: Transformer<Root> = tree => {
+    visit(tree, "element", node => {
+      if (
+        node.tagName === "a" &&
+        node.properties?.href &&
+        node.properties.href.toString().startsWith("http")
+      ) {
+        node.properties.target = "_blank";
+        node.properties.rel = "noopener noreferrer";
+      }
+    });
+  };
+
+  return transformer;
+}
+
 export default defineConfig({
   collections: { pages, blog },
   mdx: {
@@ -121,8 +139,6 @@ export default defineConfig({
           behavior: "wrap",
           properties: {
             className: "heading-anchor group",
-            target: "_blank",
-            rel: "noopener noreferrer",
           },
           content: fromHtmlIsomorphic(
             `
@@ -140,6 +156,7 @@ export default defineConfig({
         } as AutoLinkOptions,
       ],
       rehypei18nAutolinkHeadings,
+      rehypeExternalLinkNewTab,
     ],
   },
 });
