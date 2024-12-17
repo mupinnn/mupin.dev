@@ -3,7 +3,7 @@ title: Tag-based deployment for Cloudflare Pages using GitHub Actions
 description: Customize deployment workflow in Cloudflare Pages to be tag-based by leveraging GitHub Actions and Releases
 slug: tag-based-deployment-for-cloudflare-pages-using-github-actions
 isPublished: true
-publishedAt: 2024-12-17 15:50:00
+publishedAt: 2024-12-17T09:17:05.014Z
 tags: [web, deployment, cloudflare pages, github actions, tag-based, tag based, github releases, cf pages]
 ---
 
@@ -110,17 +110,17 @@ remote repository on GitHub and bring our blog project there.
 3. After the remote repository is created, two guides will appear to push our local repository to the remote repository
    we just created. Follow the steps in the red box below:
 
-   <CloudinaryImg
-     src="/blog/tag-based-deployment-for-cloudflare-pages-using-github-actions/preparing-remote-repo-1.png"
-     alt="An empty GitHub repository view contains instructions for pushing to that repository."
-   />
+<CloudinaryImg
+  src="/blog/tag-based-deployment-for-cloudflare-pages-using-github-actions/preparing-remote-repo-1.png"
+  alt="An empty GitHub repository view contains instructions for pushing to that repository."
+/>
 
 4. Reload the page and make sure your remote repository looks something like this:
 
-   <CloudinaryImg
-     src="/blog/tag-based-deployment-for-cloudflare-pages-using-github-actions/preparing-remote-repo-2.png"
-     alt="GitHub repository view after push"
-   />
+<CloudinaryImg
+  src="/blog/tag-based-deployment-for-cloudflare-pages-using-github-actions/preparing-remote-repo-2.png"
+  alt="GitHub repository view after push"
+/>
 
 ### Get Cloudflare API Token
 
@@ -602,20 +602,20 @@ a new project in the Cloudflare Pages dashboard.
 2. In the upper right corner, find and click **“+ Add”** then click **“Pages”**. Later, the **“Workers & Pages”** menu
    will appear in the sidebar menu on the left
 
-   <CloudinaryImg
-     src="/blog/tag-based-deployment-for-cloudflare-pages-using-github-actions/first-deployment-1.png"
-     alt="Workers & Pages view in Cloudflare dashboar when creating a new project"
-   />
+<CloudinaryImg
+  src="/blog/tag-based-deployment-for-cloudflare-pages-using-github-actions/first-deployment-1.png"
+  alt="Workers & Pages view in Cloudflare dashboar when creating a new project"
+/>
 
 3. Click **“Create”** > Select the **“Pages”** tab > Select the direct upload option
 4. Fill in the project name column according to the repository name or according to what we sent in the `--project-name`
    argument from the Wrangler CLI earlier
 5. Then click **“Create project”**
 
-   <CloudinaryImg
-     src="/blog/tag-based-deployment-for-cloudflare-pages-using-github-actions/first-deployment-2.png"
-     alt="View after creating project in Workers & Pages page"
-   />
+<CloudinaryImg
+  src="/blog/tag-based-deployment-for-cloudflare-pages-using-github-actions/first-deployment-2.png"
+  alt="View after creating project in Workers & Pages page"
+/>
 
 6. Go back to the **“Workers & Pages”** page. There is no need to upload any assets as we will upload them via GitHub
    Actions

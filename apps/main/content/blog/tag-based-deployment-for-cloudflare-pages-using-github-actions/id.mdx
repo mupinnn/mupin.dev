@@ -4,7 +4,7 @@ description:
   Sesuaikan deployment workflow di Cloudflare Pages menjadi berbasis tag dengan memanfaatkan GitHub Actions dan Releases
 slug: deployment-berbasis-tag-untuk-cloudflare-pages-menggunakan-github-actions
 isPublished: true
-publishedAt: 2024-12-17 15:50:00
+publishedAt: 2024-12-17T09:17:05.014Z
 tags: [web, deployment, cloudflare pages, github actions, tag-based, tag based, github releases, cf pages]
 ---
 
@@ -117,17 +117,17 @@ membuat _remote_ repositori di GitHub dan membawa proyek blog kita ke sana.
 3. Setelah _remote_ repositori terbuat, akan muncul dua panduan untuk melakukan _push_ repositori lokal kita ke _remote_
    repositori yang baru kita buat. Ikuti langkah pada kotak merah di bawah ini:
 
-   <CloudinaryImg
-     src="/blog/tag-based-deployment-for-cloudflare-pages-using-github-actions/preparing-remote-repo-1.png"
-     alt="Tampilan repositori GitHub dalam keadaan kosong berisi panduan untuk melakukan push ke repositori tersebut"
-   />
+<CloudinaryImg
+  src="/blog/tag-based-deployment-for-cloudflare-pages-using-github-actions/preparing-remote-repo-1.png"
+  alt="Tampilan repositori GitHub dalam keadaan kosong berisi panduan untuk melakukan push ke repositori tersebut"
+/>
 
 4. Muat ulang halaman dan pastikan _remote_ repositori kalian kurang lebih terlihat seperti ini:
 
-   <CloudinaryImg
-     src="/blog/tag-based-deployment-for-cloudflare-pages-using-github-actions/preparing-remote-repo-2.png"
-     alt="Tampilan repositori GitHub setelah melakukan push"
-   />
+<CloudinaryImg
+  src="/blog/tag-based-deployment-for-cloudflare-pages-using-github-actions/preparing-remote-repo-2.png"
+  alt="Tampilan repositori GitHub setelah melakukan push"
+/>
 
 ### Mendapatkan Cloudflare API Token
 
@@ -617,20 +617,20 @@ proyek baru di _dashboard_ Cloudflare Pages.
 2. Di pojok kanan atas, temukan dan klik _**“+ Add”**_ lalu klik _**“Pages”**_. Nanti akan muncul menu _**“Workers &
    Pages”**_ di menu _sidebar_ sebelah kiri
 
-   <CloudinaryImg
-     src="/blog/tag-based-deployment-for-cloudflare-pages-using-github-actions/first-deployment-1.png"
-     alt="Tampilan halaman Workers & Pages di dashboard Cloudflare pada saat membuat proyek baru"
-   />
+<CloudinaryImg
+  src="/blog/tag-based-deployment-for-cloudflare-pages-using-github-actions/first-deployment-1.png"
+  alt="Tampilan halaman Workers & Pages di dashboard Cloudflare pada saat membuat proyek baru"
+/>
 
 3. Klik _**“Create”**_ > Pilih _tab **“Pages”**_ > Pilih opsi _direct upload_
 4. Isi kolom nama proyek sesuai dengan nama repositori atau sesuai dengan yang kita kirim di argumen opsi
    `--project-name` dari Wrangler CLI sebelumnya
 5. Lalu klik _**“Create project”**_
 
-   <CloudinaryImg
-     src="/blog/tag-based-deployment-for-cloudflare-pages-using-github-actions/first-deployment-2.png"
-     alt="Tampilan sesudah membuat proyek di halaman Workers & Pages"
-   />
+<CloudinaryImg
+  src="/blog/tag-based-deployment-for-cloudflare-pages-using-github-actions/first-deployment-2.png"
+  alt="Tampilan sesudah membuat proyek di halaman Workers & Pages"
+/>
 
 6. Kembali ke halaman _**“Workers & Pages”**_. Tidak perlu mengunggah aset apa pun karena kita akan mengunggahnya
    melalui Github Actions.
