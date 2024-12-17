@@ -91,9 +91,12 @@ We will use the blog starter template from Astro by running the following comman
 $ pnpm create astro --template blog
 ```
 
-Follow the prompts and make sure you select “Yes” for installing dependencies and initializing the Git repository.
+Follow the prompts and make sure you select **“Yes”** for installing dependencies and initializing the Git repository.
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/1eea94e2-08e6-4f51-8720-0c2c690f5361/cca131cf-ef22-4432-a0f2-1188aa3e73b6/image.png)
+<CloudinaryImg
+  src="/blog/tag-based-deployment-for-cloudflare-pages-using-github-actions/creating-astro-project.png"
+  alt="Terminal view when creating a blog project with a template from Astro"
+/>
 
 Make sure the project is running smoothly in development by running `pnpm dev` and is also buildable with `pnpm build`.
 
@@ -103,40 +106,53 @@ After successfully creating a project with Astro and making sure everything work
 remote repository on GitHub and bring our blog project there.
 
 1. Visit https://github.com/new
-2. Fill in the repository name only and leave the other fields, then click “Create repository”
+2. Fill in the repository name only and leave the other fields, then click **“Create repository”**
 3. After the remote repository is created, two guides will appear to push our local repository to the remote repository
    we just created. Follow the steps in the red box below:
 
-   ![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/1eea94e2-08e6-4f51-8720-0c2c690f5361/6a0d1b9e-974d-4b8b-aaa6-b4e129989128/image.png)
+   <CloudinaryImg
+     src="/blog/tag-based-deployment-for-cloudflare-pages-using-github-actions/preparing-remote-repo-1.png"
+     alt="An empty GitHub repository view contains instructions for pushing to that repository."
+   />
 
 4. Reload the page and make sure your remote repository looks something like this:
 
-   ![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/1eea94e2-08e6-4f51-8720-0c2c690f5361/cc753144-befb-4cfc-89a6-33a80a3e3022/image.png)
+   <CloudinaryImg
+     src="/blog/tag-based-deployment-for-cloudflare-pages-using-github-actions/preparing-remote-repo-2.png"
+     alt="GitHub repository view after push"
+   />
 
 ### Get Cloudflare API Token
 
 Before using Wrangler CLI, we need two credentials from Cloudflare; namely API Token and Account ID.
 
 1. Log in to the Cloudflare dashboard
-2. Go to the “My Profile” \*\*menu in the upper right corner by clicking the user icon
-3. Go to the “API Tokens” menu, then click “Create Token”
-4. Select “Custom Token”, then click “Get started”
-5. Give any name to the API Token to be created in the *“*Token name” column
-6. Then, in the “Permissions” section, select Account, Cloudflare Pages, and Edit (select the options in order from left
-   to right)
-7. Click “Continue to summary”, then click “Create token”
+2. Go to the **“My Profile”** menu in the upper right corner by clicking the user icon
+3. Go to the **“API Tokens”** menu, then click **“Create Token”**
+4. Select **“Custom Token”**, then click **“Get started”**
+5. Give any name to the API Token to be created in the **“Token name”** column
+6. Then, in the **“Permissions”** section, select **Account**, **Cloudflare Pages**, and **Edit** (select the options in
+   order from left to right)
+7. Click **“Continue to summary”**, then click **“Create token”**
 8. Copy and save the token for later use in Github Actions and APIs
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/1eea94e2-08e6-4f51-8720-0c2c690f5361/81e7a577-346d-40f9-bf1f-e0358fb70577/image.png)
+<CloudinaryImg
+  src="/blog/tag-based-deployment-for-cloudflare-pages-using-github-actions/create-cf-api-token.png"
+  alt="Cloudflare user page when creating API Token"
+/>
 
 ### Get Cloudflare Project Account ID
 
 1. Log in to the Cloudflare dashboard
-2. Go to the “Workers & Pages” menu
-3. There is a “Account Details” section on the right side, there is a “Account ID” column. Click to copy the contents
+2. Go to the **“Workers & Pages”** menu
+3. There is a **“Account Details”** section on the right side, there is a **“Account ID”** column. Click to copy the
+   contents
 4. Save the Account ID for later use in GitHub Actions and APIs
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/1eea94e2-08e6-4f51-8720-0c2c690f5361/e8514584-e329-486a-a787-9eba16afb63c/image.png)
+<CloudinaryImg
+  src="/blog/tag-based-deployment-for-cloudflare-pages-using-github-actions/create-cf-account-id.png"
+  alt="Workers & Pages page for accessing Account ID"
+/>
 
 ## Creating Github Actions workflows
 
@@ -146,11 +162,17 @@ Workflows are defined by YAML files that can be run based on an event, run manua
 Workflow files are stored in the `.github/workflows` folder in a repository. Therefore, our first step is to create a
 `.github/workflows` folder in our blog project.
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/1eea94e2-08e6-4f51-8720-0c2c690f5361/2607a783-9905-45f1-997f-9d3c014ca910/image.png)
+<CloudinaryImg
+  src="/blog/tag-based-deployment-for-cloudflare-pages-using-github-actions/create-workflow-file-1.png"
+  alt="Project directory view after creating .github/workflows folder"
+/>
 
 Then, create a `deploy.yml` file inside the `.github/workflows` folder.
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/1eea94e2-08e6-4f51-8720-0c2c690f5361/6162a208-8a21-469e-b792-2ef1e04f6e3a/image.png)
+<CloudinaryImg
+  src="/blog/tag-based-deployment-for-cloudflare-pages-using-github-actions/create-workflow-file-2.png"
+  alt=".github/workflows directory that contain deploy.yml file"
+/>
 
 ### Defining triggers, permissions, and environment variables
 
@@ -159,7 +181,10 @@ when a workflow will be executed. Jobs are tasks that run on their respective vi
 by default. Each job can have several steps that can run a script that we create or a package/action available in the
 marketplace.
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/1eea94e2-08e6-4f51-8720-0c2c690f5361/1db8c263-f7f5-4759-a949-277f10af3861/image.png)
+<CloudinaryImg
+  src="/blog/tag-based-deployment-for-cloudflare-pages-using-github-actions/workflow-big-picture.png"
+  alt="Big picture of a workflow from GitHub Actions"
+/>
 
 In this project, I want the workflow to be run on:
 
@@ -208,7 +233,7 @@ on:
 To run a workflow manually, we can use the `workflow_dispatch` event. This event accepts a maximum of 10 inputs. Inputs
 function as option columns that we can choose to influence the running of a workflow. There are various data types to
 define an input, such as `boolean`, `choice`, `number`, `environment`, and `string`. Further explanation can be read at
-https://docs.github.com/en/enterprise-cloud@latest/actions/writing-workflows/workflow-syntax-for-github-actions#onworkflow_dispatchinputsinput_idtype
+[Workflow syntax for GitHub Actions](https://docs.github.com/en/enterprise-cloud@latest/actions/writing-workflows/workflow-syntax-for-github-actions#onworkflow_dispatchinputsinput_idtype)
 
 As an example:
 
@@ -237,11 +262,17 @@ on:
 
 The above configuration will product inputs as below.
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/1eea94e2-08e6-4f51-8720-0c2c690f5361/36c5eaca-e5bf-4a3f-9e5a-edabd119d151/image.png)
+<CloudinaryImg
+  src="/blog/tag-based-deployment-for-cloudflare-pages-using-github-actions/workflow-inputs-example.png"
+  alt="Example of displaying input results from a workflow"
+/>
 
 Okey, back to the main topic. With the configuration that we have made above, the inputs produced will be like this
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/1eea94e2-08e6-4f51-8720-0c2c690f5361/83a5f9a0-3d0f-4862-96ac-8ff0814434fb/image.png)
+<CloudinaryImg
+  src="/blog/tag-based-deployment-for-cloudflare-pages-using-github-actions/workflow-inputs-real.png"
+  alt="The results of the inputs from the workflow we created"
+/>
 
 ```yaml
 on:
@@ -305,9 +336,12 @@ seven types, namely:
 
 Each has its own use and the one we will use is only `released`. We don’t need `draft` and `pre-release` yet, so we
 don’t need the `published` type. Further explanation can be read at
-https://docs.github.com/en/actions/writing-workflows/choosing-when-your-workflow-runs/events-that-trigger-workflows#release
+[Events that trigger workflows](https://docs.github.com/en/actions/writing-workflows/choosing-when-your-workflow-runs/events-that-trigger-workflows#release)
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/1eea94e2-08e6-4f51-8720-0c2c690f5361/defb4f79-fcc6-4158-b822-df71613b040e/image.png)
+<CloudinaryImg
+  src="/blog/tag-based-deployment-for-cloudflare-pages-using-github-actions/release-event-1.png"
+  alt="GitHub Releases view when you want to make a new release"
+/>
 
 ```yaml
 name: Deploy to Cloudflare Pages
@@ -332,7 +366,7 @@ on:
 
 After the event is done, we need to define permissions so that our workflow can run smoothly and use what we need. In
 this workflow, we only need two permissions: `contents` and `deployments`. You can see what permissions are available at
-https://docs.github.com/en/enterprise-cloud@latest/actions/writing-workflows/workflow-syntax-for-github-actions#permissions
+[Workflow permissions](https://docs.github.com/en/enterprise-cloud@latest/actions/writing-workflows/workflow-syntax-for-github-actions#permissions)
 
 ```yaml
 permissions:
@@ -405,7 +439,7 @@ jobs:
 
 The `runs-on` key is needed to define where the job we create will be run. `ubuntu-latest` means the job will be run on
 a virtual machine with the latest version of Ubuntu Linux OS. There are many other runner options that you can see at
-https://docs.github.com/en/enterprise-cloud@latest/actions/writing-workflows/workflow-syntax-for-github-actions#choosing-github-hosted-runners.
+[Workflow runners](https://docs.github.com/en/enterprise-cloud@latest/actions/writing-workflows/workflow-syntax-for-github-actions#choosing-github-hosted-runners).
 
 Then, there is the `needs` key which means the job needs to wait for the `build` job to complete before running.
 Actually, we can just create one job—but that is not recommended, especially since we need to install dependencies and
@@ -417,7 +451,7 @@ For the `build` job, we need a few steps:
 1. Use the `actions/checkout@v4` action to check out our repository so that our workflow can access the code
 2. Since I am using `pnpm`, I need to use the `pnpm/action-setup@v4` action to install `pnpm`
 3. To use the `pnpm` cache feature, we need to follow these steps
-   https://github.com/pnpm/action-setup?tab=readme-ov-file#use-cache-to-reduce-installation-time
+   [`pnpm/action-setup` documentation](https://github.com/pnpm/action-setup?tab=readme-ov-file#use-cache-to-reduce-installation-time)
 4. The next step is to run the build with `run: pnpm build`
 5. Once the build is complete, we need to upload the build file to
    [artifacts](https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/storing-and-sharing-data-from-a-workflow)
@@ -481,7 +515,7 @@ jobs:
 ```
 
 For `yarn` users, you can try to adjust with the following _action_
-https://github.com/marketplace/actions/github-action-for-yarn
+[GitHub Action for Yarn](https://github.com/marketplace/actions/github-action-for-yarn)
 
 Next, for the `deploy` _job_! The steps we need are:
 
@@ -522,18 +556,21 @@ needed in this step to use Wrangler CLI via `cloudflare/wrangler-action@v3` acti
 We will add the _API Token_ and _Account ID_ to GitHub Secrets.
 
 1. Open the repository page that we have created
-2. Click _“Settings_” > _“Secrets and variables”_ > _“Actions”_
-3. Click _“New repository secret”_
+2. Click **“Settings”** > **“Secrets and variables”** > **“Actions”**
+3. Click **“New repository secret”**
 4. Fill in the name column with `CLOUDFLARE_API_TOKEN`
-5. Fill in the _value_ column with the _API Token_ that we have created, then click _“Add secret”_
+5. Fill in the _value_ column with the _API Token_ that we have created, then click **“Add secret”**
 6. Repeat from step three with the name and _value_ for `CLOUDFLARE_ACCOUNT_ID`
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/1eea94e2-08e6-4f51-8720-0c2c690f5361/255c65b8-78b6-4fd6-aaec-1f00b4b98aa2/image.png)
+<CloudinaryImg
+  src="/blog/tag-based-deployment-for-cloudflare-pages-using-github-actions/workflow-secrets-1.png"
+  alt="View for secrets configuration in GitHub Actions"
+/>
 
 The secrets that we have created can be accessed from the workflow using `secrets.<name>`. For `secrets.GITHUB_TOKEN` is
 automatically provided by GitHub using a certain permission.
 
-Next, pay attention to the `command` argument in the “Deploy to Cloudflare Pages” step. The
+Next, pay attention to the `command` argument in the **“Deploy to Cloudflare Pages”** step. The
 `cloudflare/wrangler-action@v3` action allows us to override the default `command` as needed.
 
 There are several arguments that I use here so that this deployment runs as desired:
@@ -562,19 +599,25 @@ Before we commit and push the workflow that has been created, there is one thing
 a new project in the Cloudflare Pages dashboard.
 
 1. Open the Cloudflare dashboard
-2. In the upper right corner, find and click “+ Add” then click “Pages”. Later, the “Workers & Pages” menu will appear
-   in the sidebar menu on the left
+2. In the upper right corner, find and click **“+ Add”** then click **“Pages”**. Later, the **“Workers & Pages”** menu
+   will appear in the sidebar menu on the left
 
-   ![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/1eea94e2-08e6-4f51-8720-0c2c690f5361/014db92b-1916-4560-9824-cfaaf9838728/image.png)
+   <CloudinaryImg
+     src="/blog/tag-based-deployment-for-cloudflare-pages-using-github-actions/first-deployment-1.png"
+     alt="Workers & Pages view in Cloudflare dashboar when creating a new project"
+   />
 
-3. Click “Create” > Select the “Pages” tab > Select the direct upload option
+3. Click **“Create”** > Select the **“Pages”** tab > Select the direct upload option
 4. Fill in the project name column according to the repository name or according to what we sent in the `--project-name`
    argument from the Wrangler CLI earlier
-5. Then click “Create project”
+5. Then click **“Create project”**
 
-   ![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/1eea94e2-08e6-4f51-8720-0c2c690f5361/c1869328-8793-42ad-acd6-ee745f071b46/image.png)
+   <CloudinaryImg
+     src="/blog/tag-based-deployment-for-cloudflare-pages-using-github-actions/first-deployment-2.png"
+     alt="View after creating project in Workers & Pages page"
+   />
 
-6. Go back to the “Workers & Pages” page. There is no need to upload any assets as we will upload them via GitHub
+6. Go back to the **“Workers & Pages”** page. There is no need to upload any assets as we will upload them via GitHub
    Actions
 
 Once al the settings are done, it’s time to commit and push our workflow file.
@@ -585,21 +628,36 @@ $ git commit -m "chore: setup workflows"
 $ git push
 ```
 
-Go to our repository page, click on “Actions” and you will see that there is a workflow running. You can click on it to
-see the details, even the details of each job and step that is running.
+Go to our repository page, click on **“Actions”** and you will see that there is a workflow running. You can click on it
+to see the details, even the details of each job and step that is running.
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/1eea94e2-08e6-4f51-8720-0c2c690f5361/b45850c9-6ef8-48ee-954f-8b6063a6c00e/image.png)
+<CloudinaryImg
+  src="/blog/tag-based-deployment-for-cloudflare-pages-using-github-actions/first-deployment-3.png"
+  alt="Actions view on repository that display running or completed workflow"
+/>
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/1eea94e2-08e6-4f51-8720-0c2c690f5361/94f39932-543d-4cef-8344-8e9f72edaa1f/image.png)
+<CloudinaryImg
+  src="/blog/tag-based-deployment-for-cloudflare-pages-using-github-actions/first-deployment-4.png"
+  alt="Detail view from a workflow. You can see the jobs are connected"
+/>
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/1eea94e2-08e6-4f51-8720-0c2c690f5361/c1b59b8c-fd45-40d4-88c5-a62b3f12bc17/image.png)
+<CloudinaryImg
+  src="/blog/tag-based-deployment-for-cloudflare-pages-using-github-actions/first-deployment-5.png"
+  alt="Detail view of each job from a workflow. You can see the running steps inside the job"
+/>
 
 Take a look at the last image and notice the deployment URL—that’s right, there’s some sort of unique hash there. Let’s
-take a look at the “Workers & Pages” dashboard and see the project details.
+take a look at the **“Workers & Pages”** dashboard and see the project details.
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/1eea94e2-08e6-4f51-8720-0c2c690f5361/8b58edf5-9cf5-4cf2-8275-389035b00bf5/image.png)
+<CloudinaryImg
+  src="/blog/tag-based-deployment-for-cloudflare-pages-using-github-actions/first-deployment-6.png"
+  alt="Workers & Pages page that show project lists in Cloudflare Pages"
+/>
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/1eea94e2-08e6-4f51-8720-0c2c690f5361/affd997c-31b7-4263-a9e8-55184fc2946e/image.png)
+<CloudinaryImg
+  src="/blog/tag-based-deployment-for-cloudflare-pages-using-github-actions/first-deployment-7.png"
+  alt="Cloudflare Pages project's detail page"
+/>
 
 We got two URLs! One main URL https://blog-poc-cf-pages-tag-based-deployment.pages.dev/ and the second one with a unique
 hash for each commit \*\*https://e0c3013f.blog-poc-cf-pages-tag-based-deployment.pages.dev/. If there is a new
@@ -613,31 +671,47 @@ considered as a production deployment.
 
 We will use GitHub Releases to create a tag and record what changes have occurred in this production release.
 
-First, go to our repository page and look on the right side for the “Releases” section. Click “Create a new release”.
+First, go to our repository page and look on the right side for the **“Releases”** section. Click **“Create a new
+release”**.
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/1eea94e2-08e6-4f51-8720-0c2c690f5361/daea17e0-441d-4639-982b-d0767f4ae9ee/image.png)
+<CloudinaryImg
+  src="/blog/tag-based-deployment-for-cloudflare-pages-using-github-actions/production-deployment-1.png"
+  alt="GitHub repository main page. There is a red box that indicating the location of the Releases section"
+/>
 
-Then, create a new tag in the “Choose a tag” field. We will create a `v1.0.0` tag as the initial version.
+Then, create a new tag in the **“Choose a tag”** field. We will create a `v1.0.0` tag as the initial version.
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/1eea94e2-08e6-4f51-8720-0c2c690f5361/5eff2471-1e29-469f-b685-c867cdfd5d2b/image.png)
+<CloudinaryImg
+  src="/blog/tag-based-deployment-for-cloudflare-pages-using-github-actions/production-deployment-2.png"
+  alt="Create tag view on GitHub Releases page"
+/>
 
-Then, click “Generate release notes”. This will automatically create release notes based on the commit history of the
-successfully merged pull requests. For now, since there are no pull requests that have been merged, the release notes
-appear empty.
+Then, click **“Generate release notes”**. This will automatically create release notes based on the commit history of
+the successfully merged pull requests. For now, since there are no pull requests that have been merged, the release
+notes appear empty.
 
-Next, click “Publish release” and see there will be a workflow running!
+Next, click **“Publish release”** and see there will be a workflow running!
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/1eea94e2-08e6-4f51-8720-0c2c690f5361/c6aaa91c-6e30-474c-8007-b259cf6e87bb/image.png)
+<CloudinaryImg
+  src="/blog/tag-based-deployment-for-cloudflare-pages-using-github-actions/production-deployment-3.png"
+  alt="Github Releases page after automatically filled"
+/>
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/1eea94e2-08e6-4f51-8720-0c2c690f5361/e69d636e-b392-4974-bb66-a42d5640b56e/image.png)
+<CloudinaryImg
+  src="/blog/tag-based-deployment-for-cloudflare-pages-using-github-actions/production-deployment-4.png"
+  alt="Actions page that show a workflow that currently running because triggered by a new release"
+/>
 
-Take a look at the `deploy` job on the “Deploy to Cloudflare Pages” step. We have successfully set the deployment based
-on the tag from GitHub Releases, so the `--branch` argument should contain `production`.
+Take a look at the `deploy` job on the **“Deploy to Cloudflare Pages”** step. We have successfully set the deployment
+based on the tag from GitHub Releases, so the `--branch` argument should contain `production`.
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/1eea94e2-08e6-4f51-8720-0c2c690f5361/82ee90b1-c242-4bc2-b3f2-58b9c469bcc7/image.png)
+<CloudinaryImg
+  src="/blog/tag-based-deployment-for-cloudflare-pages-using-github-actions/production-deployment-5.png"
+  alt="Detail from 'Deploy to Cloudflare Pages' step which has red box to indicate --branch argument contains production"
+/>
 
 To make sure whether the previous deployment is really considered as production by Cloudflare Pages, we need to see it
-in our project’s “Workers & Pages” dashboard.
+in our project’s **“Workers & Pages”** dashboard.
 
 We can see the image below. Actually, we don’t have a `production` branch, but the `--branch` argument allows us to
 distinguish a deployment by only having one branch.
@@ -648,7 +722,10 @@ points to the previous deployment. Of course, this is not following our goals. W
 when there is a new tag. Any changes that are pushed to the `main` branch, if they are not ready for release, will not
 available on the main URL—only on the preview URL.
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/1eea94e2-08e6-4f51-8720-0c2c690f5361/c5c88843-8a4e-444b-8aa6-56ec5551b1c6/image.png)
+<CloudinaryImg
+  src="/blog/tag-based-deployment-for-cloudflare-pages-using-github-actions/production-deployment-6.png"
+  alt="Detail page of a Cloudflare Pages project in Cloudflare dashboard"
+/>
 
 ## Set the `production` branch as a production environment
 
@@ -669,25 +746,30 @@ curl --request PATCH \
 After success, we need to do another deployment to apply the changes. Run the workflow manually by selecting the
 `production` option as the target environment.
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/1eea94e2-08e6-4f51-8720-0c2c690f5361/bf044884-8a79-4794-9661-3cb330e8b2eb/image.png)
+<CloudinaryImg
+  src="/blog/tag-based-deployment-for-cloudflare-pages-using-github-actions/set-production-branch-1.png"
+  alt="Terminal view after successfully executing command to change the production branch"
+/>
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/1eea94e2-08e6-4f51-8720-0c2c690f5361/c87b13f3-2e9c-42a5-8e4f-d3b4b47272b7/image.png)
+<CloudinaryImg
+  src="/blog/tag-based-deployment-for-cloudflare-pages-using-github-actions/set-production-branch-2.png"
+  alt="Actions page that show the inputs for running the workflow manually"
+/>
 
-Then, check your “Workers & Pages” dashboard and our production environment is on the right track. Maybe, it feels like
-there is no difference between production and preview for now. You can try to make changes to your project. In my
+Then, check your **“Workers & Pages”** dashboard and our production environment is on the right track. Maybe, it feels
+like there is no difference between production and preview for now. You can try to make changes to your project. In my
 experiment, I changed the title on the home page in the `src/pages/index.astro` file and then pushed the changes to the
 main branch. This is where the difference will appear. My main URL
 (https://blog-poc-cf-pages-tag-based-deployment.pages.dev/) has no changes, while if you access the preview deployment
 from the `main` branch, you can see a difference in the title
 (https://main.blog-poc-cf-pages-tag-based-deployment.pages.dev/).
 
-<aside>
-💡
+<blockquote>
+    
+💡 In addition to the unique hash, the deployment preview can also be accessed via the branch name such as 
+    `<branch>.<project>.pages.dev`. This URL is an alias for the latest deployment on the branch.
 
-In addition to the unique hash, the deployment preview can also be accessed via the branch name such as
-`<branch>.<project>.pages.dev`. This URL is an alias for the latest deployment on the branch.
-
-</aside>
+</blockquote>
 
 ## Conclusion
 

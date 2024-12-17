@@ -671,7 +671,7 @@ dari _dashboard **“Workers & Pages”**_ dan lihat detail proyeknya.
 
 <CloudinaryImg
   src="/blog/tag-based-deployment-for-cloudflare-pages-using-github-actions/first-deployment-7.png"
-  alt="Menyiapkan repositori remote di GitHub"
+  alt="Halaman detail dari proyek Cloudflare Pages"
 />
 
 Kita mendapatkan dua URL! Satu URL utama https://blog-poc-cf-pages-tag-based-deployment.pages.dev/ dan yang kedua dengan
@@ -680,8 +680,8 @@ _deployment_ baru, maka _deployment_ tersebut dapat diakses melalui URL utama da
 apakah _deployment_ sebelumnya masih bisa kita akses? Tentu saja! Dengan catatan, hanya bisa diakses melalui URL yang
 berkaitan.
 
-Perlu dicatat, URL utama akan di-_assign_ oleh Cloudflare Pages ke _branch_ utama _(main/master)_ dan dianggap sebagai
-_production deployment_.
+Perlu dicatat, URL utama akan di-_assign_ oleh Cloudflare Pages ke _branch_ utama _(`main`/`master`)_ dan dianggap
+sebagai _production deployment_.
 
 ## _Deployment_ ke _production_
 
@@ -711,7 +711,7 @@ Selanjutnya, klik _**“Publish release”**_ dan lihat akan ada _workflow_ yang
 
 <CloudinaryImg
   src="/blog/tag-based-deployment-for-cloudflare-pages-using-github-actions/production-deployment-3.png"
-  alt="Halaman utama dari repositori GitHub. Terdapat kotak merah yang menunjukkan lokasi bagian Releases"
+  alt="Halaman GitHub Releases setelah diisi secara otomatis"
 />
 
 <CloudinaryImg
@@ -781,7 +781,12 @@ pada proyek kalian. Pada percobaan yang saya lakukan, saya mengganti judul pada 
 _preview deployment_ dari _branch main_, maka terlihat ada perbedaan pada judul
 (https://main.blog-poc-cf-pages-tag-based-deployment.pages.dev/).
 
-<blockquote>💡 Selain _hash_ unik, _preview deployment_ juga bisa diakses melalui nama _branch_ seperti `<branch>.<project>.pages.dev`. URL tersebut merupakan _alias_ untuk _deployment_ terakhir pada _branch_ terkait.</blockquote>
+<blockquote>
+
+💡 Selain _hash_ unik, _preview deployment_ juga bisa diakses melalui nama _branch_ seperti
+`<branch>.<project>.pages.dev`. URL tersebut merupakan _alias_ untuk _deployment_ terakhir pada _branch_ terkait.
+
+</blockquote>
 
 ## Kesimpulan
 
