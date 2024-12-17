@@ -12,7 +12,7 @@ export const CloudinaryImg = async ({
   caption,
   imgClassName,
   className,
-  width = 640,
+  width = 960,
   height = 428,
   src,
   ...props
