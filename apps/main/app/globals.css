@@ -38,6 +38,10 @@ figure[data-rehype-pretty-code-figure] {
   @apply -mx-4;
 }
 
+span[data-rehype-pretty-code-figure] > code {
+  @apply px-1 py-0.5;
+}
+
 [data-rehype-pretty-code-title] {
   @apply bg-slate-800 p-2 font-mono text-xs text-slate-50 sm:rounded-t-md;
 }
