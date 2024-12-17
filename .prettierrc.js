@@ -9,4 +9,13 @@ module.exports = {
   quoteProps: "preserve",
   trailingComma: "es5",
   plugins: ["prettier-plugin-tailwindcss"],
+  overrides: [
+    {
+      files: "*.{md,mdx}",
+      options: {
+        proseWrap: "always",
+        printWidth: 120,
+      },
+    },
+  ],
 };

@@ -44,6 +44,20 @@ const config = {
       },
 
       typography: {
+        DEFAULT: {
+          css: {
+            "code::before": {
+              content: '""',
+            },
+            "code::after": {
+              content: '""',
+            },
+            a: {
+              wordWrap: "break-word",
+            },
+          },
+        },
+
         slate: {
           css: {
             "--tw-prose-body": colors.slate[900],
