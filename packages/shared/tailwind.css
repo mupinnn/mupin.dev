@@ -1,0 +1,59 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans:
+    "Inter", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol", "Noto Color Emoji";
+  --font-bricolage:
+    "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+  --color-*: initial;
+  --color-slate-50: oklch(0.984 0.003 247.858);
+  --color-slate-100: oklch(0.968 0.007 247.896);
+  --color-slate-200: oklch(0.929 0.013 255.508);
+  --color-slate-300: oklch(0.869 0.022 252.894);
+  --color-slate-400: oklch(0.704 0.04 256.788);
+  --color-slate-500: oklch(0.554 0.046 257.417);
+  --color-slate-600: oklch(0.446 0.043 257.281);
+  --color-slate-700: oklch(0.372 0.044 257.287);
+  --color-slate-800: oklch(0.279 0.041 260.031);
+  --color-slate-900: oklch(0.208 0.042 265.755);
+  --color-slate-950: oklch(0.129 0.042 264.695);
+
+  --color-red-1: #ef4747;
+  --color-red-2: #ff2323;
+  --color-red-3: #a81919;
+
+  --color-tangerine-1: #fda06b;
+  --color-tangerine-2: #ff8946;
+  --color-tangerine-3: #b66334;
+
+  --color-lemon-1: #fff969;
+  --color-lemon-2: #fff857;
+  --color-lemon-3: #ada83c;
+
+  --color-blue-1: #81b3f6;
+  --color-blue-2: #5ba2ff;
+  --color-blue-3: #4273b4;
+
+  --color-cod-gray-1: #393838;
+  --color-cod-gray-2: #292828;
+  --color-cod-gray-3: #0e0d0d;
+
+  --color-pink-1: #ffa3a3;
+  --color-pink-2: #ff8686;
+  --color-pink-3: #a85959;
+
+  --color-peach-1: #f8c7ab;
+  --color-peach-2: #ffba93;
+  --color-peach-3: #a87b61;
+
+  --color-brown-1: #cbb390;
+  --color-brown-2: #a48f70;
+  --color-brown-3: #7b6c55;
+
+  --color-turquoise-1: #60e8d8;
+  --color-turquoise-2: #49b4a7;
+  --color-turquoise-3: #3a8f85;
+}

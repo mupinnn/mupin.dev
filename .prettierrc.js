@@ -1,20 +1,17 @@
-/**
- * @type {import("prettier").Options}
- */
-module.exports = {
+/** @type {import("prettier").Options} */
+export default {
   printWidth: 100,
   arrowParens: "avoid",
   tabWidth: 2,
   endOfLine: "lf",
   quoteProps: "preserve",
   trailingComma: "es5",
-  plugins: ["prettier-plugin-tailwindcss"],
+  plugins: ["prettier-plugin-astro", "prettier-plugin-tailwindcss"],
   overrides: [
     {
-      files: "*.{md,mdx}",
+      files: "*.astro",
       options: {
-        proseWrap: "always",
-        printWidth: 120,
+        parser: "astro",
       },
     },
   ],
