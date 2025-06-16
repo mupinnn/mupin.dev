@@ -1,4 +1,6 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
+@config "./tailwind.config.js";
 
 @theme {
   --font-sans:
@@ -8,18 +10,18 @@
     "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
     "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 
-  --color-*: initial;
-  --color-slate-50: oklch(0.984 0.003 247.858);
-  --color-slate-100: oklch(0.968 0.007 247.896);
-  --color-slate-200: oklch(0.929 0.013 255.508);
-  --color-slate-300: oklch(0.869 0.022 252.894);
-  --color-slate-400: oklch(0.704 0.04 256.788);
-  --color-slate-500: oklch(0.554 0.046 257.417);
-  --color-slate-600: oklch(0.446 0.043 257.281);
-  --color-slate-700: oklch(0.372 0.044 257.287);
-  --color-slate-800: oklch(0.279 0.041 260.031);
-  --color-slate-900: oklch(0.208 0.042 265.755);
-  --color-slate-950: oklch(0.129 0.042 264.695);
+  /* --color-*: initial; */
+  /* --color-slate-50: oklch(0.984 0.003 247.858); */
+  /* --color-slate-100: oklch(0.968 0.007 247.896); */
+  /* --color-slate-200: oklch(0.929 0.013 255.508); */
+  /* --color-slate-300: oklch(0.869 0.022 252.894); */
+  /* --color-slate-400: oklch(0.704 0.04 256.788); */
+  /* --color-slate-500: oklch(0.554 0.046 257.417); */
+  /* --color-slate-600: oklch(0.446 0.043 257.281); */
+  /* --color-slate-700: oklch(0.372 0.044 257.287); */
+  /* --color-slate-800: oklch(0.279 0.041 260.031); */
+  /* --color-slate-900: oklch(0.208 0.042 265.755); */
+  /* --color-slate-950: oklch(0.129 0.042 264.695); */
 
   --color-red-1: #ef4747;
   --color-red-2: #ff2323;
