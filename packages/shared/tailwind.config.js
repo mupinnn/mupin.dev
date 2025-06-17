@@ -15,12 +15,28 @@ module.exports = {
               wordWrap: "break-word",
             },
             "h1, h2, h3, h4, h5, h6": {
+              scrollMarginTop: "calc(var(--spacing) * 6)",
+
               "a": {
                 display: "inline-block",
                 textDecoration: "none",
                 fontWeight: theme("fontWeight.bold"),
                 position: "relative",
               },
+            },
+            "pre, img": {
+              paddingInline: 0,
+              borderRadius: 0,
+              '@media (min-width: theme("screens.sm"))': {
+                borderRadius: "var(--radius-md)",
+              },
+            },
+            img: {
+              width: "100%",
+              objectFit: "contain",
+            },
+            figure: {
+              marginInline: "calc(var(--spacing) * -4)",
             },
           },
         },
