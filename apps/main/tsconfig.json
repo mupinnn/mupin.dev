@@ -1,33 +1,12 @@
 {
-  "extends": "@mupin.dev/typescript-config/nextjs.json",
+  "extends": "astro/tsconfigs/strict",
+  "include": [".astro/types.d.ts", "**/*"],
+  "exclude": ["dist"],
   "compilerOptions": {
-    "declaration": false,
-    "declarationMap": false,
+    "verbatimModuleSyntax": true,
+    "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "./*"
-      ],
-      "#content": [
-        "./.velite"
-      ]
-    },
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ]
-  },
-  "include": [
-    "next-env.d.ts",
-    "next.config.mjs",
-    "**/*.ts",
-    "**/*.tsx",
-    "**/*.js",
-    "**/*.jsx",
-    ".next/types/**/*.ts",
-    "global.d.ts"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+      "@/*": ["./src/*"]
+    }
+  }
 }
