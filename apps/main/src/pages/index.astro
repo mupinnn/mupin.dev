@@ -1,20 +1,10 @@
 ---
-import "../styles/global.css";
+import { Icon } from "astro-icon/components";
+import DefaultLayout from "@/layouts/default-layout.astro";
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <title>Astro</title>
-  </head>
-  <body>
-    <h1 class="text-pink-2 text-center text-4xl font-bold">Astro</h1>
-    <div class="prose prose-pink">
-      <h1>Yee hee!</h1>
-      <p>The quick brown fox jumps over the lazy dog</p>
-    </div>
-  </body>
-</html>
+<DefaultLayout>
+  <h1>Well, hello!</h1>
+  <Icon name="ri:verified-badge-line" class="text-6xl" />
+  <Icon name="devicon:astro" class="text-5xl" />
+</DefaultLayout>

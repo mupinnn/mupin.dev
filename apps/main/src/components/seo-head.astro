@@ -1,0 +1,21 @@
+---
+import { type Props as SEOProps, SEO as AstroSEO } from "astro-seo";
+
+interface Props extends SEOProps {
+  imageUrl?: string;
+  slot: "seo";
+}
+
+const { props } = Astro;
+
+const defaultProps: SEOProps = {
+  title: props.title,
+  titleDefault: "Ahmad Muwaffaq, Frontend Developer | mupin.dev",
+  titleTemplate: "%s | mupin.dev",
+  description: props.description,
+};
+
+const combinedProps = { ...defaultProps, ...props };
+---
+
+<AstroSEO {...combinedProps} />

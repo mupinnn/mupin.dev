@@ -7,7 +7,6 @@
   },
   "dependencies": {
     "astro": "catalog:",
-    "astro-seo": "^0.8.4",
     "tailwindcss": "^4.1.10"
   },
   "devDependencies": {

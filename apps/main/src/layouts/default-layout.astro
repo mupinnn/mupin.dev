@@ -1,0 +1,26 @@
+---
+import "@fontsource-variable/inter";
+import "@fontsource-variable/bricolage-grotesque";
+import "../styles/global.css";
+
+import SeoHead from "@/components/seo-head.astro";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <slot name="seo">
+      {/* @ts-expect-error: this is expected since it's inside a layout */}
+      <SeoHead />
+    </slot>
+  </head>
+  <body class="text-cod-gray-3 relative flex min-h-svh flex-col bg-slate-100">
+    <main class="container grow">
+      <slot />
+    </main>
+  </body>
+</html>
