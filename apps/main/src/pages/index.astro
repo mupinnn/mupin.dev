@@ -2,8 +2,9 @@
 import { getCollection } from "astro:content";
 import { Icon } from "astro-icon/components";
 import DefaultLayout from "@/layouts/default-layout.astro";
+import { getEnglishBlogPosts } from "@/utils/content.util";
 
-const allBlogPosts = await getCollection("blog");
+const allBlogPosts = await getEnglishBlogPosts();
 ---
 
 <DefaultLayout>

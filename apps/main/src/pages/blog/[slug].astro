@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from "astro:content";
 import DefaultLayout from "@/layouts/default-layout.astro";
+import { getPostTranslations } from "@/utils/content.util";
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog");
@@ -12,10 +13,20 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 const { Content } = await render(post);
+const postTranslations = await getPostTranslations(post.data.path, post.data.locale);
 ---
 
-<DefaultLayout>
+<DefaultLayout lang={post.data.locale}>
   <h1>{post.data.title}</h1>
+  <ul>
+    {
+      postTranslations.map(t => (
+        <li>
+          <a href={`/blog/${t.data.slug}`}>{t.data.languageName}</a>
+        </li>
+      ))
+    }
+  </ul>
   <div class="prose prose-slate mx-auto">
     <Content />
   </div>

@@ -4,10 +4,17 @@ import "@fontsource-variable/bricolage-grotesque";
 import "../styles/global.css";
 
 import SeoHead from "@/components/seo-head.astro";
+import { type Locale } from "@/types";
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang = "en" } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en">
+<html {lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
