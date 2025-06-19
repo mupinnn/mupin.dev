@@ -3,6 +3,7 @@ import { type Locale } from "@/types";
 
 export async function getEnglishBlogPosts() {
   const posts = await getCollection("blog");
+  console.log(posts);
   return posts.filter(p => p.data.locale === "en");
 }
 

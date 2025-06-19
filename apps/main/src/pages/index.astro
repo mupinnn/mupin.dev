@@ -2,7 +2,7 @@
 import { getCollection } from "astro:content";
 import { Icon } from "astro-icon/components";
 import DefaultLayout from "@/layouts/default-layout.astro";
-import { getEnglishBlogPosts } from "@/utils/content.util";
+import { getEnglishBlogPosts } from "@/lib/content.lib";
 
 const allBlogPosts = await getEnglishBlogPosts();
 ---
