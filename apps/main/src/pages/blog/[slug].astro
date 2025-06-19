@@ -22,17 +22,17 @@ const postTranslations = await getPostTranslations(post.data.path, post.data.loc
 
 <DefaultLayout lang={post.data.locale}>
   <header class="mx-auto flex max-w-prose flex-col gap-6 pt-8 sm:gap-8 sm:pt-16">
-    <a href="/" class="group">
-      <Icon
-        name="ri:arrow-left-line"
-        size="44"
-        class="transition-transform group-hover:-translate-x-1 group-focus:-translate-x-1"
-      />
-    </a>
-
     <h1
-      class="font-bricolage text-4xl font-bold text-pretty md:text-5xl lg:-mx-16 lg:text-center lg:text-6xl xl:-mx-24 2xl:-mx-36"
+      class="font-bricolage relative inline-flex flex-col gap-6 text-4xl font-bold text-pretty md:text-5xl lg:-mx-16 lg:text-center lg:text-6xl xl:-mx-24 2xl:-mx-36"
     >
+      <a href="/" class="group lg:absolute lg:top-0 lg:-left-14">
+        <Icon
+          name="ri:arrow-left-line"
+          size="44"
+          class="transition-transform group-hover:-translate-x-1 group-focus:-translate-x-1"
+        />
+      </a>
+
       {post.data.title}
     </h1>
 
