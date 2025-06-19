@@ -1,14 +1,14 @@
 ---
-import { getCollection, render } from "astro:content";
+import { render } from "astro:content";
 import { Icon } from "astro-icon/components";
 import DefaultLayout from "@/layouts/default-layout.astro";
 import Tag from "@/components/ui/tag.astro";
 import Alert from "@/components/ui/alert.astro";
-import { getPostTranslations } from "@/lib/content.lib";
+import { getPublishedBlogPosts, getPostTranslations } from "@/lib/content.lib";
 import { formatDate } from "@/lib/utils.lib";
 
 export async function getStaticPaths() {
-  const posts = await getCollection("blog");
+  const posts = await getPublishedBlogPosts();
   return posts.map(post => ({
     params: { slug: post.id },
     props: { post },

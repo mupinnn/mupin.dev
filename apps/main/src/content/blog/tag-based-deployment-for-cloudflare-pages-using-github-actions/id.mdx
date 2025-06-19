@@ -108,10 +108,7 @@ pnpm create astro --template blog
 
 Ikuti _prompt_-nya dan pastikan kalian memilih **“Ya”** untuk instalasi dependensi dan menginisialisasi repositori Git.
 
-<CloudinaryImg
-  src="/blog/tag-based-deployment-for-cloudflare-pages-using-github-actions/creating-astro-project.png"
-  alt="Tampilan terminal pada saat membuat proyek blog dengan template dari Astro"
-/>
+![Tampilan terminal pada saat membuat proyek blog dengan template dari Astro](./images/creating-astro-project.png)
 
 Pastikan proyek tersebut berjalan dengan lancar di _development_ dengan menjalankan `pnpm dev` dan juga dapat di-_build_
 dengan `pnpm build`.
@@ -126,17 +123,11 @@ membuat _remote_ repositori di GitHub dan membawa proyek blog kita ke sana.
 3. Setelah _remote_ repositori terbuat, akan muncul dua panduan untuk melakukan _push_ repositori lokal kita ke _remote_
    repositori yang baru kita buat. Ikuti langkah pada kotak merah di bawah ini:
 
-<CloudinaryImg
-  src="/blog/tag-based-deployment-for-cloudflare-pages-using-github-actions/preparing-remote-repo-1.png"
-  alt="Tampilan repositori GitHub dalam keadaan kosong berisi panduan untuk melakukan push ke repositori tersebut"
-/>
+![Tampilan repositori GitHub dalam keadaan kosong berisi panduan untuk melakukan push ke repositori tersebut](./images/preparing-remote-repo-1.png)
 
 4. Muat ulang halaman dan pastikan _remote_ repositori kalian kurang lebih terlihat seperti ini:
 
-<CloudinaryImg
-  src="/blog/tag-based-deployment-for-cloudflare-pages-using-github-actions/preparing-remote-repo-2.png"
-  alt="Tampilan repositori GitHub setelah melakukan push"
-/>
+![Tampilan repositori GitHub setelah melakukan push](./images/preparing-remote-repo-2.png)
 
 ### Mendapatkan Cloudflare API Token
 
@@ -152,10 +143,7 @@ Sebelum menggunakan Wrangler CLI, kita membutuhkan dua kredensial dari Cloudflar
 7. Klik _**"Continue to summary"**_, lalu klik _**"Create token"**_
 8. Salin dan simpan token tersebut untuk kemudian kita gunakan di Github Actions dan API
 
-<CloudinaryImg
-  src="/blog/tag-based-deployment-for-cloudflare-pages-using-github-actions/create-cf-api-token.png"
-  alt="Halaman pengguna Cloudflare ketika membuat API Token"
-/>
+![Halaman pengguna Cloudflare ketika membuat API Token](./images/create-cf-api-token.png)
 
 ### Mendapatkan Cloudflare Project Account ID
 
@@ -165,10 +153,7 @@ Sebelum menggunakan Wrangler CLI, kita membutuhkan dua kredensial dari Cloudflar
    isinya
 4. Simpan _**Account ID**_ tersebut untuk kemudian kita gunakan di Github Actions dan API
 
-<CloudinaryImg
-  src="/blog/tag-based-deployment-for-cloudflare-pages-using-github-actions/create-cf-account-id.png"
-  alt="Halaman Workers & Pages untuk mengakses Account ID"
-/>
+![Halaman Workers & Pages untuk mengakses Account ID](./images/create-cf-account-id.png)
 
 ## Membuat Github Actions workflows
 
@@ -179,17 +164,11 @@ _event_, dijalankan secara manual, atau bahkan terjadwal.
 Berkas _workflows_ disimpan di folder `.github/workflows` pada sebuah repositori. Oleh karena itu, langkah pertama kita
 adalah membuat folder `.github/workflows` pada proyek blog kita.
 
-<CloudinaryImg
-  src="/blog/tag-based-deployment-for-cloudflare-pages-using-github-actions/create-workflow-file-1.png"
-  alt="Tampilan direktori proyek setelah membuat folder .github/workflows"
-/>
+![Tampilan direktori proyek setelah membuat folder .github/workflows](./images/create-workflow-file-1.png)
 
 Lalu, buat berkas `deploy.yml` di dalam folder `.github/workflows`
 
-<CloudinaryImg
-  src="/blog/tag-based-deployment-for-cloudflare-pages-using-github-actions/create-workflow-file-2.png"
-  alt="Tampilan direktori .github/workflows yang berisi berkas deploy.yml"
-/>
+![Tampilan direktori .github/workflows yang berisi berkas deploy.yml](./images/create-workflow-file-2.png)
 
 ### Mendefinisikan _trigger, permissions,_ serta _environment variables_
 
@@ -198,10 +177,7 @@ pada saat apa sebuah _workflow_ akan dijalankan. _Job_ adalah sebuah tugas yang 
 masing-masing yang secara _default_ dijalankan secara paralel. Tiap _job_ dapat memiliki beberapa _step_ yang bisa
 menjalankan sebuah skrip yang kita buat atau sebuah paket/_action_ yang tersedia di _marketplace._
 
-<CloudinaryImg
-  src="/blog/tag-based-deployment-for-cloudflare-pages-using-github-actions/workflow-big-picture.png"
-  alt="Gambaran besar dari sebuah Workflow pada GitHub Actions"
-/>
+![Gambaran besar dari sebuah Workflow pada GitHub Actions](./images/workflow-big-picture.png)
 
 Pada proyek ini, saya menginginkan _workflow_ dijalankan pada:
 
@@ -280,18 +256,12 @@ on:
 
 Konfigurasi di atas akan menghasilkan _inputs_ seperti di bawah ini
 
-<CloudinaryImg
-  src="/blog/tag-based-deployment-for-cloudflare-pages-using-github-actions/workflow-inputs-example.png"
-  alt="Contoh tampilan hasil inputs dari sebuah workflow"
-/>
+![Contoh tampilan hasil inputs dari sebuah workflow](./images/workflow-inputs-example.png)
 
 Oke, kembali ke topik utama. Dengan konfigurasi yang sudah kita buat di atas tadi, maka _inputs_ yang dihasilkan akan
 seperti ini
 
-<CloudinaryImg
-  src="/blog/tag-based-deployment-for-cloudflare-pages-using-github-actions/workflow-inputs-real.png"
-  alt="Hasil tampilan inputs dari workflow yang kita buat"
-/>
+![Hasil tampilan inputs dari workflow yang kita buat](./images/workflow-inputs-real.png)
 
 ```yaml
 on:
@@ -358,10 +328,7 @@ Masing-masing memiliki kegunaannya tersendiri dan yang akan kita gunakan hanyala
 _draft_ dan _pre-release_, sehingga tidak memerlukan tipe `published`. Penjelasan lebih lanjut dapat dibaca di
 [Events that trigger workflows](https://docs.github.com/en/actions/writing-workflows/choosing-when-your-workflow-runs/events-that-trigger-workflows#release)
 
-<CloudinaryImg
-  src="/blog/tag-based-deployment-for-cloudflare-pages-using-github-actions/release-event-1.png"
-  alt="Tampilan dari GitHub Releases ketika ingin membuat rilisan baru"
-/>
+![Tampilan dari GitHub Releases ketika ingin membuat rilisan baru](./images/release-event-1.png)
 
 ```yaml
 name: Deploy to Cloudflare Pages
@@ -589,10 +556,7 @@ Kita akan menambahkan _API Token_ dan _Account ID_ ke dalam GitHub Secrets.
 5. Isi kolom _value_ dengan _API Token_ yang sudah kita buat, lalu klik _**“Add secret”**_
 6. Ulangi dari langkah ketiga dengan nama dan _value_ untuk `CLOUDFLARE_ACCOUNT_ID`
 
-<CloudinaryImg
-  src="/blog/tag-based-deployment-for-cloudflare-pages-using-github-actions/workflow-secrets-1.png"
-  alt="Tampilan untuk konfigurasi secrets di GitHub Actions"
-/>
+![Tampilan untuk konfigurasi secrets di GitHub Actions](./images/workflow-secrets-1.png)
 
 _Secrets_ yang sudah kita buat dapat diakses dari _workflow_ dengan `secrets.<name>`. Untuk `secrets.GITHUB_TOKEN`,
 secara otomatis disediakan oleh GitHub dengan menggunakan _permission_ tertentu.
@@ -626,20 +590,14 @@ proyek baru di _dashboard_ Cloudflare Pages.
 2. Di pojok kanan atas, temukan dan klik _**“+ Add”**_ lalu klik _**“Pages”**_. Nanti akan muncul menu _**“Workers &
    Pages”**_ di menu _sidebar_ sebelah kiri
 
-<CloudinaryImg
-  src="/blog/tag-based-deployment-for-cloudflare-pages-using-github-actions/first-deployment-1.png"
-  alt="Tampilan halaman Workers & Pages di dashboard Cloudflare pada saat membuat proyek baru"
-/>
+![Tampilan halaman Workers & Pages di dashboard Cloudflare pada saat membuat proyek baru](./images/first-deployment-1.png)
 
 3. Klik _**“Create”**_ > Pilih _tab **“Pages”**_ > Pilih opsi _direct upload_
 4. Isi kolom nama proyek sesuai dengan nama repositori atau sesuai dengan yang kita kirim di argumen opsi
    `--project-name` dari Wrangler CLI sebelumnya
 5. Lalu klik _**“Create project”**_
 
-<CloudinaryImg
-  src="/blog/tag-based-deployment-for-cloudflare-pages-using-github-actions/first-deployment-2.png"
-  alt="Tampilan sesudah membuat proyek di halaman Workers & Pages"
-/>
+![Tampilan sesudah membuat proyek di halaman Workers & Pages](./images/first-deployment-2.png)
 
 6. Kembali ke halaman _**“Workers & Pages”**_. Tidak perlu mengunggah aset apa pun karena kita akan mengunggahnya
    melalui Github Actions.
@@ -655,33 +613,18 @@ $ git push
 Buka halaman repositori kita, klik _**“Actions”**_ dan kalian akan melihat ada satu _workflow_ yang sedang berjalan.
 Kalian bisa klik untuk melihat detailnya, bahkan hingga detail masing-masing _job_ dan _step_ yang sedang berjalan.
 
-<CloudinaryImg
-  src="/blog/tag-based-deployment-for-cloudflare-pages-using-github-actions/first-deployment-3.png"
-  alt="Tampilan Actions pada repositori yang menampilkan workflow yang sedang atau sudah berjalan"
-/>
+![Tampilan Actions pada repositori yang menampilkan workflow yang sedang atau sudah berjalan](./images/first-deployment-3.png)
 
-<CloudinaryImg
-  src="/blog/tag-based-deployment-for-cloudflare-pages-using-github-actions/first-deployment-4.png"
-  alt="Detail tampilan dari sebuah workflow. Terlihat jobs yang saling terhubung"
-/>
+![Detail tampilan dari sebuah workflow. Terlihat jobs yang saling terhubung](./images/first-deployment-4.png)
 
-<CloudinaryImg
-  src="/blog/tag-based-deployment-for-cloudflare-pages-using-github-actions/first-deployment-5.png"
-  alt="Detail tampilan dari tiap job dalam sebuah workflow. Terlihat steps yang dijalankan di job tersebut"
-/>
+![Detail tampilan dari tiap job dalam sebuah workflow. Terlihat steps yang dijalankan di job tersebut](./images/first-deployment-5.png)
 
 Lihat gambar terakhir dan perhatikan _deployment_ URL-nya—betul sekali, ada semacam _hash_ unik di sana. Coba kita lihat
 dari _dashboard **“Workers & Pages”**_ dan lihat detail proyeknya.
 
-<CloudinaryImg
-  src="/blog/tag-based-deployment-for-cloudflare-pages-using-github-actions/first-deployment-6.png"
-  alt="Halaman Workers & Pages yang menampilkan daftar proyek di Cloudflare Pages"
-/>
+![Halaman Workers & Pages yang menampilkan daftar proyek di Cloudflare Pages](./images/first-deployment-6.png)
 
-<CloudinaryImg
-  src="/blog/tag-based-deployment-for-cloudflare-pages-using-github-actions/first-deployment-7.png"
-  alt="Halaman detail dari proyek Cloudflare Pages"
-/>
+![Halaman detail dari proyek Cloudflare Pages](./images/first-deployment-7.png)
 
 Kita mendapatkan dua URL! Satu URL utama https://blog-poc-cf-pages-tag-based-deployment.pages.dev/ dan yang kedua dengan
 _hash_ unik untuk tiap _commitnya_ https://e0c3013f.blog-poc-cf-pages-tag-based-deployment.pages.dev/. Jika ada
@@ -700,17 +643,11 @@ _production_ ini.
 Pertama, buka halaman repositori kita dan lihat di sisi sebelah kanan terdapat bagian _**“Releases”**_. Klik _**“Create
 a new release”**_.
 
-<CloudinaryImg
-  src="/blog/tag-based-deployment-for-cloudflare-pages-using-github-actions/production-deployment-1.png"
-  alt="Halaman utama dari repositori GitHub. Terdapat kotak merah yang menunjukkan lokasi bagian Releases"
-/>
+![Halaman utama dari repositori GitHub. Terdapat kotak merah yang menunjukkan lokasi bagian Releases](./images/production-deployment-1.png)
 
 Lalu, buat tag baru pada kolom _**“Choose a tag”**_. Kita akan membuat _tag_ `v1.0.0` sebagai versi awal.
 
-<CloudinaryImg
-  src="/blog/tag-based-deployment-for-cloudflare-pages-using-github-actions/production-deployment-2.png"
-  alt="Tampilan membuat tag pada halaman GitHub Releases"
-/>
+![Tampilan membuat tag pada halaman GitHub Releases](./images/production-deployment-2.png)
 
 Kemudian, klik _**“Generate release notes”**_. Ini akan membuat catatan rilis secara otomatis berdasarkan _commit
 history_ dari _pull request_ yang berhasil di-_merge_. Untuk saat ini, karena memang belum ada _pull request_ yang
@@ -718,23 +655,14 @@ di-_merge,_ maka catatan rilis tampak kosong.
 
 Selanjutnya, klik _**“Publish release”**_ dan lihat akan ada _workflow_ yang berjalan!
 
-<CloudinaryImg
-  src="/blog/tag-based-deployment-for-cloudflare-pages-using-github-actions/production-deployment-3.png"
-  alt="Halaman GitHub Releases setelah diisi secara otomatis"
-/>
+![Halaman GitHub Releases setelah diisi secara otomatis](./images/production-deployment-3.png)
 
-<CloudinaryImg
-  src="/blog/tag-based-deployment-for-cloudflare-pages-using-github-actions/production-deployment-4.png"
-  alt="Halaman Actions yang menampilkan sebuah workflow yang berjalan karena dipicu oleh rilis baru"
-/>
+![Halaman Actions yang menampilkan sebuah workflow yang berjalan karena dipicu oleh rilis baru](./images/production-deployment-4.png)
 
 Perhatikan _job_ `deploy` pada _step **“Deploy to Cloudflare Pages”**_. Kita sudah berhasil mengatur _deployment_
 berdasarkan _tag_ dari Github Releases, sehingga argumen opsi `--branch` seharusnya berisi `production`.
 
-<CloudinaryImg
-  src="/blog/tag-based-deployment-for-cloudflare-pages-using-github-actions/production-deployment-5.png"
-  alt="Detail dari step 'Deploy to Cloudflare Pages' yang terdapat kotak merah untuk menunjukkan argumen --branch berisi production"
-/>
+![Detail dari step 'Deploy to Cloudflare Pages' yang terdapat kotak merah untuk menunjukkan argumen --branch berisi production](./images/production-deployment-5.png)
 
 Untuk memastikan apakah _deployment_ tadi benar-benar dianggap sebagai _production_ oleh Cloudflare Pages, kita perlu
 melihatnya di _dashboard **“Workers & Pages”**_ proyek kita.
@@ -748,10 +676,7 @@ karena masih mengarah ke _deployment_ sebelumnya. Tentu ini belum sesuai dengan 
 _production_ hanya pada saat ada _tag_ baru. Perubahan apa pun yang di-_push_ ke _branch main_, jika belum siap untuk
 dirilis maka tidak akan tersedia di URL utama—melainkan hanya di _preview_ URL.
 
-<CloudinaryImg
-  src="/blog/tag-based-deployment-for-cloudflare-pages-using-github-actions/production-deployment-6.png"
-  alt="Halaman detail dari proyek Cloudflare Pages yang ada di dashboard Cloudflare"
-/>
+![Halaman detail dari proyek Cloudflare Pages yang ada di dashboard Cloudflare](./images/production-deployment-6.png)
 
 ## Mengatur _branch_ `production` sebagai _production environment_
 
@@ -772,15 +697,9 @@ curl --request PATCH \
 Setelah sukses, kita perlu melakukan _deployment_ lagi untuk menerapkan perubahan. Jalankan _workflow_ secara manual
 dengan memilih opsi `production` sebagai _environment_ tujuan.
 
-<CloudinaryImg
-  src="/blog/tag-based-deployment-for-cloudflare-pages-using-github-actions/set-production-branch-1.png"
-  alt="Tampilan dari terminal setelah melakukan perintah untuk mengganti production branch yang hasilnya sukses"
-/>
+![Tampilan dari terminal setelah melakukan perintah untuk mengganti production branch yang hasilnya sukses](./images/set-production-branch-1.png)
 
-<CloudinaryImg
-  src="/blog/tag-based-deployment-for-cloudflare-pages-using-github-actions/set-production-branch-2.png"
-  alt="Halaman Actions yang menampilkan inputs untuk menjalankan workflow secara manual"
-/>
+![Halaman Actions yang menampilkan inputs untuk menjalankan workflow secara manual](./images/set-production-branch-2.png)
 
 Lalu, cek _dashboard **“Workers & Pages”**_ kalian dan _production environment_ kita sudah berada di jalan yang benar.
 Mungkin, rasanya tidak ada perbedaan antara _production_ dan _preview_ untuk saat ini. Kalian bisa coba buat perubahan

@@ -3,7 +3,7 @@ import { glob, type Loader } from "astro/loaders";
 import { LocaleSchema, type Locale } from "./types";
 
 function blogContentLoader(): Loader {
-  const defaultGlob = glob({ pattern: "dummy-article/*.{md,mdx}", base: "./src/content/blog" });
+  const defaultGlob = glob({ pattern: "**/*.{md,mdx}", base: "./src/content/blog" });
   const localeLanguageNameMap = {
     id: "Bahasa Indonesia (Indonesian)",
     en: "English",
