@@ -23,16 +23,11 @@ const postTranslations = await getPostTranslations(post.data.path, post.data.loc
 
 <DefaultLayout lang={post.data.locale}>
   <SeoHead
+    slot="seo"
     title={post.data.title}
     description={post.data.description}
-    slot="seo"
-    openGraph={{
-      basic: {
-        title: post.data.title,
-        type: "article",
-        image: getOGImage(post.data.title),
-      },
-    }}
+    ogType="article"
+    ogImage={getOGImage(post.data.title)}
     languageAlternates={postTranslations.map(p => ({
       href: `${Astro.site}blog/${p.data.slug}`,
       hrefLang: p.data.locale,
