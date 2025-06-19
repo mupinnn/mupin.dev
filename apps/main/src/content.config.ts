@@ -47,7 +47,6 @@ const blog = defineCollection({
     slug: z.string(),
     isPublished: z.boolean(),
     publishedAt: z.coerce.date(),
-    updatedAt: z.coerce.date().optional(),
     tags: z.array(z.string()),
     path: z.string(),
     locale: LocaleSchema,

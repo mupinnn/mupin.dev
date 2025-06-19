@@ -10,6 +10,8 @@ import rehypeUnwrapImages from "rehype-unwrap-images";
 import { fromHtmlIsomorphic } from "hast-util-from-html-isomorphic";
 import { visit } from "unist-util-visit";
 import { h } from "hastscript";
+import getReadingTime from "reading-time";
+import { toString as mdastToString } from "mdast-util-to-string";
 
 function remarkGitModifiedTime() {
   return function (tree, file) {
@@ -55,6 +57,14 @@ function rehypeWrapImageInFigure() {
   };
 }
 
+function remarkReadingTime() {
+  return function (tree, { data }) {
+    const textOnPage = mdastToString(tree);
+    const readingTime = getReadingTime(textOnPage);
+    data.astro.frontmatter.readingTime = readingTime.text;
+  };
+}
+
 // https://astro.build/config
 export default defineConfig({
   vite: {
@@ -63,7 +73,7 @@ export default defineConfig({
 
   markdown: {
     syntaxHighlight: false,
-    remarkPlugins: [remarkGitModifiedTime],
+    remarkPlugins: [remarkGitModifiedTime, remarkReadingTime],
     rehypePlugins: [
       rehypeSlug,
       [rehypePrettyCode, { theme: "catppuccin-frappe", defaultLang: "plaintext" }],
