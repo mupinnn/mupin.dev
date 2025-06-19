@@ -4,8 +4,9 @@ import { Icon } from "astro-icon/components";
 import DefaultLayout from "@/layouts/default-layout.astro";
 import Tag from "@/components/ui/tag.astro";
 import Alert from "@/components/ui/alert.astro";
+import SeoHead from "@/components/seo-head.astro";
 import { getPublishedBlogPosts, getPostTranslations } from "@/lib/content.lib";
-import { formatDate } from "@/lib/utils.lib";
+import { formatDate, getOGImage } from "@/lib/utils.lib";
 
 export async function getStaticPaths() {
   const posts = await getPublishedBlogPosts();
@@ -21,6 +22,23 @@ const postTranslations = await getPostTranslations(post.data.path, post.data.loc
 ---
 
 <DefaultLayout lang={post.data.locale}>
+  <SeoHead
+    title={post.data.title}
+    description={post.data.description}
+    slot="seo"
+    openGraph={{
+      basic: {
+        title: post.data.title,
+        type: "article",
+        image: getOGImage(post.data.title),
+      },
+    }}
+    languageAlternates={postTranslations.map(p => ({
+      href: `${Astro.site}blog/${p.data.slug}`,
+      hrefLang: p.data.locale,
+    }))}
+  />
+
   <header class="mx-auto flex max-w-prose flex-col gap-6 pt-8 sm:gap-8 sm:pt-16">
     <h1
       class="font-bricolage relative inline-flex flex-col gap-6 text-4xl font-bold text-pretty md:text-5xl lg:-mx-16 lg:text-center lg:text-6xl xl:-mx-24 2xl:-mx-36"

@@ -12,3 +12,7 @@ export function formatDate(date: string | Date, options?: Intl.DateTimeFormatOpt
     ...options,
   }).format(new Date(date));
 }
+
+export function getOGImage(title: string) {
+  return `https://workers.mupin.dev/og?title=${title}&origin=main`;
+}

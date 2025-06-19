@@ -2,17 +2,24 @@
 import { type Props as SEOProps, SEO as AstroSEO } from "astro-seo";
 
 interface Props extends SEOProps {
-  imageUrl?: string;
   slot: "seo";
 }
 
 const { props } = Astro;
 
+const titleDefault = "Ahmad Muwaffaq, Frontend Developer | mupin.dev";
 const defaultProps: SEOProps = {
   title: props.title,
-  titleDefault: "Ahmad Muwaffaq, Frontend Developer | mupin.dev",
+  titleDefault,
   titleTemplate: "%s | mupin.dev",
   description: props.description,
+  openGraph: {
+    basic: {
+      title: props.title || titleDefault,
+      type: "website",
+      image: "https://workers.mupin.dev/images/og/og-main-mupin-dev.png",
+    },
+  },
 };
 
 const combinedProps = { ...defaultProps, ...props };

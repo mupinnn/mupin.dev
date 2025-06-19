@@ -67,6 +67,7 @@ function remarkReadingTime() {
 
 // https://astro.build/config
 export default defineConfig({
+  site: "https://mupin.dev",
   vite: {
     plugins: [tailwindcss()],
   },
