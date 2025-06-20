@@ -1,13 +1,12 @@
 ---
 import { render } from "astro:content";
-import { Image } from "astro:assets";
-import { Icon } from "astro-icon/components";
 import DefaultLayout from "@/layouts/default-layout.astro";
-import Tag from "@/components/ui/tag.astro";
 import Alert from "@/components/ui/alert.astro";
 import SeoHead from "@/components/seo-head.astro";
+import PageHeader from "@/components/page-header.astro";
+import TagList from "@/components/blog/tag-list.astro";
 import { getPublishedBlogPosts, getPostTranslations } from "@/lib/content.lib";
-import { formatDate, getOGImage } from "@/lib/utils.lib";
+import { formatDate } from "@/lib/utils.lib";
 
 export async function getStaticPaths() {
   const posts = await getPublishedBlogPosts();
@@ -39,53 +38,19 @@ const postTranslations = await getPostTranslations(post.data.path, post.data.loc
     title={post.data.title}
     description={post.data.description}
     ogType="article"
-    ogImage={getOGImage(post.data.title)}
+    ogImage={post.data.ogImage}
     languageAlternates={postTranslations.map(p => ({
       href: `${Astro.site}blog/${p.data.slug}`,
       hrefLang: p.data.locale,
     }))}
   />
 
-  <div class="absolute inset-x-0 top-0 h-52">
-    <div
-      class="absolute top-0 size-full bg-linear-to-t from-slate-100 from-35% to-transparent to-100%"
-    >
-    </div>
-    <div class="grid-pattern"></div>
-  </div>
-
-  <header class="mx-auto flex max-w-prose flex-col gap-6 pt-8 sm:gap-8 sm:pt-16">
-    <h1
-      class="font-bricolage relative inline-flex flex-col gap-6 text-4xl font-bold text-pretty md:text-5xl lg:-mx-16 lg:text-center lg:text-6xl xl:-mx-24 2xl:-mx-36"
-    >
-      <a href="/" class="group lg:absolute lg:top-0 lg:-left-14">
-        <Icon
-          name="ri:arrow-left-line"
-          size="44"
-          class="transition-transform group-hover:-translate-x-1 group-focus:-translate-x-1"
-        />
-      </a>
-
-      {post.data.title}
-    </h1>
-
+  <PageHeader title={post.data.title} backLink="/blog">
     <div class="space-y-2 text-xs sm:text-sm">
       <p>
-        {formatDate(post.data.publishedAt, { day: "numeric", weekday: "short", month: "long" })} — {
-          remarkPluginFrontmatter.readingTime
-        }
+        {formatDate(post.data.publishedAt)} — {remarkPluginFrontmatter.readingTime}
       </p>
-      {
-        post.data.tags.length > 0 && (
-          <div class="flex flex-wrap gap-2">
-            {post.data.tags.map(tag => (
-              <a href={`/tag/${tag}`}>
-                <Tag>#{tag}</Tag>
-              </a>
-            ))}
-          </div>
-        )
-      }
+      <TagList tags={post.data.tags} />
     </div>
 
     {
@@ -107,7 +72,7 @@ const postTranslations = await getPostTranslations(post.data.path, post.data.loc
         </Alert>
       )
     }
-  </header>
+  </PageHeader>
 
   <div class="prose prose-slate mx-auto pt-8 sm:pt-16">
     <Content />

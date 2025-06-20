@@ -1,0 +1,26 @@
+---
+import { type CollectionEntry } from "astro:content";
+import { type HTMLAttributes } from "astro/types";
+import { cn, formatDate } from "@/lib/utils.lib";
+import TagList from "./tag-list.astro";
+
+type Props = {
+  posts: CollectionEntry<"blog">[];
+} & HTMLAttributes<"div">;
+
+const { posts, class: cls } = Astro.props;
+---
+
+<div class={cn("grid grid-cols-1 lg:grid-cols-2 gap-6", cls)}>
+  {
+    posts.map(post => (
+      <a href={`/blog/${post.id}`} class="bg-peach-1/70 group rounded-xl p-4 backdrop-blur-md">
+        <div class="relative h-full translate-y-4 space-y-1 rounded-t-lg bg-slate-100 p-4 transition-transform group-hover:translate-y-0 group-hover:rounded-b-lg">
+          <p class="text-xs">{formatDate(post.data.publishedAt)}</p>
+          <h2 class="font-bricolage mb-4 text-xl font-bold">{post.data.title}</h2>
+          <TagList withLink={false} tags={post.data.tags} />
+        </div>
+      </a>
+    ))
+  }
+</div>

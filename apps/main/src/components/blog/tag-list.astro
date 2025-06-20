@@ -1,0 +1,30 @@
+---
+import { type HTMLAttributes } from "astro/types";
+import { type CollectionEntry } from "astro:content";
+import Tag from "../ui/tag.astro";
+
+type Props = {
+  tags: CollectionEntry<"blog">["data"]["tags"];
+  withLink?: boolean;
+} & HTMLAttributes<"div">;
+
+const { tags, withLink = true } = Astro.props;
+---
+
+{
+  tags.length > 0 && (
+    <div class="flex flex-wrap gap-2">
+      {tags.map(tag => {
+        if (withLink) {
+          return (
+            <a href={`/tag/${tag}`}>
+              <Tag>#{tag}</Tag>
+            </a>
+          );
+        }
+
+        return <Tag>#{tag}</Tag>;
+      })}
+    </div>
+  )
+}

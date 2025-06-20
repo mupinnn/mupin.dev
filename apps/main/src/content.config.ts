@@ -1,6 +1,7 @@
 import { defineCollection, z } from "astro:content";
 import { glob, type Loader } from "astro/loaders";
 import { LocaleSchema, type Locale } from "./types";
+import { getOGImage } from "./lib/utils.lib";
 
 function blogContentLoader(): Loader {
   const defaultGlob = glob({ pattern: "**/*.{md,mdx}", base: "./src/content/blog" });
@@ -31,6 +32,7 @@ function blogContentLoader(): Loader {
               path,
               locale,
               languageName: localeLanguageNameMap[locale],
+              ogImage: getOGImage(entry.data.title as string),
             },
           });
         },
@@ -51,6 +53,7 @@ const blog = defineCollection({
     path: z.string(),
     locale: LocaleSchema,
     languageName: z.string(),
+    ogImage: z.string(),
   }),
 });
 

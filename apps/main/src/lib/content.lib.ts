@@ -15,3 +15,10 @@ export async function getPostTranslations(path: string, locale: Locale) {
   const posts = await getPublishedBlogPosts();
   return posts.filter(p => p.data.path === path && p.data.locale !== locale);
 }
+
+export async function getBlogTags() {
+  const posts = await getPublishedBlogPosts();
+  const allTags = Array.from(new Set(posts.flatMap(post => post.data.tags)));
+
+  return allTags;
+}

@@ -9,7 +9,9 @@ export function cn(...inputs: ClassValue[]) {
 export function formatDate(date: string | Date, options?: Intl.DateTimeFormatOptions) {
   return new Intl.DateTimeFormat("en-US", {
     year: "numeric",
-    month: "short",
+    month: "long",
+    day: "numeric",
+    weekday: "short",
     ...options,
   }).format(new Date(date));
 }
