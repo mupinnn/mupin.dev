@@ -1,0 +1,17 @@
+---
+import { getEntry, render } from "astro:content";
+import DefaultLayout from "@/layouts/default-layout.astro";
+import SeoHead from "@/components/seo-head.astro";
+import PageHeader from "@/components/page-header.astro";
+
+const nowPage = await getEntry("page", "now");
+const { Content } = await render(nowPage);
+---
+
+<DefaultLayout>
+  <SeoHead slot="seo" title={nowPage.data.title} description={nowPage.data.description} />
+  <PageHeader title={nowPage.data.title} subtitle={nowPage.data.description} />
+  <div class="prose prose-slate mx-auto pt-8 sm:pt-16">
+    <Content />
+  </div>
+</DefaultLayout>
