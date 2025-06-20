@@ -1,9 +1,15 @@
 ---
-import { getCollection, render } from "astro:content";
+import { render } from "astro:content";
 import DefaultLayout from "@/layouts/default-layout.astro";
+import Alert from "@/components/ui/alert.astro";
+import SeoHead from "@/components/seo-head.astro";
+import PageHeader from "@/components/page-header.astro";
+import TagList from "@/components/blog/tag-list.astro";
+import { getPublishedBlogPosts, getPostTranslations } from "@/lib/content.lib";
+import { formatDate } from "@/lib/utils.lib";
 
 export async function getStaticPaths() {
-  const posts = await getCollection("blog");
+  const posts = await getPublishedBlogPosts();
   return posts.map(post => ({
     params: { slug: post.id },
     props: { post },
@@ -11,12 +17,64 @@ export async function getStaticPaths() {
 }
 
 const { post } = Astro.props;
-const { Content } = await render(post);
+const { Content, remarkPluginFrontmatter } = await render(post);
+const postTranslations = await getPostTranslations(post.data.path, post.data.locale);
 ---
 
-<DefaultLayout>
-  <h1>{post.data.title}</h1>
-  <div class="prose prose-slate mx-auto">
+<style>
+  .grid-pattern {
+    width: 100%;
+    height: 100%;
+    background-image:
+      linear-gradient(var(--color-cod-gray-3) 2px, transparent 2px),
+      linear-gradient(to right, var(--color-cod-gray-3) 2px, transparent 2px);
+    background-size: 30px 30px;
+  }
+</style>
+
+<DefaultLayout lang={post.data.locale}>
+  <SeoHead
+    slot="seo"
+    title={post.data.title}
+    description={post.data.description}
+    ogType="article"
+    ogImage={post.data.ogImage}
+    languageAlternates={postTranslations.map(p => ({
+      href: `${Astro.site}blog/${p.data.slug}`,
+      hrefLang: p.data.locale,
+    }))}
+  />
+
+  <PageHeader title={post.data.title} backLink="/blog">
+    <div class="space-y-2 text-xs sm:text-sm">
+      <p>
+        {formatDate(post.data.publishedAt)} — {remarkPluginFrontmatter.readingTime}
+      </p>
+      <TagList tags={post.data.tags} />
+    </div>
+
+    {
+      postTranslations.length > 0 && (
+        <Alert>
+          <p>
+            This article is available in other language(s):{" "}
+            {postTranslations.map((p, i) => {
+              return (
+                <>
+                  <a href={`/blog/${p.data.slug}`} class="underline">
+                    {p.data.languageName}
+                  </a>
+                  {i !== postTranslations.length - 1 && ", "}
+                </>
+              );
+            })}
+          </p>
+        </Alert>
+      )
+    }
+  </PageHeader>
+
+  <div class="prose prose-slate mx-auto pt-8 sm:pt-16">
     <Content />
   </div>
 </DefaultLayout>

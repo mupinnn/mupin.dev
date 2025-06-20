@@ -1,0 +1,24 @@
+---
+import { type HTMLAttributes } from "astro/types";
+import { tv, type VariantProps } from "tailwind-variants";
+
+const alertVariants = tv({
+  base: "relative w-full rounded-md border p-4 text-sm font-medium",
+  variants: {
+    color: {
+      info: "bg-blue-1/25 text-blue-3",
+    },
+  },
+  defaultVariants: {
+    color: "info",
+  },
+});
+
+type Props = HTMLAttributes<"div"> & VariantProps<typeof alertVariants>;
+
+const { color, class: cls, ...rest } = Astro.props;
+---
+
+<div {...rest} role="alert" class:list={alertVariants({ color, class: cls })}>
+  <slot />
+</div>

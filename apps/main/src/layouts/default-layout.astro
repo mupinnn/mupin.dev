@@ -4,10 +4,19 @@ import "@fontsource-variable/bricolage-grotesque";
 import "../styles/global.css";
 
 import SeoHead from "@/components/seo-head.astro";
+import { type Locale } from "@/types";
+import { cn } from "@/lib/utils.lib";
+
+interface Props {
+  lang: Locale;
+  containerClass?: string;
+}
+
+const { lang = "en", containerClass } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en">
+<html {lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
@@ -19,7 +28,7 @@ import SeoHead from "@/components/seo-head.astro";
     </slot>
   </head>
   <body class="text-cod-gray-3 relative flex min-h-svh flex-col bg-slate-100">
-    <main class="container grow">
+    <main class={cn("container grow", containerClass)}>
       <slot />
     </main>
   </body>

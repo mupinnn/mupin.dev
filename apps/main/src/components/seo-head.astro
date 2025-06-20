@@ -1,18 +1,73 @@
 ---
 import { type Props as SEOProps, SEO as AstroSEO } from "astro-seo";
+import { getWorkersAsset } from "@/lib/utils.lib";
 
-interface Props extends SEOProps {
-  imageUrl?: string;
+interface Props extends Omit<SEOProps, "openGraph"> {
   slot: "seo";
+  ogImage?: string;
+  ogType?: Pick<SEOProps, "openGraph">["basic"]["type"];
+  keywords?: string[];
 }
 
-const { props } = Astro;
+const { ogType = "website", ...props } = Astro.props;
+
+const title = props.title || "Ahmad Muwaffaq, Frontend Developer";
+const description =
+  props.description ||
+  "An enthusiastic frontend developer who loves about performance, crafting pleasant interface, and intuitive user experiences.";
+const ogImage = props.ogImage || getWorkersAsset("/images/og/og-main-mupin-dev.png");
+const defaultKeywords = [
+  "ahmad muwaffaq",
+  "faqih",
+  "mupin",
+  "mupin.dev",
+  "frontend developer",
+  "frontend engineer",
+  "software engineer",
+  "web developer",
+  "itsmupinnn",
+  "faqih frontend developer",
+  "faqih frontend engineer",
+  "ahmad muwaffaq frontend developer",
+  "ahmad muwaffaq frontend engineer",
+  "mupin.dev blog",
+  "mupin blog",
+  "mupin frontend developer",
+  "mupin frontend engineer",
+  "itsmupinnn frontend developer",
+  "itsmupinnn frontend engineer",
+  "mupin github",
+  "mupinnn github",
+];
+const keywords = (props.keywords || []).length > 0 ? props.keywords : defaultKeywords;
 
 const defaultProps: SEOProps = {
-  title: props.title,
-  titleDefault: "Ahmad Muwaffaq, Frontend Developer | mupin.dev",
+  title,
   titleTemplate: "%s | mupin.dev",
-  description: props.description,
+  description,
+  openGraph: {
+    basic: {
+      title,
+      type: ogType,
+      image: ogImage,
+    },
+  },
+  twitter: {
+    creator: "@itsmupinnn",
+    site: "@itsmupinnn",
+    card: "summary_large_image",
+    description,
+    image: ogImage,
+    imageAlt: title,
+  },
+  extend: {
+    meta: [
+      {
+        name: "keywords",
+        content: keywords.join(","),
+      },
+    ],
+  },
 };
 
 const combinedProps = { ...defaultProps, ...props };
