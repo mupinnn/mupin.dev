@@ -1,0 +1,51 @@
+---
+import DefaultLayout from "@/layouts/default-layout.astro";
+import SeoHead from "@/components/seo-head.astro";
+import PageHeader from "@/components/page-header.astro";
+import BlogList from "@/components/blog/blog-list.astro";
+import TagList from "@/components/blog/tag-list.astro";
+import { getBlogTags, getPostsByTag } from "@/lib/content.lib";
+
+export async function getStaticPaths() {
+  const tags = await getBlogTags();
+  const promises = await Promise.all(
+    tags.map(async tag => ({
+      params: { slug: tag },
+      props: {
+        tags,
+        posts: await getPostsByTag(tag),
+      },
+    }))
+  );
+
+  return promises;
+}
+
+const { slug } = Astro.params;
+const { posts, tags } = Astro.props;
+
+const title = `Blog post by "${slug}" tag`;
+---
+
+<DefaultLayout>
+  <SeoHead
+    slot="seo"
+    title={title}
+    description="Learning journey, tutorials, and documentation about software engineering and front-end development"
+  />
+
+  <PageHeader
+    title={title}
+    subtitle="Some write-ups about what I learned. Writing is the best way to learn."
+    backLink="/tag"
+  />
+
+  <section class="grid grid-cols-1 gap-8 pt-8 sm:grid-cols-4 sm:gap-6 sm:pt-16">
+    <BlogList posts={posts} class="col-span-1 sm:col-span-3" />
+
+    <div class="col-span-1 space-y-4">
+      <h2 class="text-xl font-bold">Other tags</h2>
+      <TagList tags={tags} />
+    </div>
+  </section>
+</DefaultLayout>
