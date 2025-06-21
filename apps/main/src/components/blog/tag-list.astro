@@ -19,7 +19,7 @@ const { tags, withLink = true, class: cls } = Astro.props;
       {tags.map(tag => {
         if (withLink) {
           return (
-            <a href={`/tag/${tag}`}>
+            <a href={`/tags/${tag}`}>
               <Tag>#{tag}</Tag>
             </a>
           );
