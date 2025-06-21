@@ -27,3 +27,8 @@ export async function getPostsByTag(tag: string) {
   const posts = await getEnglishBlogPosts();
   return posts.filter(p => p.data.tags.some(t => t === tag));
 }
+
+export async function getProjects() {
+  const projects = await getCollection("projects");
+  return projects;
+}

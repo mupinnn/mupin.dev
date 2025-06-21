@@ -1,0 +1,61 @@
+---
+import { render } from "astro:content";
+import { Icon } from "astro-icon/components";
+import DefaultLayout from "@/layouts/default-layout.astro";
+import SeoHead from "@/components/seo-head.astro";
+import PageHeader from "@/components/page-header.astro";
+import { getProjects } from "@/lib/content.lib";
+
+export async function getStaticPaths() {
+  const projects = await getProjects();
+
+  return projects.map(project => ({
+    params: { slug: project.id },
+    props: {
+      project,
+    },
+  }));
+}
+
+const { project } = Astro.props;
+const { Content } = await render(project);
+---
+
+<DefaultLayout>
+  <SeoHead slot="seo" title={project.data.title} description={project.data.description} />
+  <PageHeader title={project.data.title} subtitle={project.data.description} backLink="/projects">
+    <div class="inline-flex items-center gap-2">
+      {
+        project.data.githubUrl && (
+          <a
+            href={project.data.githubUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 rounded bg-slate-300 px-4 py-1.5"
+          >
+            <Icon name="devicon:github" size="18" />
+            GitHub
+          </a>
+        )
+      }
+
+      {
+        project.data.appUrl && (
+          <a
+            href={project.data.appUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 rounded bg-slate-300 px-4 py-1.5"
+          >
+            <Icon name="ri:external-link-line" size="18" />
+            Visit the app
+          </a>
+        )
+      }
+    </div>
+  </PageHeader>
+
+  <div class="prose prose-slate mx-auto pt-8 sm:pt-16">
+    <Content />
+  </div>
+</DefaultLayout>
