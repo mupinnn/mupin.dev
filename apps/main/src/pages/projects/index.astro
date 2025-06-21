@@ -1,4 +1,6 @@
 ---
+import { Image } from "astro:assets";
+import { Icon } from "astro-icon/components";
 import DefaultLayout from "@/layouts/default-layout.astro";
 import SeoHead from "@/components/seo-head.astro";
 import PageHeader from "@/components/page-header.astro";
@@ -15,7 +17,27 @@ const projects = await getProjects();
     subtitle="I'm not putting all of my projects, but here are some of my favorites."
   />
 
-  <section class="grid grid-cols-1 gap-8 pt-8 sm:grid-cols-4 sm:gap-6 sm:pt-16">
-    {projects.map(project => <a href={`/projects/${project.id}`}>{project.data.title}</a>)}
+  <section
+    class="grid grid-cols-1 gap-4 pt-8 min-[560px]:grid-cols-2 sm:pt-16 md:grid-cols-3 lg:grid-cols-4"
+  >
+    {
+      projects.map(project => (
+        <a
+          href={`/projects/${project.id}`}
+          class="border-lemon-3 space-y-4 rounded-xl border border-dashed p-4"
+        >
+          <Image src={project.data.thumbnail} alt="" class="col-span-2 col-start-7 rounded-lg" />
+          <div class="space-y-1">
+            <h2 class="font-bricolage text-xl font-bold">{project.data.title}</h2>
+            <p class="text-sm">{project.data.description}</p>
+          </div>
+          <div class="inline-flex items-center gap-2">
+            {project.data.stacksIcon.map(stack => (
+              <Icon name={stack} />
+            ))}
+          </div>
+        </a>
+      ))
+    }
   </section>
 </DefaultLayout>
