@@ -1,6 +1,7 @@
 import { getCollection } from "astro:content";
 import { type Locale } from "@/types";
 
+// TODO: sort by latest
 export async function getPublishedBlogPosts() {
   const posts = await getCollection("blog");
   return posts.filter(p => p.data.isPublished);
@@ -26,6 +27,11 @@ export async function getBlogTags() {
 export async function getPostsByTag(tag: string) {
   const posts = await getEnglishBlogPosts();
   return posts.filter(p => p.data.tags.some(t => t === tag));
+}
+
+export async function getLatestBlogPost() {
+  const posts = await getEnglishBlogPosts();
+  return posts[0];
 }
 
 export async function getProjects() {

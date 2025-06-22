@@ -1,0 +1,94 @@
+---
+import { Image } from "astro:assets";
+import { getEntry } from "astro:content";
+import { Icon } from "astro-icon/components";
+import Badge from "@/components/ui/badge.astro";
+import { OrbitingCircles } from "@/components/ui/orbiting-circles.tsx";
+import featuredProjectKagetImage from "@/assets/images/featured-project-kaget.png";
+import { getLatestBlogPost } from "@/lib/content.lib";
+
+const socialIcons = ["ri:twitter-x-line", "ri:linkedin-box-fill", "ri:github-fill"];
+const kagetProjectEntry = await getEntry("projects", "kaget");
+const latestWritings = await getLatestBlogPost();
+---
+
+<div class="grid auto-rows-fr grid-cols-32 gap-4">
+  <div class="col-start-1 col-end-12 row-start-1 row-end-2 grid grid-cols-3 gap-4">
+    {
+      socialIcons.map(social => (
+        <div class="bg-cod-gray-3 inline-flex aspect-square items-center justify-center rounded-xl text-slate-100">
+          <Icon name={social} size="40" />
+        </div>
+      ))
+    }
+  </div>
+
+  <div
+    class="bg-tangerine-1 group col-start-1 col-end-12 row-start-2 row-end-3 cursor-pointer rounded-xl bg-[url(#ai:ri:arrow-right-line)] bg-contain p-4"
+  >
+    <h2 class="font-bricolage inline-flex items-center gap-2 text-2xl font-bold">
+      See what I'm up to right now
+      <Icon
+        name="ri:arrow-right-line"
+        class="shrink-0 transition-transform group-hover:translate-x-1"
+      />
+    </h2>
+  </div>
+
+  <div
+    class="bg-peach-1 group col-span-full col-start-12 row-start-1 row-end-3 grid cursor-pointer grid-cols-2 gap-4 rounded-xl p-4"
+  >
+    <div class="space-y-1 self-end">
+      <Badge>
+        <Icon name="ri:star-fill" />
+        Featured work
+      </Badge>
+      <h2 class="font-bricolage inline-flex items-center gap-2 text-2xl font-bold">
+        {kagetProjectEntry.data.title}
+        <Icon
+          name="ri:arrow-right-line"
+          class="opacity-0 transition group-hover:translate-x-2 group-hover:opacity-100"
+        />
+      </h2>
+      <p class="text-sm">{kagetProjectEntry.data.description}</p>
+    </div>
+
+    <div class="relative z-10">
+      <div
+        class="bg-cod-gray-1/15 absolute -translate-y-16 rounded-[36px] p-2 backdrop-blur-xs transition-all group-hover:-translate-y-18 group-hover:[clip-path:inset(0_0_333px_0)]!"
+        style="clip-path: inset(0 0 341px 0)"
+      >
+        <Image
+          src={featuredProjectKagetImage}
+          alt="A screenshot of KaGet budgeting app that showing the main page"
+        />
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="bg-pink-2 col-start-1 col-end-20 row-start-3 row-end-5 grid auto-rows-auto rounded-xl p-4"
+  >
+    <Badge class="self-start">
+      <Icon name="ri:pencil-fill" />
+      Latest writings
+    </Badge>
+
+    <div class="space-y-1 self-end">
+      <h2 class="font-bricolage inline-flex items-center gap-2 text-2xl font-bold">
+        {latestWritings.data.title}
+      </h2>
+      <p class="text-sm">{latestWritings.data.description}</p>
+    </div>
+  </div>
+
+  <div
+    class="border-cod-gray-1 col-span-full col-start-20 row-start-3 row-end-5 flex items-center justify-center rounded-xl border-2 bg-slate-100 p-4 text-4xl"
+  >
+    <h2 class="font-bricolage text-4xl font-bold">?</h2>
+    <!-- <Icon name="devicon:vitejs" /> -->
+    <!-- <Icon name="devicon:react" /> -->
+    <!-- <Icon name="devicon:typescript" /> -->
+    <!-- <Icon name="devicon:tailwindcss" /> -->
+  </div>
+</div>

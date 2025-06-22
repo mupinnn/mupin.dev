@@ -1,4 +1,18 @@
-<div class="bg-cod-gray-1/15 inline-block rounded-full p-1 text-xs font-semibold backdrop-blur-xs">
+---
+import { type HTMLAttributes } from "astro/types";
+import { cn } from "@/lib/utils.lib";
+
+type Props = HTMLAttributes<"div">;
+
+const { class: cls } = Astro.props;
+---
+
+<div
+  class={cn(
+    "bg-cod-gray-1/15 inline-block w-fit rounded-full p-1 text-xs font-semibold backdrop-blur-xs",
+    cls
+  )}
+>
   <span class="inline-flex items-center gap-1 rounded-full bg-slate-50 px-2 py-1">
     <slot />
   </span>
