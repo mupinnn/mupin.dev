@@ -18,7 +18,7 @@ export function OrbitingCircles({
   children,
   reverse,
   duration = 20,
-  radius = 80,
+  radius = 160,
   path = true,
   iconSize = 30,
   speed = 1,
@@ -31,15 +31,13 @@ export function OrbitingCircles({
         <svg
           xmlns="http://www.w3.org/2000/svg"
           version="1.1"
-          viewBox="0 0 500 500"
-          preserveAspectRatio="xMinYMin meet"
           className="pointer-events-none absolute inset-0 size-full"
         >
           <circle
-            cx="250"
-            cy="250"
-            r={radius}
             className="stroke-cod-gray-3/10 stroke-1"
+            cx="50%"
+            cy="50%"
+            r={radius}
             fill="none"
           />
         </svg>
@@ -57,7 +55,7 @@ export function OrbitingCircles({
               } as React.CSSProperties
             }
             className={cn(
-              `animate-orbit absolute flex size-[var(--icon-size)] transform-gpu items-center justify-center rounded-full`,
+              `animate-orbit absolute flex transform-gpu items-center justify-center rounded-full [&_svg]:size-[var(--icon-size)]`,
               { "[animation-direction:reverse]": reverse },
               className
             )}

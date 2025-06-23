@@ -3,6 +3,7 @@ import { getCollection } from "astro:content";
 import { Icon } from "astro-icon/components";
 import DefaultLayout from "@/layouts/default-layout.astro";
 import HomeBentoSection from "@/components/home/home-bento-section.astro";
+import { OrbitingCircles } from "@/components/ui/orbiting-circles.tsx";
 import { getEnglishBlogPosts } from "@/lib/content.lib";
 
 const allBlogPosts = await getEnglishBlogPosts();
@@ -21,5 +22,6 @@ const allBlogPosts = await getEnglishBlogPosts();
   <!--     )) -->
   <!--   } -->
   <!-- </ul> -->
+
   <HomeBentoSection />
 </DefaultLayout>

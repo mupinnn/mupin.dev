@@ -10,6 +10,18 @@ import { getLatestBlogPost } from "@/lib/content.lib";
 const socialIcons = ["ri:twitter-x-line", "ri:linkedin-box-fill", "ri:github-fill"];
 const kagetProjectEntry = await getEntry("projects", "kaget");
 const latestWritings = await getLatestBlogPost();
+const techStacks = [
+  "vitejs",
+  "javascript",
+  "react",
+  "typescript",
+  "vuejs",
+  "nuxtjs",
+  "tailwindcss",
+  "css3",
+  "sass",
+  "astro",
+];
 ---
 
 <div class="grid auto-rows-fr grid-cols-32 gap-4">
@@ -83,12 +95,31 @@ const latestWritings = await getLatestBlogPost();
   </div>
 
   <div
-    class="border-cod-gray-1 col-span-full col-start-20 row-start-3 row-end-5 flex items-center justify-center rounded-xl border-2 bg-slate-100 p-4 text-4xl"
+    class="border-cod-gray-1 bg-lemon-1 relative col-span-full col-start-20 row-start-3 row-end-5 flex items-center justify-center rounded-xl border-2 border-dashed"
   >
-    <h2 class="font-bricolage text-4xl font-bold">?</h2>
-    <!-- <Icon name="devicon:vitejs" /> -->
-    <!-- <Icon name="devicon:react" /> -->
-    <!-- <Icon name="devicon:typescript" /> -->
-    <!-- <Icon name="devicon:tailwindcss" /> -->
+    <div
+      class="border-cod-gray-1 flex size-full -rotate-2 items-center justify-center overflow-clip rounded-xl border bg-slate-50 p-4"
+    >
+      <div
+        class="absolute inset-x-0 -top-2/3 flex size-full flex-col items-center justify-center overflow-hidden"
+      >
+        <OrbitingCircles iconSize={30} radius={90}>
+          {techStacks.map(stack => <Icon name={`devicon:${stack}`} />)}
+        </OrbitingCircles>
+      </div>
+
+      <Badge>
+        <Icon name="ri:tools-fill" />
+        Comfortable stacks
+      </Badge>
+
+      <div
+        class="absolute inset-x-0 -bottom-2/3 flex size-full flex-col items-center justify-center overflow-hidden"
+      >
+        <OrbitingCircles iconSize={30} radius={90}>
+          {techStacks.map(stack => <Icon name={`devicon:${stack}`} />)}
+        </OrbitingCircles>
+      </div>
+    </div>
   </div>
 </div>
