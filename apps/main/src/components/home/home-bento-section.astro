@@ -7,7 +7,15 @@ import { OrbitingCircles } from "@/components/ui/orbiting-circles.tsx";
 import featuredProjectKagetImage from "@/assets/images/featured-project-kaget.png";
 import { getLatestBlogPost } from "@/lib/content.lib";
 
-const socialIcons = ["ri:twitter-x-line", "ri:linkedin-box-fill", "ri:github-fill"];
+const socialIcons = [
+  { link: "http://x.com/itsmupinnn/", name: "Twitter", icon: "ri:twitter-x-line" },
+  {
+    link: "https://www.linkedin.com/in/ahmad-muwaffaq/",
+    name: "LinkedIn",
+    icon: "ri:linkedin-box-fill",
+  },
+  { link: "https://github.com/mupinnn/", name: "GitHub", icon: "ri:github-fill" },
+];
 const kagetProjectEntry = await getEntry("projects", "kaget");
 const latestWritings = await getLatestBlogPost();
 const techStacks = [
@@ -24,19 +32,28 @@ const techStacks = [
 ];
 ---
 
-<div class="grid auto-rows-fr grid-cols-32 gap-4">
-  <div class="col-start-1 col-end-12 row-start-1 row-end-2 grid grid-cols-3 gap-4">
+<div
+  class="grid auto-rows-[auto_auto_1fr_auto_minmax(200px,_auto)] grid-cols-12 gap-4 md:auto-rows-fr md:grid-cols-32"
+>
+  <div class="col-span-full col-start-1 row-start-1 row-end-2 grid grid-cols-3 gap-4 md:col-end-12">
     {
       socialIcons.map(social => (
-        <div class="bg-cod-gray-3 inline-flex aspect-square items-center justify-center rounded-xl text-slate-100">
-          <Icon name={social} size="40" />
-        </div>
+        <a
+          href={social.link}
+          rel="noopener noreferrer"
+          target="_blank"
+          class="bg-cod-gray-3 inline-flex aspect-square items-center justify-center rounded-xl text-slate-100"
+        >
+          <span class="sr-only">Visit my {social.name}</span>
+          <Icon name={social.icon} size="40" />
+        </a>
       ))
     }
   </div>
 
-  <div
-    class="bg-tangerine-1 group col-start-1 col-end-12 row-start-2 row-end-3 cursor-pointer rounded-xl bg-[url(#ai:ri:arrow-right-line)] bg-contain p-4"
+  <a
+    href="/now"
+    class="bg-tangerine-1 group col-span-full col-start-1 row-start-2 row-end-3 cursor-pointer rounded-xl bg-[url(#ai:ri:arrow-right-line)] bg-contain p-4 md:col-end-12"
   >
     <h2 class="font-bricolage inline-flex items-center gap-2 text-2xl font-bold">
       See what I'm up to right now
@@ -45,10 +62,11 @@ const techStacks = [
         class="shrink-0 transition-transform group-hover:translate-x-1"
       />
     </h2>
-  </div>
+  </a>
 
-  <div
-    class="bg-peach-1 group col-span-full col-start-12 row-start-1 row-end-3 grid cursor-pointer grid-cols-2 gap-4 rounded-xl p-4"
+  <a
+    href={`/projects/${kagetProjectEntry.id}`}
+    class="bg-peach-1 group gap-4row-start-3 col-span-full row-end-4 flex cursor-pointer flex-col gap-4 overflow-clip rounded-xl p-4 md:col-start-12 md:row-start-1 md:row-end-3 md:grid md:grid-cols-2 md:overflow-visible"
   >
     <div class="space-y-1 self-end">
       <Badge>
@@ -65,9 +83,9 @@ const techStacks = [
       <p class="text-sm">{kagetProjectEntry.data.description}</p>
     </div>
 
-    <div class="relative z-10">
+    <div class="relative z-10 h-60 md:h-auto">
       <div
-        class="bg-cod-gray-1/15 absolute -translate-y-16 rounded-[36px] p-2 backdrop-blur-xs transition-all group-hover:-translate-y-18 group-hover:[clip-path:inset(0_0_333px_0)]!"
+        class="bg-cod-gray-1/15 absolute rounded-[36px] p-2 backdrop-blur-xs transition-all group-hover:-translate-y-18 group-hover:[clip-path:inset(0_0_333px_0)]! md:-translate-y-16"
         style="clip-path: inset(0 0 341px 0)"
       >
         <Image
@@ -76,10 +94,11 @@ const techStacks = [
         />
       </div>
     </div>
-  </div>
+  </a>
 
-  <div
-    class="bg-pink-2 col-start-1 col-end-20 row-start-3 row-end-5 grid auto-rows-auto rounded-xl p-4"
+  <a
+    href={`/blog/${latestWritings.id}`}
+    class="bg-pink-2 col-span-full row-start-4 row-end-5 grid auto-rows-auto rounded-xl p-4 md:col-start-1 md:col-end-20 md:row-start-3 md:row-end-5"
   >
     <Badge class="self-start">
       <Icon name="ri:pencil-fill" />
@@ -92,10 +111,10 @@ const techStacks = [
       </h2>
       <p class="text-sm">{latestWritings.data.description}</p>
     </div>
-  </div>
+  </a>
 
   <div
-    class="border-cod-gray-1 bg-lemon-1 relative col-span-full col-start-20 row-start-3 row-end-5 flex items-center justify-center rounded-xl border-2 border-dashed"
+    class="border-cod-gray-1 bg-lemon-1 relative col-span-full row-start-5 row-end-6 flex items-center justify-center rounded-xl border-2 border-dashed md:col-start-20 md:row-start-3 md:row-end-5"
   >
     <div
       class="border-cod-gray-1 flex size-full -rotate-2 items-center justify-center overflow-clip rounded-xl border bg-slate-50 p-4"
