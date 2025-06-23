@@ -1,6 +1,10 @@
 @import "tailwindcss";
 @import "@mupin.dev/shared/tailwind.css";
 
+@theme {
+  --text-shadow-flat: 4px 4px;
+}
+
 @theme inline {
   --animate-orbit: orbit calc(var(--duration) * 1s) linear infinite;
 

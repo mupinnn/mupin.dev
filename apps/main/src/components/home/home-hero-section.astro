@@ -1,0 +1,41 @@
+---
+import { Image } from "astro:assets";
+import { getWorkersAsset } from "@/lib/utils.lib";
+---
+
+<style>
+  .gradient {
+    background-color: hsla(0, 0%, 100%, 0);
+    background-image:
+      radial-gradient(at 60% 60%, hsla(0, 100%, 81%, 1) 0px, transparent 50%),
+      radial-gradient(at 39% 40%, hsla(57, 100%, 70%, 1) 0px, transparent 50%);
+  }
+</style>
+
+<section class="grid h-svh grid-cols-1 place-items-center gap-8 md:grid-cols-2">
+  <div class="relative space-y-4 text-balance">
+    <div class="gradient absolute -top-16 -left-16 -z-1 size-96"></div>
+    <h1 class="font-bricolage text-4xl font-bold sm:text-5xl lg:text-6xl">
+      <span class="text-2xl font-thin sm:text-3xl lg:text-4xl">Hi, it's me, Faqih.</span><br />
+      An enthusiastic frontend
+      <span class="text-shadow-lemon-1 text-shadow-flat font-serif italic">wɛb</span> developer.
+    </h1>
+
+    <p>
+      I'm helping to bridge the gap between design, ideas, and technical implementation, tailoring
+      pleasant user interfaces and intuitive user experiences.
+    </p>
+  </div>
+
+  <div
+    class="border-cod-gray-1 bg-lemon-1 group relative hidden size-fit rounded-[20px] border-2 border-dashed md:block"
+  >
+    <Image
+      src={getWorkersAsset("/images/logo/logo-main-240x240.png")}
+      alt=""
+      width={200}
+      height={200}
+      class="rotate-6 transition-transform group-hover:rotate-0"
+    />
+  </div>
+</section>

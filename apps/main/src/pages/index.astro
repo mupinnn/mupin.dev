@@ -1,27 +1,10 @@
 ---
-import { getCollection } from "astro:content";
-import { Icon } from "astro-icon/components";
 import DefaultLayout from "@/layouts/default-layout.astro";
+import HomeHeroSection from "@/components/home/home-hero-section.astro";
 import HomeBentoSection from "@/components/home/home-bento-section.astro";
-import { OrbitingCircles } from "@/components/ui/orbiting-circles.tsx";
-import { getEnglishBlogPosts } from "@/lib/content.lib";
-
-const allBlogPosts = await getEnglishBlogPosts();
 ---
 
-<DefaultLayout containerClass="min-h-screen flex flex-col items-center justify-center">
-  <!-- <h1>Well, hello!</h1> -->
-  <!-- <Icon name="ri:verified-badge-line" class="text-6xl" /> -->
-  <!-- <Icon name="devicon:astro" class="text-5xl" /> -->
-  <!-- <ul> -->
-  <!--   { -->
-  <!--     allBlogPosts.map(post => ( -->
-  <!--       <li> -->
-  <!--         <a href={`/blog/${post.id}`}>{post.data.title}</a> -->
-  <!--       </li> -->
-  <!--     )) -->
-  <!--   } -->
-  <!-- </ul> -->
-
+<DefaultLayout containerClass="min-h-svh">
+  <HomeHeroSection />
   <HomeBentoSection />
 </DefaultLayout>
