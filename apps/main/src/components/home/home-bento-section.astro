@@ -15,6 +15,7 @@ const socialIcons = [
     icon: "ri:linkedin-box-fill",
   },
   { link: "https://github.com/mupinnn/", name: "GitHub", icon: "ri:github-fill" },
+  { link: "mailto:itsmupin@gmail.com", name: "Email", icon: "ri:mail-line" },
 ];
 const kagetProjectEntry = await getEntry("projects", "kaget");
 const latestWritings = await getLatestBlogPost();
@@ -32,10 +33,10 @@ const techStacks = [
 ];
 ---
 
-<div
-  class="grid auto-rows-[auto_auto_1fr_auto_minmax(200px,_auto)] grid-cols-12 gap-4 md:auto-rows-fr md:grid-cols-32"
->
-  <div class="col-span-full col-start-1 row-start-1 row-end-2 grid grid-cols-3 gap-4 md:col-end-12">
+<div class="grid auto-rows-auto grid-cols-12 gap-4 py-16 md:auto-rows-auto md:grid-cols-32">
+  <div
+    class="col-span-full grid grid-cols-4 gap-4 min-[560px]:col-end-6 min-[560px]:grid-cols-2 md:col-end-12 md:row-start-1 md:row-end-2 md:grid-cols-4"
+  >
     {
       socialIcons.map(social => (
         <a
@@ -53,31 +54,31 @@ const techStacks = [
 
   <a
     href="/now"
-    class="bg-tangerine-1 group col-span-full col-start-1 row-start-2 row-end-3 cursor-pointer rounded-xl bg-[url(#ai:ri:arrow-right-line)] bg-contain p-4 md:col-end-12"
+    class="bg-tangerine-1 group col-span-full cursor-pointer place-content-center rounded-xl p-4 min-[560px]:col-start-6 min-[560px]:row-start-1 min-[560px]:row-end-1 md:col-start-1 md:col-end-12 md:row-start-2 md:row-end-3"
   >
-    <h2 class="font-bricolage inline-flex items-center gap-2 text-2xl font-bold">
+    <h2 class="font-bricolage text-2xl font-bold min-[560px]:text-3xl sm:text-5xl md:text-2xl">
       See what I'm up to right now
       <Icon
         name="ri:arrow-right-line"
-        class="shrink-0 transition-transform group-hover:translate-x-1"
+        class="inline-block shrink-0 transition-transform group-hover:translate-x-1"
       />
     </h2>
   </a>
 
   <a
     href={`/projects/${kagetProjectEntry.id}`}
-    class="bg-peach-1 group gap-4row-start-3 col-span-full row-end-4 flex cursor-pointer flex-col gap-4 overflow-clip rounded-xl p-4 md:col-start-12 md:row-start-1 md:row-end-3 md:grid md:grid-cols-2 md:overflow-visible"
+    class="bg-peach-1 group col-span-full flex flex-col gap-4 overflow-clip rounded-xl p-4 min-[560px]:grid min-[560px]:grid-cols-2 md:col-start-12 md:row-start-1 md:row-end-3 md:overflow-visible"
   >
-    <div class="space-y-1 self-end">
-      <Badge>
+    <div class="flex flex-col gap-1 self-end">
+      <Badge class="mb-3">
         <Icon name="ri:star-fill" />
         Featured work
       </Badge>
-      <h2 class="font-bricolage inline-flex items-center gap-2 text-2xl font-bold">
+      <h2 class="font-bricolage text-2xl font-bold">
         {kagetProjectEntry.data.title}
         <Icon
           name="ri:arrow-right-line"
-          class="opacity-0 transition group-hover:translate-x-2 group-hover:opacity-100"
+          class="hidden opacity-0 transition group-hover:translate-x-2 group-hover:opacity-100 md:inline-block"
         />
       </h2>
       <p class="text-sm">{kagetProjectEntry.data.description}</p>
@@ -85,8 +86,7 @@ const techStacks = [
 
     <div class="relative z-10 h-60 md:h-auto">
       <div
-        class="bg-cod-gray-1/15 absolute rounded-[36px] p-2 backdrop-blur-xs transition-all group-hover:-translate-y-18 group-hover:[clip-path:inset(0_0_333px_0)]! md:-translate-y-16"
-        style="clip-path: inset(0 0 341px 0)"
+        class="bg-cod-gray-1/15 absolute rounded-[36px] p-2 backdrop-blur-xs transition-all md:-translate-y-16 md:[clip-path:inset(0_0_174px_0)] md:group-hover:-translate-y-20 md:group-hover:[clip-path:inset(0_0_36.9%_0)]!"
       >
         <Image
           src={featuredProjectKagetImage}
@@ -98,14 +98,13 @@ const techStacks = [
 
   <a
     href={`/blog/${latestWritings.id}`}
-    class="bg-pink-2 col-span-full row-start-4 row-end-5 grid auto-rows-auto rounded-xl p-4 md:col-start-1 md:col-end-20 md:row-start-3 md:row-end-5"
+    class="bg-pink-2 col-span-full grid auto-rows-auto gap-4 rounded-xl p-4 sm:col-end-8 md:col-end-20 md:row-start-3 md:row-end-5"
   >
-    <Badge class="self-start">
-      <Icon name="ri:pencil-fill" />
-      Latest writings
-    </Badge>
-
-    <div class="space-y-1 self-end">
+    <div class="flex flex-col gap-1 self-end">
+      <Badge class="mb-3">
+        <Icon name="ri:pencil-fill" />
+        Latest writings
+      </Badge>
       <h2 class="font-bricolage inline-flex items-center gap-2 text-2xl font-bold">
         {latestWritings.data.title}
       </h2>
@@ -114,7 +113,7 @@ const techStacks = [
   </a>
 
   <div
-    class="border-cod-gray-1 bg-lemon-1 relative col-span-full row-start-5 row-end-6 flex items-center justify-center rounded-xl border-2 border-dashed md:col-start-20 md:row-start-3 md:row-end-5"
+    class="border-cod-gray-1 bg-lemon-1 relative col-span-full flex h-56 items-center justify-center rounded-xl border-2 border-dashed sm:col-start-8 sm:h-auto md:col-start-20 md:row-start-3 md:row-end-5"
   >
     <div
       class="border-cod-gray-1 flex size-full -rotate-2 items-center justify-center overflow-clip rounded-xl border bg-slate-50 p-4"

@@ -27,7 +27,7 @@ const { lang = "en", containerClass } = Astro.props;
       <SeoHead />
     </slot>
   </head>
-  <body class="text-cod-gray-3 relative flex min-h-svh flex-col bg-slate-100">
+  <body class="text-cod-gray-3 relative flex flex-col bg-slate-100">
     <main class={cn("container grow", containerClass)}>
       <slot />
     </main>
