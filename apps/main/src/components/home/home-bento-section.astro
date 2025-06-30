@@ -8,14 +8,32 @@ import featuredProjectKagetImage from "@/assets/images/featured-project-kaget.pn
 import { getLatestBlogPost } from "@/lib/content.lib";
 
 const socialIcons = [
-  { link: "http://x.com/itsmupinnn/", name: "Twitter", icon: "ri:twitter-x-line" },
+  {
+    link: "http://x.com/itsmupinnn/",
+    name: "Twitter",
+    icon: "ri:twitter-x-line",
+    class: "hover:bg-brand-x",
+  },
   {
     link: "https://www.linkedin.com/in/ahmad-muwaffaq/",
     name: "LinkedIn",
     icon: "ri:linkedin-box-fill",
+    class: "hover:bg-brand-linkedin",
   },
-  { link: "https://github.com/mupinnn/", name: "GitHub", icon: "ri:github-fill" },
-  { link: "mailto:itsmupin@gmail.com", name: "Email", icon: "ri:mail-line" },
+  {
+    link: "https://github.com/mupinnn/",
+    name: "GitHub",
+    icon: "ri:github-fill",
+    class: "hover:bg-brand-github",
+  },
+  { link: "#", name: "Email", icon: "ri:mail-line", class: "hover:bg-brand-google-red" },
+  {
+    link: "https://codepen.io/mupin",
+    name: "CodePen",
+    icon: "ri:codepen-line",
+    class: "hover:bg-cod-gray-1",
+  },
+  { link: "#", name: "Resume", icon: "ri:file-list-3-line", class: "hover:bg-brown-1" },
 ];
 const kagetProjectEntry = await getEntry("projects", "kaget");
 const latestWritings = await getLatestBlogPost();
@@ -31,63 +49,40 @@ const techStacks = [
   "sass",
   "astro",
 ];
+const experiences = [
+  {
+    role: "Frontend Developer",
+    company: "Juragan Material",
+    current: true,
+  },
+  {
+    role: "Frontend Developer",
+    company: "Garena",
+    current: false,
+    from: 2019,
+    to: 2020,
+  },
+];
 ---
 
-<div class="grid auto-rows-auto grid-cols-12 gap-4 py-16 md:auto-rows-auto md:grid-cols-32">
-  <div
-    class="col-span-full grid grid-cols-4 gap-4 min-[560px]:col-end-6 min-[560px]:grid-cols-2 md:col-end-12 md:row-start-1 md:row-end-2 md:grid-cols-4"
-  >
-    {
-      socialIcons.map(social => (
-        <a
-          href={social.link}
-          rel="noopener noreferrer"
-          target="_blank"
-          class="bg-cod-gray-3 inline-flex aspect-square items-center justify-center rounded-xl text-slate-100"
-        >
-          <span class="sr-only">Visit my {social.name}</span>
-          <Icon name={social.icon} size="40" />
-        </a>
-      ))
-    }
-  </div>
-
-  <a
-    href="/now"
-    class="bg-tangerine-1 group col-span-full cursor-pointer place-content-center rounded-xl p-4 min-[560px]:col-start-6 min-[560px]:row-start-1 min-[560px]:row-end-1 md:col-start-1 md:col-end-12 md:row-start-2 md:row-end-3"
-  >
-    <h2 class="font-bricolage text-2xl font-bold min-[560px]:text-3xl sm:text-5xl md:text-2xl">
-      See what I'm up to right now
-      <Icon
-        name="ri:arrow-right-line"
-        class="inline-block shrink-0 transition-transform group-hover:translate-x-1"
-      />
-    </h2>
-  </a>
-
+<div class="flex flex-col gap-4 py-16">
   <a
     href={`/projects/${kagetProjectEntry.id}`}
-    class="bg-peach-1 group col-span-full flex flex-col gap-4 overflow-clip rounded-xl p-4 min-[560px]:grid min-[560px]:grid-cols-2 md:col-start-12 md:row-start-1 md:row-end-3 md:overflow-visible"
+    class="bg-peach-1 col-span-full flex flex-col overflow-clip rounded-xl p-4"
   >
-    <div class="flex flex-col gap-1 self-end">
+    <div class="mb-8 flex flex-col self-end">
       <Badge class="mb-3">
         <Icon name="ri:star-fill" />
         Featured work
       </Badge>
-      <h2 class="font-bricolage text-2xl font-bold">
+      <h2 class="font-bricolage mb-1 text-2xl font-bold">
         {kagetProjectEntry.data.title}
-        <Icon
-          name="ri:arrow-right-line"
-          class="hidden opacity-0 transition group-hover:translate-x-2 group-hover:opacity-100 md:inline-block"
-        />
       </h2>
       <p class="text-sm">{kagetProjectEntry.data.description}</p>
     </div>
 
-    <div class="relative z-10 h-60 md:h-auto">
-      <div
-        class="bg-cod-gray-1/15 absolute rounded-[36px] p-2 backdrop-blur-xs transition-all md:-translate-y-16 md:[clip-path:inset(0_0_174px_0)] md:group-hover:-translate-y-20 md:group-hover:[clip-path:inset(0_0_36.9%_0)]!"
-      >
+    <div class="relative h-60">
+      <div class="bg-cod-gray-1/15 absolute rounded-[36px] p-2 backdrop-blur-xs">
         <Image
           src={featuredProjectKagetImage}
           alt="A screenshot of KaGet budgeting app that showing the main page"
@@ -97,15 +92,25 @@ const techStacks = [
   </a>
 
   <a
-    href={`/blog/${latestWritings.id}`}
-    class="bg-pink-2 col-span-full grid auto-rows-auto gap-4 rounded-xl p-4 sm:col-end-8 md:col-end-20 md:row-start-3 md:row-end-5"
+    href="/now"
+    class="bg-tangerine-1 col-span-full cursor-pointer place-content-center rounded-xl p-4"
   >
-    <div class="flex flex-col gap-1 self-end">
+    <h2 class="font-bricolage text-2xl font-bold">
+      See what I'm up to right now
+      <Icon name="ri:arrow-right-line" class="inline-block shrink-0" />
+    </h2>
+  </a>
+
+  <a
+    href={`/blog/${latestWritings.id}`}
+    class="bg-pink-2 col-span-full flex flex-col rounded-xl p-4"
+  >
+    <div class="flex flex-col self-end">
       <Badge class="mb-3">
         <Icon name="ri:pencil-fill" />
         Latest writings
       </Badge>
-      <h2 class="font-bricolage inline-flex items-center gap-2 text-2xl font-bold">
+      <h2 class="font-bricolage mb-1 text-2xl font-bold">
         {latestWritings.data.title}
       </h2>
       <p class="text-sm">{latestWritings.data.description}</p>
@@ -113,31 +118,95 @@ const techStacks = [
   </a>
 
   <div
-    class="border-cod-gray-1 bg-lemon-1 relative col-span-full flex h-56 items-center justify-center rounded-xl border-2 border-dashed sm:col-start-8 sm:h-auto md:col-start-20 md:row-start-3 md:row-end-5"
+    class="border-cod-gray-1 bg-lemon-1 relative col-span-full h-72 rounded-xl border-2 border-dashed"
   >
     <div
-      class="border-cod-gray-1 flex size-full -rotate-2 items-center justify-center overflow-clip rounded-xl border bg-slate-50 p-4"
+      class="border-cod-gray-1 relative flex size-full -rotate-2 flex-col overflow-clip rounded-xl border bg-slate-50 p-4"
     >
+      <div class="flex flex-col self-end">
+        <Badge class="mb-3">
+          <Icon name="ri:tools-fill" />
+          Comfortable stacks
+        </Badge>
+        <p class="text-sm">
+          These are my go-to stacks. On the other hand, I'm always keen on learning new tech and
+          tools that can fulfill my needs.
+        </p>
+      </div>
+
       <div
-        class="absolute inset-x-0 -top-2/3 flex size-full flex-col items-center justify-center overflow-hidden"
+        class="absolute inset-x-0 -bottom-1/2 flex size-full flex-col items-center justify-center"
       >
-        <OrbitingCircles iconSize={30} radius={90}>
+        <OrbitingCircles iconSize={30} radius={130}>
           {techStacks.map(stack => <Icon name={`devicon:${stack}`} />)}
         </OrbitingCircles>
       </div>
 
-      <Badge>
-        <Icon name="ri:tools-fill" />
-        Comfortable stacks
-      </Badge>
-
       <div
-        class="absolute inset-x-0 -bottom-2/3 flex size-full flex-col items-center justify-center overflow-hidden"
+        class="absolute inset-x-0 -bottom-1/2 flex size-full flex-col items-center justify-center"
       >
-        <OrbitingCircles iconSize={30} radius={90}>
+        <OrbitingCircles iconSize={20} radius={80} reverse speed={2}>
           {techStacks.map(stack => <Icon name={`devicon:${stack}`} />)}
         </OrbitingCircles>
       </div>
     </div>
+  </div>
+
+  <div class="col-span-full grid grid-cols-3 gap-4">
+    {
+      socialIcons.map(social => (
+        <a
+          href={social.link}
+          rel="noopener noreferrer"
+          target="_blank"
+          class:list={[
+            "bg-cod-gray-3 inline-flex aspect-square items-center justify-center rounded-xl text-slate-100 transition-colors",
+            social.class,
+          ]}
+        >
+          <span class="sr-only">Visit my {social.name}</span>
+          <Icon name={social.icon} size="40" />
+        </a>
+      ))
+    }
+  </div>
+
+  <div class="border-cod-gray-1 bg-brown-1 rounded-xl border-2 border-dashed">
+    <div class="border-cod-gray-1 flex rotate-2 flex-col rounded-xl border bg-slate-50 p-4">
+      <Badge class="mb-3">
+        <Icon name="ri:star-fill" />
+        Experience
+      </Badge>
+
+      <div class="space-y-2">
+        {
+          experiences.map(experience => (
+            <div class="space-y-1">
+              <p>
+                {experience.role} at {experience.company}
+              </p>
+              <p class="text-cod-gray-1/75 text-sm">
+                {experience.current ? "Current" : `${experience.from} - ${experience.to}`}
+              </p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+
+  <div class="border-brown-1 col-span-full flex flex-col rounded-xl border-2 border-dashed p-4">
+    <blockquote>
+      <p>Do One Thing And Do It Well</p>
+    </blockquote>
+    <p><cite>Unix philosophy</cite></p>
+  </div>
+
+  <div class="border-cod-gray-1 col-span-full overflow-x-auto border-2 p-4">
+    <figure>
+      <embed
+        src="https://wakatime.com/share/@9eb8a0cd-44fd-41ce-a489-6ccfbecf1e67/2524bacb-2ce0-445a-a131-0bde36eb86ee.svg"
+      />
+    </figure>
   </div>
 </div>

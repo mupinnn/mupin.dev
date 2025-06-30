@@ -3,6 +3,10 @@
 
 @theme {
   --text-shadow-flat: 4px 4px;
+  --color-brand-linkedin: #0a66c2;
+  --color-brand-x: #1da1f2;
+  --color-brand-github: #333;
+  --color-brand-google-red: #ea4335;
 }
 
 @theme inline {
