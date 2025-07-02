@@ -1,0 +1,33 @@
+---
+import { Image } from "astro:assets";
+import { GridPattern } from "@/components/ui/grid-pattern.tsx";
+import { getWorkersAsset } from "@/lib/utils.lib";
+import FooterPieceOfCake from "@/assets/images/footer-piece-of-cake.svg";
+---
+
+<footer class="mx-auto flex w-full max-w-6xl flex-col pt-16">
+  <div
+    class="relative flex aspect-video size-full items-center justify-center overflow-hidden border-y"
+  >
+    <GridPattern width={20} height={20} x={-1} y={-1} />
+    <FooterPieceOfCake class="z-10 size-full px-4" />
+  </div>
+
+  <div class="flex flex-col gap-8 px-4 py-8">
+    <div class="inline-flex items-center gap-2">
+      <Image
+        src={getWorkersAsset("/images/logo/logo-main-240x240.png")}
+        alt=""
+        width={24}
+        height={24}
+      />
+      <p class="text-cod-gray-1/75">mupin.dev — /(Faqih)/ &copy; {new Date().getFullYear()}</p>
+    </div>
+
+    <div class="flex flex-col gap-3 font-semibold">
+      <a href="/blog">Blog</a>
+      <a href="/projects">Projects</a>
+      <a href="/now">Now</a>
+    </div>
+  </div>
+</footer>
