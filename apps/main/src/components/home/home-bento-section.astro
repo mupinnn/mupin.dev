@@ -57,6 +57,12 @@ const experiences = [
   },
   {
     role: "Frontend Developer",
+    company: "Freelance",
+    from: 2020,
+    to: 2022,
+  },
+  {
+    role: "Frontend Developer, Intern",
     company: "Garena",
     current: false,
     from: 2019,
@@ -93,7 +99,7 @@ const experiences = [
 
   <a
     href="/now"
-    class="bg-tangerine-1 col-span-full cursor-pointer place-content-center rounded-xl p-4"
+    class="bg-tangerine-1 col-span-full cursor-pointer place-content-center rounded-xl p-4 text-balance"
   >
     <h2 class="font-bricolage text-2xl font-bold">
       See what I'm up to right now
@@ -181,8 +187,8 @@ const experiences = [
       <div class="space-y-2">
         {
           experiences.map(experience => (
-            <div class="space-y-1">
-              <p>
+            <div class="space-y-1 text-sm">
+              <p class="font-medium">
                 {experience.role} at {experience.company}
               </p>
               <p class="text-cod-gray-1/75 text-sm">
@@ -195,18 +201,26 @@ const experiences = [
     </div>
   </div>
 
-  <div class="border-brown-1 col-span-full flex flex-col rounded-xl border-2 border-dashed p-4">
-    <blockquote>
+  <a
+    href="https://cscie2x.dce.harvard.edu/hw/ch01s06.html#:~:text=do%20one%20thing%20and%20do%20it%20well"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="bg-cod-gray-3 col-span-full flex flex-col rounded-xl p-4 text-slate-100"
+  >
+    <blockquote class="relative mb-4 pt-8 text-6xl font-bold text-balance italic">
+      <Icon name="ri:double-quotes-l" size="160" class="absolute -top-6 -left-4 opacity-25" />
       <p>Do One Thing And Do It Well</p>
     </blockquote>
-    <p><cite>Unix philosophy</cite></p>
-  </div>
+    <p><cite>– Unix philosophy</cite></p>
+  </a>
 
-  <div class="border-cod-gray-1 col-span-full overflow-x-auto border-2 p-4">
-    <figure>
-      <embed
-        src="https://wakatime.com/share/@9eb8a0cd-44fd-41ce-a489-6ccfbecf1e67/2524bacb-2ce0-445a-a131-0bde36eb86ee.svg"
-      />
-    </figure>
-  </div>
+  <a
+    href="/projects"
+    class="bg-blue-1 col-span-full cursor-pointer place-content-center rounded-xl p-4 text-balance"
+  >
+    <h2 class="font-bricolage text-2xl font-bold">
+      Find out my other works
+      <Icon name="ri:arrow-right-line" class="inline-block shrink-0" />
+    </h2>
+  </a>
 </div>
