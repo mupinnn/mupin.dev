@@ -7,13 +7,13 @@ import FooterPieceOfCake from "@/assets/images/footer-piece-of-cake.svg";
 
 <footer class="mx-auto flex w-full max-w-6xl flex-col pt-16">
   <div
-    class="relative flex aspect-video size-full items-center justify-center overflow-hidden border-y"
+    class="relative flex aspect-[16/6] size-full items-center justify-center overflow-hidden border-y [mask-image:linear-gradient(to_top,var(--color-slate-100),transparent)] sm:aspect-[16/4] min-[72rem]:rounded-xl min-[72rem]:border"
   >
     <GridPattern width={20} height={20} x={-1} y={-1} />
-    <FooterPieceOfCake class="z-10 size-full px-4" />
+    <FooterPieceOfCake class="z-[5] size-full px-4" />
   </div>
 
-  <div class="flex flex-col gap-8 px-4 py-8">
+  <div class="flex flex-col gap-8 px-4 py-8 sm:flex-row sm:items-center sm:justify-between sm:py-4">
     <div class="inline-flex items-center gap-2">
       <Image
         src={getWorkersAsset("/images/logo/logo-main-240x240.png")}
@@ -24,7 +24,7 @@ import FooterPieceOfCake from "@/assets/images/footer-piece-of-cake.svg";
       <p class="text-cod-gray-1/75">mupin.dev — /(Faqih)/ &copy; {new Date().getFullYear()}</p>
     </div>
 
-    <div class="flex flex-col gap-4 font-semibold">
+    <div class="flex flex-col gap-4 font-semibold sm:flex-row sm:items-center">
       <a href="/blog">Blog</a>
       <a href="/projects">Projects</a>
       <a href="/now">Now</a>
