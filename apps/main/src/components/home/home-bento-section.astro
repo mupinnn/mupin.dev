@@ -71,12 +71,12 @@ const experiences = [
 ];
 ---
 
-<div class="flex flex-col gap-4 py-16">
+<div class="flex flex-col gap-4 py-16 sm:grid sm:auto-rows-fr sm:grid-cols-6">
   <a
     href={`/projects/${kagetProjectEntry.id}`}
-    class="bg-peach-1 col-span-full flex flex-col overflow-clip rounded-xl p-4"
+    class="bg-peach-1 flex flex-col gap-8 overflow-clip rounded-xl p-4 sm:row-start-1 sm:row-end-3 sm:h-full"
   >
-    <div class="mb-8 flex flex-col self-end">
+    <div class="flex flex-col">
       <Badge class="mb-3">
         <Icon name="ri:star-fill" />
         Featured work
@@ -88,7 +88,9 @@ const experiences = [
     </div>
 
     <div class="relative h-60">
-      <div class="bg-cod-gray-1/15 absolute rounded-[36px] p-2 backdrop-blur-xs">
+      <div
+        class="bg-cod-gray-1/15 relative mx-auto w-fit rounded-[36px] p-2 backdrop-blur-xs sm:-translate-y-16 sm:[clip-path:rect(0_100%_320px_0)]"
+      >
         <Image
           src={featuredProjectKagetImage}
           alt="A screenshot of KaGet budgeting app that showing the main page"
@@ -99,7 +101,7 @@ const experiences = [
 
   <a
     href="/now"
-    class="bg-tangerine-1 col-span-full cursor-pointer place-content-center rounded-xl p-4 text-balance"
+    class="bg-tangerine-1 cursor-pointer place-content-center rounded-xl p-4 text-balance sm:row-start-3 sm:row-end-5"
   >
     <h2 class="font-bricolage text-2xl font-bold">
       See what I'm up to right now
@@ -109,9 +111,9 @@ const experiences = [
 
   <a
     href={`/blog/${latestWritings.id}`}
-    class="bg-pink-2 col-span-full flex flex-col rounded-xl p-4"
+    class="bg-pink-2 flex flex-col rounded-xl p-4 sm:row-start-3 sm:row-end-5"
   >
-    <div class="flex flex-col self-end">
+    <div class="flex flex-col">
       <Badge class="mb-3">
         <Icon name="ri:pencil-fill" />
         Latest writings
@@ -124,12 +126,12 @@ const experiences = [
   </a>
 
   <div
-    class="border-cod-gray-1 bg-lemon-1 relative col-span-full h-72 rounded-xl border-2 border-dashed"
+    class="border-cod-gray-1 bg-lemon-1 relative rounded-xl border-2 border-dashed sm:col-start-1 sm:col-end-4 sm:row-start-5 sm:row-end-7"
   >
     <div
       class="border-cod-gray-1 relative flex size-full -rotate-2 flex-col overflow-clip rounded-xl border bg-slate-50 p-4"
     >
-      <div class="flex flex-col self-end">
+      <div class="flex flex-col">
         <Badge class="mb-3">
           <Icon name="ri:tools-fill" />
           Comfortable stacks
@@ -158,7 +160,7 @@ const experiences = [
     </div>
   </div>
 
-  <div class="col-span-full grid grid-cols-3 gap-4">
+  <div class="grid grid-cols-3 gap-4 sm:col-start-4 sm:col-end-7 sm:row-start-5 sm:row-end-7">
     {
       socialIcons.map(social => (
         <a
@@ -177,7 +179,9 @@ const experiences = [
     }
   </div>
 
-  <div class="border-cod-gray-1 bg-brown-1 rounded-xl border-2 border-dashed">
+  <div
+    class="border-cod-gray-1 bg-brown-1 rounded-xl border-2 border-dashed sm:row-start-8 sm:row-end-11"
+  >
     <div class="border-cod-gray-1 flex rotate-2 flex-col rounded-xl border bg-slate-50 p-4">
       <Badge class="mb-3">
         <Icon name="ri:star-fill" />
@@ -205,7 +209,7 @@ const experiences = [
     href="https://cscie2x.dce.harvard.edu/hw/ch01s06.html#:~:text=do%20one%20thing%20and%20do%20it%20well"
     target="_blank"
     rel="noopener noreferrer"
-    class="bg-cod-gray-3 col-span-full flex flex-col rounded-xl p-4 text-slate-100"
+    class="bg-cod-gray-3 flex flex-col rounded-xl p-4 text-slate-100 sm:row-start-8 sm:row-end-11"
   >
     <blockquote class="relative mb-4 pt-8 text-6xl font-bold text-balance italic">
       <Icon name="ri:double-quotes-l" size="160" class="absolute -top-6 -left-4 opacity-25" />
@@ -216,7 +220,7 @@ const experiences = [
 
   <a
     href="/projects"
-    class="bg-blue-1 col-span-full cursor-pointer place-content-center rounded-xl p-4 text-balance"
+    class="bg-blue-1 cursor-pointer place-content-center rounded-xl p-4 text-balance sm:row-start-8 sm:row-end-11"
   >
     <h2 class="font-bricolage text-2xl font-bold">
       Find out my other works
