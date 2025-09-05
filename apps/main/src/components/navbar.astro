@@ -1,0 +1,23 @@
+---
+import { Image } from "astro:assets";
+import { getWorkersAsset } from "@/lib/utils.lib";
+---
+
+<nav class="sticky top-0 z-50 bg-slate-100/50 backdrop-blur-sm">
+  <div class="mx-auto flex w-full max-w-6xl items-center justify-between gap-2 p-4">
+    <a href="/">
+      <Image
+        src={getWorkersAsset("/images/logo/logo-main-240x240.png")}
+        alt=""
+        width={44}
+        height={44}
+      />
+    </a>
+
+    <div class="flex items-center gap-4 font-semibold">
+      <a href="/blog">Blog</a>
+      <a href="/projects">Projects</a>
+      <a href="/now">Now</a>
+    </div>
+  </div>
+</nav>

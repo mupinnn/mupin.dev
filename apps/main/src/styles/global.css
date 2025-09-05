@@ -1,2 +1,25 @@
 @import "tailwindcss";
 @import "@mupin.dev/shared/tailwind.css";
+
+@theme {
+  --text-shadow-flat: 4px 4px;
+  --color-brand-linkedin: #0a66c2;
+  --color-brand-x: #1da1f2;
+  --color-brand-github: #333;
+  --color-brand-google-red: #ea4335;
+}
+
+@theme inline {
+  --animate-orbit: orbit calc(var(--duration) * 1s) linear infinite;
+
+  @keyframes orbit {
+    0% {
+      transform: rotate(calc(var(--angle) * 1deg)) translateY(calc(var(--radius) * 1px))
+        rotate(calc(var(--angle) * -1deg));
+    }
+    100% {
+      transform: rotate(calc(var(--angle) * 1deg + 360deg)) translateY(calc(var(--radius) * 1px))
+        rotate(calc((var(--angle) * -1deg) - 360deg));
+    }
+  }
+}

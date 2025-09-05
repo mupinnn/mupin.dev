@@ -1,5 +1,6 @@
 ---
 import { Icon } from "astro-icon/components";
+import { GridPattern } from "@/components/ui/grid-pattern.tsx";
 
 type Props = {
   title: string;
@@ -10,23 +11,14 @@ type Props = {
 const { title, subtitle, backLink = "/" } = Astro.props;
 ---
 
-<style>
-  .grid-pattern {
-    width: 100%;
-    height: 100%;
-    background-image:
-      linear-gradient(var(--color-cod-gray-3) 2px, transparent 2px),
-      linear-gradient(to right, var(--color-cod-gray-3) 2px, transparent 2px);
-    background-size: 30px 30px;
-  }
-</style>
-
-<div class="absolute inset-x-0 top-0 -z-1 h-52">
-  <div
-    class="absolute top-0 size-full bg-linear-to-t from-slate-100 from-35% to-transparent to-100%"
-  >
-  </div>
-  <div class="grid-pattern"></div>
+<div class="absolute inset-x-0 top-0 -z-1 h-56">
+  <GridPattern
+    width={30}
+    height={30}
+    x={-1}
+    y={-1}
+    className="[mask-image:linear-gradient(to_bottom,var(--color-slate-100),transparent)]"
+  />
 </div>
 
 <header class="mx-auto flex max-w-prose flex-col gap-6 pt-8 sm:gap-8 sm:pt-16">

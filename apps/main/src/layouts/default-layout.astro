@@ -4,6 +4,8 @@ import "@fontsource-variable/bricolage-grotesque";
 import "../styles/global.css";
 
 import SeoHead from "@/components/seo-head.astro";
+import Footer from "@/components/footer.astro";
+import Navbar from "@/components/navbar.astro";
 import { type Locale } from "@/types";
 import { cn } from "@/lib/utils.lib";
 
@@ -28,8 +30,10 @@ const { lang = "en", containerClass } = Astro.props;
     </slot>
   </head>
   <body class="text-cod-gray-3 relative flex min-h-svh flex-col bg-slate-100">
-    <main class={cn("container grow", containerClass)}>
+    <Navbar />
+    <main class={cn("mx-auto max-w-6xl w-full px-4 grow", containerClass)}>
       <slot />
     </main>
+    <Footer />
   </body>
 </html>

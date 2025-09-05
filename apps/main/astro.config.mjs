@@ -2,6 +2,7 @@ import { execSync } from "node:child_process";
 import { defineConfig } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
 import icon from "astro-icon";
+import react from "@astrojs/react";
 import mdx from "@astrojs/mdx";
 import rehypePrettyCode from "rehype-pretty-code";
 import rehypeSlug from "rehype-slug";
@@ -107,5 +108,6 @@ export default defineConfig({
     ],
   },
 
-  integrations: [icon(), mdx()],
+  integrations: [icon(), mdx(), react({ experimentalReactChildren: true })],
 });
+
