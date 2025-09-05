@@ -71,160 +71,166 @@ const experiences = [
 ];
 ---
 
-<div class="flex flex-col gap-4 py-16 sm:grid sm:auto-rows-fr sm:grid-cols-6">
-  <a
-    href={`/projects/${kagetProjectEntry.id}`}
-    class="bg-peach-1 flex flex-col gap-8 overflow-clip rounded-xl p-4 sm:row-start-1 sm:row-end-3 sm:h-full"
-  >
-    <div class="flex flex-col">
-      <Badge class="mb-3">
-        <Icon name="ri:star-fill" />
-        Featured work
-      </Badge>
-      <h2 class="font-bricolage mb-1 text-2xl font-bold">
-        {kagetProjectEntry.data.title}
-      </h2>
-      <p class="text-sm">{kagetProjectEntry.data.description}</p>
-    </div>
+<div class="flex flex-col gap-4 py-16">
+  <div class="flex flex-1 flex-col gap-4 sm:flex-row">
+    <a
+      href={`/projects/${kagetProjectEntry?.id}`}
+      class="bg-peach-1 group flex flex-col gap-8 overflow-clip rounded-xl p-4 sm:flex-row sm:overflow-visible"
+    >
+      <div class="flex flex-col sm:self-end">
+        <Badge class="mb-3">
+          <Icon name="ri:star-fill" />
+          Featured work
+        </Badge>
+        <h2 class="font-bricolage mb-1 text-2xl font-bold">
+          {kagetProjectEntry?.data.title}
+        </h2>
+        <p class="text-sm">{kagetProjectEntry?.data.description}</p>
+      </div>
 
-    <div class="relative h-60">
-      <div
-        class="bg-cod-gray-1/15 relative mx-auto w-fit rounded-[36px] p-2 backdrop-blur-xs sm:-translate-y-16 sm:[clip-path:rect(0_100%_320px_0)]"
+      <div class="relative h-60 sm:min-w-48">
+        <div
+          class="bg-cod-gray-1/15 relative mx-auto w-fit rounded-[36px] p-2 backdrop-blur-xs sm:-translate-y-16 sm:transition-all sm:[clip-path:rect(0_100%_320px_0)] sm:group-hover:-translate-y-20 sm:group-hover:[clip-path:rect(0_100%_336px_0)]"
+        >
+          <Image
+            src={featuredProjectKagetImage}
+            alt="A screenshot of KaGet budgeting app that showing the main page"
+          />
+        </div>
+      </div>
+    </a>
+
+    <div class="flex flex-col gap-4">
+      <a
+        href="/now"
+        class="bg-tangerine-1 hover:bg-tangerine-2 flex-1 cursor-pointer place-content-center rounded-xl p-4 text-balance transition-colors"
       >
-        <Image
-          src={featuredProjectKagetImage}
-          alt="A screenshot of KaGet budgeting app that showing the main page"
-        />
+        <h2 class="font-bricolage text-2xl font-bold">
+          See what I'm up to right now
+          <Icon name="ri:arrow-right-line" class="inline-block shrink-0" />
+        </h2>
+      </a>
+
+      <a
+        href="/projects"
+        class="bg-blue-1 hover:bg-blue-2 flex-1 cursor-pointer place-content-center rounded-xl p-4 text-balance transition-colors"
+      >
+        <h2 class="font-bricolage text-2xl font-bold">
+          Find out my other works
+          <Icon name="ri:arrow-right-line" class="inline-block shrink-0" />
+        </h2>
+      </a>
+    </div>
+  </div>
+
+  <div class="flex flex-1 flex-wrap gap-4 *:flex-auto sm:grid sm:grid-cols-3">
+    <div class="border-cod-gray-1 bg-brown-1 rounded-xl border-2 border-dashed">
+      <div
+        class="border-cod-gray-1 flex size-full rotate-2 flex-col rounded-xl border bg-slate-50 p-4"
+      >
+        <Badge class="mb-3">
+          <Icon name="ri:star-fill" />
+          Experience
+        </Badge>
+
+        <div class="space-y-2">
+          {
+            experiences.map(experience => (
+              <div class="space-y-1 text-sm">
+                <p class="font-medium">
+                  {experience.role} at {experience.company}
+                </p>
+                <p class="text-cod-gray-1/75 text-sm">
+                  {experience.current ? "Current" : `${experience.from} - ${experience.to}`}
+                </p>
+              </div>
+            ))
+          }
+        </div>
       </div>
     </div>
-  </a>
 
-  <a
-    href="/now"
-    class="bg-tangerine-1 cursor-pointer place-content-center rounded-xl p-4 text-balance sm:row-start-3 sm:row-end-5"
-  >
-    <h2 class="font-bricolage text-2xl font-bold">
-      See what I'm up to right now
-      <Icon name="ri:arrow-right-line" class="inline-block shrink-0" />
-    </h2>
-  </a>
-
-  <a
-    href={`/blog/${latestWritings.id}`}
-    class="bg-pink-2 flex flex-col rounded-xl p-4 sm:row-start-3 sm:row-end-5"
-  >
-    <div class="flex flex-col">
-      <Badge class="mb-3">
-        <Icon name="ri:pencil-fill" />
-        Latest writings
-      </Badge>
-      <h2 class="font-bricolage mb-1 text-2xl font-bold">
-        {latestWritings.data.title}
-      </h2>
-      <p class="text-sm">{latestWritings.data.description}</p>
-    </div>
-  </a>
-
-  <div
-    class="border-cod-gray-1 bg-lemon-1 relative rounded-xl border-2 border-dashed sm:col-start-1 sm:col-end-4 sm:row-start-5 sm:row-end-7"
-  >
-    <div
-      class="border-cod-gray-1 relative flex size-full -rotate-2 flex-col overflow-clip rounded-xl border bg-slate-50 p-4"
+    <a
+      href={`/blog/${latestWritings.id}`}
+      class="bg-pink-2 hover:bg-pink-1 flex flex-col rounded-xl p-4 transition-colors"
     >
       <div class="flex flex-col">
         <Badge class="mb-3">
-          <Icon name="ri:tools-fill" />
-          Comfortable stacks
+          <Icon name="ri:pencil-fill" />
+          Latest writings
         </Badge>
-        <p class="text-sm">
-          These are my go-to stacks. On the other hand, I'm always keen on learning new tech and
-          tools that can fulfill my needs.
-        </p>
+        <h2 class="font-bricolage mb-1 text-2xl font-bold">
+          {latestWritings.data.title}
+        </h2>
+        <p class="text-sm">{latestWritings.data.description}</p>
       </div>
+    </a>
 
+    <div class="border-cod-gray-1 bg-lemon-1 relative min-h-72 rounded-xl border-2 border-dashed">
       <div
-        class="absolute inset-x-0 -bottom-1/2 flex size-full flex-col items-center justify-center"
+        class="border-cod-gray-1 relative flex size-full -rotate-2 flex-col overflow-clip rounded-xl border bg-slate-50 p-4"
       >
-        <OrbitingCircles iconSize={30} radius={130}>
-          {techStacks.map(stack => <Icon name={`devicon:${stack}`} />)}
-        </OrbitingCircles>
-      </div>
+        <div class="flex flex-col">
+          <Badge class="mb-3">
+            <Icon name="ri:tools-fill" />
+            Comfortable stacks
+          </Badge>
+          <p class="text-sm">
+            These are my go-to stacks. On the other hand, I'm always keen on learning new tech and
+            tools that can fulfill my needs.
+          </p>
+        </div>
 
-      <div
-        class="absolute inset-x-0 -bottom-1/2 flex size-full flex-col items-center justify-center"
-      >
-        <OrbitingCircles iconSize={20} radius={80} reverse speed={2}>
-          {techStacks.map(stack => <Icon name={`devicon:${stack}`} />)}
-        </OrbitingCircles>
-      </div>
-    </div>
-  </div>
-
-  <div class="grid grid-cols-3 gap-4 sm:col-start-4 sm:col-end-7 sm:row-start-5 sm:row-end-7">
-    {
-      socialIcons.map(social => (
-        <a
-          href={social.link}
-          rel="noopener noreferrer"
-          target="_blank"
-          class:list={[
-            "bg-cod-gray-3 inline-flex aspect-square items-center justify-center rounded-xl text-slate-100 transition-colors",
-            social.class,
-          ]}
+        <div
+          class="absolute inset-x-0 -bottom-1/2 flex size-full flex-col items-center justify-center"
         >
-          <span class="sr-only">Visit my {social.name}</span>
-          <Icon name={social.icon} size="40" />
-        </a>
-      ))
-    }
-  </div>
+          <OrbitingCircles iconSize={30} radius={130}>
+            {techStacks.map(stack => <Icon name={`devicon:${stack}`} />)}
+          </OrbitingCircles>
+        </div>
 
-  <div
-    class="border-cod-gray-1 bg-brown-1 rounded-xl border-2 border-dashed sm:row-start-8 sm:row-end-11"
-  >
-    <div class="border-cod-gray-1 flex rotate-2 flex-col rounded-xl border bg-slate-50 p-4">
-      <Badge class="mb-3">
-        <Icon name="ri:star-fill" />
-        Experience
-      </Badge>
-
-      <div class="space-y-2">
-        {
-          experiences.map(experience => (
-            <div class="space-y-1 text-sm">
-              <p class="font-medium">
-                {experience.role} at {experience.company}
-              </p>
-              <p class="text-cod-gray-1/75 text-sm">
-                {experience.current ? "Current" : `${experience.from} - ${experience.to}`}
-              </p>
-            </div>
-          ))
-        }
+        <div
+          class="absolute inset-x-0 -bottom-1/2 flex size-full flex-col items-center justify-center"
+        >
+          <OrbitingCircles iconSize={20} radius={80} reverse speed={2}>
+            {techStacks.map(stack => <Icon name={`devicon:${stack}`} />)}
+          </OrbitingCircles>
+        </div>
       </div>
     </div>
   </div>
 
-  <a
-    href="https://cscie2x.dce.harvard.edu/hw/ch01s06.html#:~:text=do%20one%20thing%20and%20do%20it%20well"
-    target="_blank"
-    rel="noopener noreferrer"
-    class="bg-cod-gray-3 flex flex-col rounded-xl p-4 text-slate-100 sm:row-start-8 sm:row-end-11"
-  >
-    <blockquote class="relative mb-4 pt-8 text-6xl font-bold text-balance italic">
-      <Icon name="ri:double-quotes-l" size="160" class="absolute -top-6 -left-4 opacity-25" />
-      <p>Do One Thing And Do It Well</p>
-    </blockquote>
-    <p><cite>– Unix philosophy</cite></p>
-  </a>
+  <div class="flex flex-1 flex-col gap-4 lg:flex-row">
+    <div class="grid grid-cols-3 gap-4 sm:grid-cols-6 lg:flex-1 lg:grid-cols-3">
+      {
+        socialIcons.map(social => (
+          <a
+            href={social.link}
+            rel="noopener noreferrer"
+            target="_blank"
+            class:list={[
+              "bg-cod-gray-3 inline-flex aspect-square items-center justify-center rounded-xl text-slate-100 transition-colors",
+              social.class,
+            ]}
+          >
+            <span class="sr-only">Visit my {social.name}</span>
+            <Icon name={social.icon} size="40" />
+          </a>
+        ))
+      }
+    </div>
 
-  <a
-    href="/projects"
-    class="bg-blue-1 cursor-pointer place-content-center rounded-xl p-4 text-balance sm:row-start-8 sm:row-end-11"
-  >
-    <h2 class="font-bricolage text-2xl font-bold">
-      Find out my other works
-      <Icon name="ri:arrow-right-line" class="inline-block shrink-0" />
-    </h2>
-  </a>
+    <a
+      href="https://cscie2x.dce.harvard.edu/hw/ch01s06.html#:~:text=do%20one%20thing%20and%20do%20it%20well"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="bg-cod-gray-3 flex flex-col rounded-xl p-4 text-slate-100 lg:flex-1 lg:basis-3/9"
+    >
+      <blockquote class="relative mb-4 pt-8 text-6xl font-bold text-balance italic">
+        <Icon name="ri:double-quotes-l" size="160" class="absolute -top-6 -left-4 opacity-25" />
+        <p>Do One Thing And Do It Well</p>
+      </blockquote>
+      <p><cite>– Unix philosophy</cite></p>
+    </a>
+  </div>
 </div>
