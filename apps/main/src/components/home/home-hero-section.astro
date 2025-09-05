@@ -1,8 +1,3 @@
----
-import { Image } from "astro:assets";
-import { getWorkersAsset } from "@/lib/utils.lib";
----
-
 <style>
   .gradient {
     background-color: hsla(0, 0%, 100%, 0);
@@ -12,30 +7,22 @@ import { getWorkersAsset } from "@/lib/utils.lib";
   }
 </style>
 
-<section class="grid min-h-[calc(100svh-76px)] grid-cols-1 place-items-center gap-8 md:grid-cols-2">
-  <div class="relative space-y-4 text-balance">
-    <div class="gradient absolute -top-16 -left-16 -z-1 size-full min-[400px]:size-96"></div>
-    <h1 class="font-bricolage text-4xl font-bold sm:text-5xl lg:text-6xl">
-      <span class="text-2xl font-thin sm:text-3xl lg:text-4xl">Hi, it's me, Faqih.</span><br />
-      An enthusiastic frontend
-      <span class="text-shadow-lemon-1 text-shadow-flat font-serif italic">wɛb</span> developer.
-    </h1>
-
-    <p>
-      I'm helping to bridge the gap between design, ideas, and technical implementation, tailoring
-      pleasant user interfaces and intuitive user experiences.
-    </p>
-  </div>
-
-  <div
-    class="border-cod-gray-1 bg-lemon-1 group relative hidden size-fit rounded-[20px] border-2 border-dashed md:block"
+<section class="relative flex min-h-[calc(100svh-76px)] items-center justify-center">
+  <div class="gradient absolute -z-1 aspect-square max-h-full w-full"></div>
+  <h1
+    class="font-bricolage text-center text-3xl text-balance min-[440px]:text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl"
   >
-    <Image
-      src={getWorkersAsset("/images/logo/logo-main-240x240.png")}
-      alt=""
-      width={200}
-      height={200}
-      class="rotate-6 transition-transform group-hover:rotate-0"
-    />
-  </div>
+    It's me,
+    <em class="bg-pink-2 inline-flex rounded-xl px-3 py-1 font-bold"> Faqih </em>. <br />
+    An
+    <em class="font-bold">enthusiastic</em> frontend <em class="font-serif font-bold">wɛb</em> developer,
+    <span
+      class="border-cod-gray-1 bg-lemon-1 inline-flex items-center justify-center rounded-xl border-2 border-dashed font-bold"
+    >
+      <span class="border-cod-gray-1 inline-block rotate-2 rounded-xl border bg-slate-50 px-3 py-1">
+        tailoring
+      </span>
+    </span>
+    <span class="font-bold underline"> pleasant user interfaces. </span>
+  </h1>
 </section>
