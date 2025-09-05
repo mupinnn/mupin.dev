@@ -29,7 +29,7 @@ const { lang = "en", containerClass } = Astro.props;
       <SeoHead />
     </slot>
   </head>
-  <body class="text-cod-gray-3 relative flex flex-col bg-slate-100">
+  <body class="text-cod-gray-3 relative flex min-h-svh flex-col bg-slate-100">
     <Navbar />
     <main class={cn("mx-auto max-w-6xl w-full px-4 grow", containerClass)}>
       <slot />
