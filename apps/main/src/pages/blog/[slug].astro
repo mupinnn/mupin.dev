@@ -43,6 +43,7 @@ const postTranslations = await getPostTranslations(post.data.path, post.data.loc
       href: `${Astro.site}blog/${p.data.slug}`,
       hrefLang: p.data.locale,
     }))}
+    keywords={post.data.tags}
   />
 
   <PageHeader title={post.data.title} backLink="/blog">

@@ -13,6 +13,7 @@ import { visit } from "unist-util-visit";
 import { h } from "hastscript";
 import getReadingTime from "reading-time";
 import { toString as mdastToString } from "mdast-util-to-string";
+import sitemap from "@astrojs/sitemap";
 
 function remarkGitModifiedTime() {
   return function (tree, file) {
@@ -108,6 +109,6 @@ export default defineConfig({
     ],
   },
 
-  integrations: [icon(), mdx(), react({ experimentalReactChildren: true })],
+  integrations: [icon(), mdx(), react({ experimentalReactChildren: true }), sitemap()],
 });
 

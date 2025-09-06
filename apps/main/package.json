@@ -11,6 +11,7 @@
   "dependencies": {
     "@astrojs/mdx": "^4.3.0",
     "@astrojs/react": "^4.3.0",
+    "@astrojs/sitemap": "^3.5.1",
     "@fontsource-variable/bricolage-grotesque": "^5.2.8",
     "@fontsource-variable/inter": "^5.2.6",
     "@mupin.dev/shared": "workspace:*",
