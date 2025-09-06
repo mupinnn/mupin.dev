@@ -15,12 +15,12 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
 
-    outputs:
-      changed-apps: ${{ steps.detect-changes.outputs.changed-apps }}
-
     strategy:
       matrix:
         changed-apps: ${{ fromJSON(steps.detect-changes.outputs.changed-apps) }}
+
+    outputs:
+      changed-apps: ${{ steps.detect-changes.outputs.changed-apps }}
 
     steps:
       - name: Checkout
