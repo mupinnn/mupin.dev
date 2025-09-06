@@ -6,7 +6,8 @@
     "dev": "astro dev --host --port 4322",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "deploy": "echo 'deploy'"
   },
   "dependencies": {
     "@mupin.dev/shared": "workspace:*",

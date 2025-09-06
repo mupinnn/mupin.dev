@@ -6,6 +6,7 @@
     "build": "turbo build",
     "dev": "turbo dev",
     "lint": "turbo lint",
+    "deploy": "turbo deploy",
     "format": "prettier -w -c \"**/*.{ts,tsx,md,mdx,js,jsx,json,yaml,yml,html,css,scss,sass,astro}\"",
     "prepare": "husky"
   },

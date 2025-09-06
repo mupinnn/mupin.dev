@@ -1,0 +1,80 @@
+name: Deploy to Cloudflare Pages
+
+on:
+  push:
+    branches:
+      - "*"
+
+permissions:
+  contents: read
+  deployments: write
+  pull-requests: write
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+
+    outputs:
+      changed-apps: ${{ steps.detect-changes.outputs.changed-apps }}
+
+    strategy:
+      matrix:
+        changed-apps: ${{ fromJSON(steps.detect-changes.outputs.changed-apps) }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Cache turbo build setup
+        uses: actions/cache@v4
+        with:
+          path: .turbo
+          key: ${{ runner.os }}-turbo-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-turbo-
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+
+      - name: Setup Node.js v22
+        uses: actions/setup-node@v4
+        with:
+          node_version: 22
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Detect changed apps
+        id: detect-changes
+        run: |
+          CHANGED_APPS=$(pnpm turbo build --dry=json | jq -r '[.tasks[] | select(.cache.status != "HIT" and .command != "<NONEXISTENT>") | .directory] | unique | tojson')
+          echo "Changed apps: $CHANGED_APPS"
+          echo "changed-apps=$CHANGED_APPS" >> $GITHUB_OUTPUT
+
+      - name: Build
+        run: pnpm build
+
+      - name: Upload ${{ matrix.changed-apps }} artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.changed-apps }}
+          path: ${{ matrix.changed-apps }}/dist
+
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    needs: build
+    strategy:
+      matrix:
+        changed-apps: ${{ fromJSON(needs.build.outputs.changed-apps) }}
+
+    steps:
+      - name: Retrieve ${{ matrix.changed-apps }} artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ matrix.changed-apps }}
+          path: ${{ matrix.changed-apps }}/dist
