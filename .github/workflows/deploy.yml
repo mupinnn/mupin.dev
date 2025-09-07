@@ -117,3 +117,16 @@ jobs:
         with:
           name: ${{ env.DASHED_APP_NAME }}-build-artifact
           path: ${{ matrix.changed-apps }}/dist
+
+      - uses: pnpm/action-setup@v4
+
+      - name: Deploy to Cloudflare
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+          packageManager: pnpm
+          workingDirectory: ${{ matrix.changed-apps }}
+          command: |
+            pages deploy
