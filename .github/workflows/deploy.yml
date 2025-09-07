@@ -106,10 +106,11 @@ jobs:
 
     steps:
       - name: Retrieve ${{ matrix.changed-apps }} artifact
-        # uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v4
         run: |
-          NAME="${${{ matrix.changed-apps }}//\/-}"
-          echo $NAME
-        # with:
-        #   name: ${{ matrix.changed-apps }}-build-artifact
-        #   path: ${{ matrix.changed-apps }}/dist
+          APP_NAME="${{ matrix.changed-apps }}"
+          DASHED_APP_NAME="${APP_NAME//\//-}"
+          echo "DASHED_APP_NAME=$DASHED_APP_NAME" >> $GITHUB_ENV
+        with:
+          name: ${{ env.DASHED_APP_NAME }}-build-artifact
+          path: ${{ matrix.changed-apps }}/dist
