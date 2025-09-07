@@ -106,6 +106,8 @@ jobs:
         changed-apps: ${{ fromJSON(needs.define-changed.outputs.changed-apps) }}
 
     steps:
+      - uses: actions/checkout@v4
+
       - name: Format changed apps value
         run: |
           APP_NAME="${{ matrix.changed-apps }}"
