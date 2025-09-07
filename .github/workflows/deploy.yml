@@ -105,12 +105,14 @@ jobs:
         changed-apps: ${{ fromJSON(needs.define-changed.outputs.changed-apps) }}
 
     steps:
-      - name: Retrieve ${{ matrix.changed-apps }} artifact
-        uses: actions/download-artifact@v4
+      - name: Format changed apps value
         run: |
           APP_NAME="${{ matrix.changed-apps }}"
           DASHED_APP_NAME="${APP_NAME//\//-}"
           echo "DASHED_APP_NAME=$DASHED_APP_NAME" >> $GITHUB_ENV
+
+      - name: Retrieve ${{ matrix.changed-apps }} artifact
+        uses: actions/download-artifact@v4
         with:
           name: ${{ env.DASHED_APP_NAME }}-build-artifact
           path: ${{ matrix.changed-apps }}/dist
