@@ -1,0 +1,134 @@
+name: Deploy to Cloudflare Pages
+
+on:
+  push:
+    branches: ["main"]
+
+permissions:
+  contents: read
+  deployments: write
+  pull-requests: write
+
+jobs:
+  define-changed:
+    name: Define changed apps
+    runs-on: ubuntu-latest
+
+    outputs:
+      changed-apps: ${{ steps.detect-changes.outputs.changed-apps }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Cache turbo build setup
+        uses: actions/cache@v4
+        with:
+          path: .turbo
+          key: ${{ runner.os }}-turbo-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-turbo-
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+
+      - name: Setup Node.js v22
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Detect changed apps
+        id: detect-changes
+        run: |
+          CHANGED_APPS=$(pnpm turbo build --dry=json | jq -r '[.tasks[] | select(.cache.status != "HIT" and .command != "<NONEXISTENT>") | .directory] | unique | tojson')
+          echo "Changed apps: $CHANGED_APPS"
+          echo "changed-apps=$CHANGED_APPS" >> $GITHUB_OUTPUT
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    needs: define-changed
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Cache turbo build setup
+        uses: actions/cache@v4
+        with:
+          path: .turbo
+          key: ${{ runner.os }}-turbo-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-turbo-
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+
+      - name: Setup Node.js v22
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build the apps
+        run: pnpm turbo build
+
+      - name: Upload apps/main artifact
+        uses: actions/upload-artifact@v4
+        with:
+          if-no-files-found: ignore
+          name: apps-main-build-artifact
+          path: apps/main/dist
+
+      - name: Upload apps/memoir artifact
+        uses: actions/upload-artifact@v4
+        with:
+          if-no-files-found: ignore
+          name: apps-memoir-build-artifact
+          path: apps/memoir/dist
+
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    needs: [define-changed, build]
+    if: ${{ needs.define-changed.outputs.changed-apps != '[]' }}
+    strategy:
+      matrix:
+        changed-apps: ${{ fromJSON(needs.define-changed.outputs.changed-apps) }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Format changed apps value
+        run: |
+          APP_NAME="${{ matrix.changed-apps }}"
+          DASHED_APP_NAME="${APP_NAME//\//-}"
+          echo "DASHED_APP_NAME=$DASHED_APP_NAME" >> $GITHUB_ENV
+
+      - name: Retrieve ${{ matrix.changed-apps }} artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ env.DASHED_APP_NAME }}-build-artifact
+          path: ${{ matrix.changed-apps }}/dist
+
+      - uses: pnpm/action-setup@v4
+
+      - name: Deploy to Cloudflare
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+          packageManager: pnpm
+          workingDirectory: "${{ matrix.changed-apps }}"
+          command: |
+            pages deploy

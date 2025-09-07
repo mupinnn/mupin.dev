@@ -6,7 +6,8 @@
     "dev": "astro dev --host --port 4321",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "deploy": "echo 'deploy'"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.0",
@@ -40,6 +41,7 @@
   },
   "devDependencies": {
     "@iconify-json/devicon": "^1.2.29",
-    "@iconify-json/ri": "^1.2.5"
+    "@iconify-json/ri": "^1.2.5",
+    "wrangler": "^4.34.0"
   }
 }
