@@ -129,6 +129,6 @@ jobs:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
           packageManager: pnpm
-          workingDirectory: ${{ matrix.changed-apps }}
+          workingDirectory: "${{ matrix.changed-apps }}"
           command: |
             pages deploy
