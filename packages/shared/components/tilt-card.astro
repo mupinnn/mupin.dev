@@ -1,0 +1,46 @@
+---
+import { type HTMLAttributes } from "astro/types";
+import { tv, type VariantProps } from "tailwind-variants";
+
+const tiltCardVariants = tv({
+  base: "border-2 border-dashed border-cod-gray-1 rounded-xl",
+  slots: {
+    inner: "border-cod-gray-1 rounded-xl border bg-slate-50 p-4 flex flex-col",
+  },
+  variants: {
+    tiltDirection: {
+      right: {
+        inner: "rotate-2",
+      },
+      left: {
+        inner: "-rotate-2",
+      },
+    },
+    color: {
+      red: "bg-red-1",
+      tangerine: "bg-tangerine-1",
+      lemon: "bg-lemon-1",
+      blue: "bg-blue-1",
+      pink: "bg-pink-1",
+      peach: "bg-peach-1",
+      brown: "bg-brown-1",
+      turquoise: "bg-turquoise-1",
+    },
+  },
+  defaultVariants: {
+    tiltDirection: "right",
+    color: "lemon",
+  },
+});
+
+type Props = HTMLAttributes<"div"> & VariantProps<typeof tiltCardVariants>;
+
+const { class: cls, tiltDirection, color, ...rest } = Astro.props;
+const { base, inner } = tiltCardVariants({ tiltDirection, color });
+---
+
+<div {...rest} class:list={base()}>
+  <div class:list={inner({ class: cls })}>
+    <slot />
+  </div>
+</div>

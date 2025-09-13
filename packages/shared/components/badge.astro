@@ -1,0 +1,18 @@
+---
+import { type HTMLAttributes } from "astro/types";
+
+type Props = HTMLAttributes<"div">;
+
+const { class: cls } = Astro.props;
+---
+
+<div
+  class:list={[
+    "bg-cod-gray-1/15 inline-block w-fit rounded-full p-1 text-xs font-semibold whitespace-nowrap backdrop-blur-xs",
+    cls,
+  ]}
+>
+  <span class="inline-flex items-center gap-1 rounded-full bg-slate-50 px-2 py-1">
+    <slot />
+  </span>
+</div>

@@ -1,0 +1,38 @@
+---
+import "@fontsource-variable/inter";
+import "@fontsource-variable/bricolage-grotesque";
+import "../styles/global.css";
+
+import { Icon } from "astro-icon/components";
+import TiltCard from "@mupin.dev/shared/components/tilt-card.astro";
+import Badge from "@mupin.dev/shared/components/badge.astro";
+import resume from "@mupin.dev/shared/data/resume.json";
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Ahmad Muwaffaq, Frontend Developer | Resume</title>
+  </head>
+  <body class="text-cod-gray-3 relative flex min-h-svh flex-col bg-slate-100">
+    <main class="mx-auto w-full max-w-3xl space-y-4 p-4">
+      <section class="bg-peach-1 rounded-xl p-4 text-balance">
+        <h1 class="font-bricolage mb-1 text-3xl font-bold">{resume.basics.name}</h1>
+        <p class="text-cod-gray-1 mb-4 text-sm">Frontend Developer</p>
+        <div class="flex items-center gap-6">
+          <Icon name="ri:linkedin-box-line" size={20} />
+          <Icon name="ri:linkedin-box-line" size={20} />
+          <Icon name="ri:linkedin-box-line" size={20} />
+          <Icon name="ri:linkedin-box-line" size={20} />
+        </div>
+      </section>
+
+      <TiltCard>
+        <Badge>Summary</Badge>
+      </TiltCard>
+    </main>
+  </body>
+</html>

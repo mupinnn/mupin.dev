@@ -4,7 +4,7 @@ export default {
     "scope-enum": [
       2,
       "always",
-      ["deps", "docs", "components", "libs", "utils", "e2e", "shared", "main", "memoir"],
+      ["deps", "docs", "components", "libs", "utils", "e2e", "shared", "main", "memoir", "resume"],
     ],
     "type-enum": [
       2,

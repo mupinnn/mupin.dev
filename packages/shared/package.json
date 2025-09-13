@@ -3,10 +3,13 @@
   "version": "0.0.0",
   "private": true,
   "exports": {
-    "./tailwind.css": "./tailwind.css"
+    "./tailwind.css": "./tailwind.css",
+    "./components/*": "./components/*",
+    "./data/*": "./data/*"
   },
   "dependencies": {
     "astro": "catalog:",
+    "tailwind-variants": "^1.0.0",
     "tailwindcss": "^4.1.10"
   },
   "devDependencies": {
