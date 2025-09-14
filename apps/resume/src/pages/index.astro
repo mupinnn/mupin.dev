@@ -7,7 +7,7 @@ import { Icon } from "astro-icon/components";
 import TiltCard from "@mupin.dev/shared/components/tilt-card.astro";
 import Badge from "@mupin.dev/shared/components/badge.astro";
 import resume from "@mupin.dev/shared/data/resume.json";
-import { getWorkersAsset } from "@mupin.dev/shared/lib/utils.lib.ts";
+import { getWorkersAsset, formatDate } from "@mupin.dev/shared/lib/utils.lib.ts";
 ---
 
 <html lang="en">
@@ -68,9 +68,23 @@ import { getWorkersAsset } from "@mupin.dev/shared/lib/utils.lib.ts";
                   <span class="text-slate-700">{work.position}</span>
                 </div>
                 <div class="inline-flex items-center gap-2 text-sm text-slate-700">
-                  <span>{work.startDate}</span>
+                  <span>
+                    {formatDate(work.startDate, {
+                      day: undefined,
+                      weekday: undefined,
+                      month: "short",
+                    })}
+                  </span>
                   <Icon name="ri:arrow-right-long-line" class="shrink-0" />
-                  <span>{work.endDate ?? "Present"}</span>
+                  <span>
+                    {work.endDate
+                      ? formatDate(work.endDate, {
+                          day: undefined,
+                          weekday: undefined,
+                          month: "short",
+                        })
+                      : "Present"}
+                  </span>
                 </div>
               </div>
               <ul class="mt-2 list-disc space-y-2 border-t border-slate-300 pt-2 pl-6">
@@ -131,9 +145,23 @@ import { getWorkersAsset } from "@mupin.dev/shared/lib/utils.lib.ts";
                 {education.studyType} &bullet; {education.area}
               </p>
               <div class="inline-flex items-center gap-2 text-sm text-slate-700">
-                <span>{education.startDate}</span>
+                <span>
+                  {formatDate(education.startDate, {
+                    day: undefined,
+                    weekday: undefined,
+                    month: "short",
+                  })}
+                </span>
                 <Icon name="ri:arrow-right-long-line" class="shrink-0" />
-                <span>{education.endDate ?? "Present"}</span>
+                <span>
+                  {education.endDate
+                    ? formatDate(education.endDate, {
+                        day: undefined,
+                        weekday: undefined,
+                        month: "short",
+                      })
+                    : "Present"}
+                </span>
               </div>
             </article>
           ))

@@ -24,6 +24,12 @@
         "username": "itsmupinnn",
         "url": "http://x.com/itsmupinnn/",
         "astroIconName": "ri:twitter-x-fill"
+      },
+      {
+        "network": "Email",
+        "username": "hi@mupin.dev",
+        "url": "mailto:hi@mupin.dev",
+        "astroIconName": "ri:mail-line"
       }
     ]
   },

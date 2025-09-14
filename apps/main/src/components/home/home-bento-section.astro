@@ -2,38 +2,41 @@
 import { Image } from "astro:assets";
 import { getEntry } from "astro:content";
 import { Icon } from "astro-icon/components";
+import resume from "@mupin.dev/shared/data/resume.json";
+import { formatDate } from "@mupin.dev/shared/lib/utils.lib.js";
 import Badge from "@/components/ui/badge.astro";
 import { OrbitingCircles } from "@/components/ui/orbiting-circles.tsx";
 import featuredProjectKagetImage from "@/assets/images/featured-project-kaget.png";
 import { getLatestBlogPost } from "@/lib/content.lib";
 
 const socialIcons = [
-  {
-    link: "http://x.com/itsmupinnn/",
-    name: "Twitter",
-    icon: "ri:twitter-x-line",
-    class: "hover:bg-brand-x",
-  },
-  {
-    link: "https://www.linkedin.com/in/ahmad-muwaffaq/",
-    name: "LinkedIn",
-    icon: "ri:linkedin-box-fill",
-    class: "hover:bg-brand-linkedin",
-  },
-  {
-    link: "https://github.com/mupinnn/",
-    name: "GitHub",
-    icon: "ri:github-fill",
-    class: "hover:bg-brand-github",
-  },
-  { link: "#", name: "Email", icon: "ri:mail-line", class: "hover:bg-brand-google-red" },
+  ...resume.basics.profiles.map(profile => {
+    const classes: Record<string, string> = {
+      LinkedIn: "hover:bg-brand-linkedin",
+      GitHub: "hover:bg-brand-github",
+      "X/Twitter": "hover:bg-brand-x",
+      "Email": "hover:bg-brand-google-red",
+    };
+
+    return {
+      link: profile.url,
+      name: profile.network,
+      icon: profile.astroIconName,
+      class: classes[profile.network],
+    };
+  }),
   {
     link: "https://codepen.io/mupin",
     name: "CodePen",
     icon: "ri:codepen-line",
     class: "hover:bg-cod-gray-1",
   },
-  { link: "#", name: "Resume", icon: "ri:file-list-3-line", class: "hover:bg-brown-1" },
+  {
+    link: "https://resume.mupin.dev",
+    name: "Resume",
+    icon: "ri:file-list-3-line",
+    class: "hover:bg-brown-1",
+  },
 ];
 const kagetProjectEntry = await getEntry("projects", "kaget");
 const latestWritings = await getLatestBlogPost();
@@ -49,29 +52,9 @@ const techStacks = [
   "sass",
   "astro",
 ];
-const experiences = [
-  {
-    role: "Frontend Developer",
-    company: "Juragan Material",
-    current: true,
-  },
-  {
-    role: "Frontend Developer, Freelance",
-    company: "",
-    from: 2020,
-    to: 2022,
-  },
-  {
-    role: "Frontend Developer, Intern",
-    company: "Garena",
-    current: false,
-    from: 2019,
-    to: 2020,
-  },
-];
 ---
 
-<div class="flex flex-col gap-4 py-16 xl:py-24">
+<div class="flex flex-col gap-4 py-16">
   <div class="flex flex-1 flex-col gap-4 sm:flex-row">
     <a
       href={`/projects/${kagetProjectEntry?.id}`}
@@ -135,13 +118,27 @@ const experiences = [
 
         <div class="space-y-2">
           {
-            experiences.map(experience => (
+            resume.work.map(work => (
               <div class="space-y-1 text-sm">
                 <p class="font-medium">
-                  {experience.role} {experience.company ? `at ${experience.company}` : null}
+                  {work.name === "Freelance"
+                    ? `${work.position} (${work.name})`
+                    : `${work.position} @${work.name}`}
                 </p>
-                <p class="text-cod-gray-1/75 text-sm">
-                  {experience.current ? "Current" : `${experience.from} - ${experience.to}`}
+                <p class="text-cod-gray-1/75">
+                  {formatDate(work.startDate, {
+                    day: undefined,
+                    weekday: undefined,
+                    month: "short",
+                  })}{" "}
+                  -{" "}
+                  {work.endDate
+                    ? formatDate(work.endDate, {
+                        day: undefined,
+                        weekday: undefined,
+                        month: "short",
+                      })
+                    : "Present"}
                 </p>
               </div>
             ))
