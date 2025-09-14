@@ -1,7 +1,7 @@
 import { defineCollection, z } from "astro:content";
 import { glob, type Loader } from "astro/loaders";
+import { getOGImage } from "@mupin.dev/shared/lib/utils.lib.ts";
 import { LocaleSchema, type Locale } from "./types";
-import { getOGImage } from "./lib/utils.lib";
 
 function blogContentLoader(): Loader {
   const defaultGlob = glob({ pattern: "**/*.{md,mdx}", base: "./src/content/blog" });

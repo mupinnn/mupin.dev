@@ -1,12 +1,12 @@
 ---
 import { render } from "astro:content";
+import { formatDate } from "@mupin.dev/shared/lib/utils.lib.ts";
 import DefaultLayout from "@/layouts/default-layout.astro";
 import Alert from "@/components/ui/alert.astro";
 import SeoHead from "@/components/seo-head.astro";
 import PageHeader from "@/components/page-header.astro";
 import TagList from "@/components/blog/tag-list.astro";
 import { getPublishedBlogPosts, getPostTranslations } from "@/lib/content.lib";
-import { formatDate } from "@/lib/utils.lib";
 
 export async function getStaticPaths() {
   const posts = await getPublishedBlogPosts();

@@ -5,7 +5,8 @@
   "exports": {
     "./tailwind.css": "./tailwind.css",
     "./components/*": "./components/*",
-    "./data/*": "./data/*"
+    "./data/*": "./data/*",
+    "./lib/*": "./lib/*"
   },
   "dependencies": {
     "astro": "catalog:",

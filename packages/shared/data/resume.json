@@ -10,17 +10,20 @@
       {
         "network": "LinkedIn",
         "username": "ahmad-muwaffaq",
-        "url": "https://linkedin.com/in/ahmad-muwaffaq/"
+        "url": "https://linkedin.com/in/ahmad-muwaffaq/",
+        "astroIconName": "ri:linkedin-box-fill"
       },
       {
         "network": "GitHub",
         "username": "mupinnn",
-        "url": "https://github.com/mupinnn"
+        "url": "https://github.com/mupinnn",
+        "astroIconName": "ri:github-fill"
       },
       {
         "network": "X/Twitter",
         "username": "itsmupinnn",
-        "url": "http://x.com/itsmupinnn/"
+        "url": "http://x.com/itsmupinnn/",
+        "astroIconName": "ri:twitter-x-fill"
       }
     ]
   },
@@ -83,14 +86,6 @@
       "area": "Data Science",
       "studyType": "Bachelor's Degree",
       "startDate": "2025-09-08"
-    },
-    {
-      "institution": "SMK Negeri 24 Jakarta",
-      "url": "https://smkn24jkt.sch.id/",
-      "area": "Software Engineering",
-      "studyType": "Vocational High School",
-      "startDate": "2016-06-01",
-      "endDate": "2019-06-01"
     }
   ],
   "skills": [
