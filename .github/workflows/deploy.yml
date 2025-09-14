@@ -96,6 +96,13 @@ jobs:
           name: apps-memoir-build-artifact
           path: apps/memoir/dist
 
+      - name: Upload apps/resume artifact
+        uses: actions/upload-artifact@v4
+        with:
+          if-no-files-found: ignore
+          name: apps-resume-build-artifact
+          path: apps/resume/dist
+
   deploy:
     name: Deploy
     runs-on: ubuntu-latest

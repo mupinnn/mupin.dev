@@ -1,0 +1,140 @@
+{
+  "$schema": "https://raw.githubusercontent.com/jsonresume/resume-schema/v1.0.0/schema.json",
+  "basics": {
+    "name": "Ahmad Muwaffaq",
+    "label": "Frontend Developer",
+    "email": "hi@mupin.dev",
+    "url": "https://mupin.dev",
+    "summary": "An enthusiastic frontend developer with 4+ years of experience developing user interfaces around the web. I'm helping to bridge the gap between design, ideas, and technical implementation, tailoring pleasant user interfaces and intuitive user experiences. Proficient in leveraging modern tools to deliver performant and scalable apps.",
+    "profiles": [
+      {
+        "network": "LinkedIn",
+        "username": "ahmad-muwaffaq",
+        "url": "https://linkedin.com/in/ahmad-muwaffaq/",
+        "astroIconName": "ri:linkedin-box-fill"
+      },
+      {
+        "network": "GitHub",
+        "username": "mupinnn",
+        "url": "https://github.com/mupinnn",
+        "astroIconName": "ri:github-fill"
+      },
+      {
+        "network": "X/Twitter",
+        "username": "itsmupinnn",
+        "url": "http://x.com/itsmupinnn/",
+        "astroIconName": "ri:twitter-x-fill"
+      }
+    ]
+  },
+  "work": [
+    {
+      "name": "Dicoding",
+      "position": "External Code Reviewer (Elite)",
+      "url": "https://dicoding.com/elite",
+      "startDate": "2025-09-01",
+      "highlights": [
+        "Responsible in reviewing student code submissions to ensure it aligns with the course objectives and providing constructive feedback and suggestions to improve their learning outcomes.",
+        "Assisting students by answering their questions on the course discussion forum to help them overcome learning challenges."
+      ]
+    },
+    {
+      "name": "Juragan Material",
+      "position": "Frontend Developer",
+      "url": "https://juraganmaterial.id",
+      "startDate": "2022-06-01",
+      "highlights": [
+        "Develop and maintain an in-house content management system (CMS) and e-commerce platform to serve our primary business processes.",
+        "Develop and maintain the Juragan Vendor, inventory management system for our 200+ happy registered vendors.",
+        "Refactor and redesign the architecture of our e-commerce platform,from Nuxt v2 to Nuxt v3. Resulting in ~75% performance gain and a whole better DX.",
+        "Develop, maintain, and architect an in-house UI componentlibrary to reduce repetitive components across repositories and to standardize our brand identity across products.",
+        "Develop an in-house configurable survey form to replace the third-party survey form.",
+        "Develop and integrate an in-house customer service chatbot, leveraging SSE.",
+        "Develop an in-house sales portal to help the sales team to track their new customers onboarding progress"
+      ]
+    },
+    {
+      "name": "Freelance",
+      "position": "Frontend Developer",
+      "startDate": "2020-09-01",
+      "endDate": "2022-03-01",
+      "summary": "Engaged on a project-by-project basis while preparing for a college entrance exam and sharpening skills",
+      "highlights": [
+        "Built a dashboard for a school management system using React and Ant Design (3-month engagement).",
+        "Worked with a digital solutions company to slice design into 6 microsites using Gulp, Tailwind CSS, and jQuery.",
+        "Develop and maintain 5 landing pages for a local convection sub-business using GatsbyJS and integrating order forms with Google Sheets via Apps Script.",
+        "Revamped a company profile website and integrating Google Drive and Sheets workflows with Apps Script."
+      ]
+    },
+    {
+      "name": "Garena",
+      "position": "Frontend Developer, Intern",
+      "startDate": "2019-12-01",
+      "endDate": "2020-10-01",
+      "highlights": [
+        "Mainly responsible for translating design into front-end code and integrating with back-end services utilizing React, Redux, and SCSS.",
+        "Maintain and improve web and animation performance.",
+        "Contributed to the in-house front-end project boilerplate by creating an error reporting helper for an API call.",
+        "Handled 15 projects which each project has daily active users ranging from 10K to over 50K."
+      ]
+    }
+  ],
+  "education": [
+    {
+      "institution": "Cakrawala University",
+      "url": "https://www.cakrawala.ac.id/",
+      "area": "Data Science",
+      "studyType": "Bachelor's Degree",
+      "startDate": "2025-09-08"
+    }
+  ],
+  "skills": [
+    {
+      "name": "Languages",
+      "keywords": ["HTML", "CSS", "SCSS", "JavaScript", "TypeScript"]
+    },
+    {
+      "name": "Frameworks & Libraries",
+      "keywords": [
+        "React",
+        "Vue",
+        "Next.js",
+        "Nuxt",
+        "Quasar",
+        "Tailwind",
+        "Astro",
+        "Tanstack Query"
+      ]
+    },
+    {
+      "name": "Tools",
+      "keywords": ["Vite", "Vitest", "Jest", "Webpack", "Gulp", "PNPM/NPM/Yarn", "Turborepo", "Git"]
+    },
+    {
+      "name": "Familiar",
+      "keywords": [
+        "Node.js",
+        "GatsbyJS",
+        "Redux",
+        "GraphQL",
+        "WordPress (headless)",
+        "Google Analytics",
+        "Google Tag Manager",
+        "Figma",
+        "GitHub Actions"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "KaGet: Kawan Budget",
+      "url": "https://kaget.mupin.dev/",
+      "description": "A mobile-first, fully offline web-based budgeting app that meets your needs. (Stack: React, Tailwind, TypeScript, Tanstack Router & Query, PWA)."
+    },
+    {
+      "name": "Garena Intern Projects",
+      "url": "http://bit.ly/4bRyvBk",
+      "description": "I'm handling 15 projects during my intern period as a Front-End Developer Intern at Garena Indonesia. (Stack: React, Redux, SCSS)."
+    }
+  ]
+}

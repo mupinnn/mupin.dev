@@ -1,0 +1,165 @@
+---
+import "@fontsource-variable/inter";
+import "@fontsource-variable/bricolage-grotesque";
+import "../styles/global.css";
+
+import { Icon } from "astro-icon/components";
+import TiltCard from "@mupin.dev/shared/components/tilt-card.astro";
+import Badge from "@mupin.dev/shared/components/badge.astro";
+import resume from "@mupin.dev/shared/data/resume.json";
+import { getWorkersAsset } from "@mupin.dev/shared/lib/utils.lib.ts";
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <meta
+      name="description"
+      content="Resume of Ahmad Muwaffaq, an enthusiastic frontend developer who crafts pleasant user interfaces."
+    />
+    <meta name="robots" content="index, follow" />
+    <meta name="og:title" content="Ahmad Muwaffaq, Frontend Developer | Resume" />
+    <meta name="og:type" content="website" />
+    <meta name="og:image" content={getWorkersAsset("/images/og/og-main-mupin-dev.png")} />
+    <title>Ahmad Muwaffaq, Frontend Developer | Resume</title>
+  </head>
+  <body class="text-cod-gray-3 relative flex min-h-svh flex-col bg-slate-100">
+    <main class="mx-auto w-full max-w-2xl space-y-6 p-4 sm:space-y-8">
+      <section class="bg-peach-1 rounded-xl p-6 text-balance">
+        <h1 class="font-bricolage mb-1 text-4xl font-bold">{resume.basics.name}</h1>
+        <p class="text-cod-gray-1 mb-4 text-xl font-medium">{resume.basics.label}</p>
+        <div class="flex items-center gap-6">
+          {
+            resume.basics.profiles.map(profile => (
+              <a href={profile.url} target="_blank" rel="noopener noreferrer">
+                <span class="sr-only">
+                  {profile.network} of {resume.basics.name} which username is {profile.username}
+                </span>
+                <Icon name={profile.astroIconName} size={24} />
+              </a>
+            ))
+          }
+        </div>
+      </section>
+
+      <TiltCard class="p-6">
+        <Badge as="h2" class="mb-6">
+          <Icon name="ri:file-list-3-line" />
+          Summary
+        </Badge>
+        <p class="text-cod-gray-1">{resume.basics.summary}</p>
+      </TiltCard>
+
+      <TiltCard color="pink" tiltDirection="left" class="-rotate-[0.5deg] p-6">
+        <Badge as="h2" class="mb-6">
+          <Icon name="ri:star-fill" />
+          Experiences
+        </Badge>
+        {
+          resume.work.map(work => (
+            <article class="border-cod-gray-1 rounded-xl border p-4 not-last:mb-4">
+              <div class="flex flex-col gap-1">
+                <div class="inline-flex flex-wrap items-center gap-2">
+                  <h3 class="font-semibold">{work.name}</h3>
+                  <span class="text-slate-500">&bullet;</span>
+                  <span class="text-slate-700">{work.position}</span>
+                </div>
+                <div class="inline-flex items-center gap-2 text-sm text-slate-700">
+                  <span>{work.startDate}</span>
+                  <Icon name="ri:arrow-right-long-line" class="shrink-0" />
+                  <span>{work.endDate ?? "Present"}</span>
+                </div>
+              </div>
+              <ul class="mt-2 list-disc space-y-2 border-t border-slate-300 pt-2 pl-6">
+                {work.highlights.map(highlight => (
+                  <li class="text-sm marker:text-slate-500">{highlight}</li>
+                ))}
+              </ul>
+            </article>
+          ))
+        }
+      </TiltCard>
+
+      <TiltCard color="peach" class="p-6">
+        <Badge as="h2" class="mb-6">
+          <Icon name="ri:suitcase-line" />
+          Projects
+        </Badge>
+        {
+          resume.projects.map(project => (
+            <article class="border-cod-gray-1 rounded-xl border p-4 not-last:mb-4">
+              <h3 class="mb-2 font-semibold">
+                <a
+                  href={project.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center gap-2"
+                >
+                  {project.name}
+                  <Icon name="ri:external-link-line" />
+                </a>
+              </h3>
+              <p class="text-cod-gray-1 text-sm">{project.description}</p>
+            </article>
+          ))
+        }
+      </TiltCard>
+
+      <TiltCard color="turquoise" tiltDirection="left" class="p-6">
+        <Badge as="h2" class="mb-6">
+          <Icon name="ri:school-line" />
+          Education
+        </Badge>
+        {
+          resume.education.map(education => (
+            <article class="border-cod-gray-1 space-y-1 rounded-xl border p-4 not-last:mb-4">
+              <h3 class="font-semibold">
+                <a
+                  href={education.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center gap-2"
+                >
+                  {education.institution}
+                  <Icon name="ri:external-link-line" />
+                </a>
+              </h3>
+              <p class="text-sm text-slate-700">
+                {education.studyType} &bullet; {education.area}
+              </p>
+              <div class="inline-flex items-center gap-2 text-sm text-slate-700">
+                <span>{education.startDate}</span>
+                <Icon name="ri:arrow-right-long-line" class="shrink-0" />
+                <span>{education.endDate ?? "Present"}</span>
+              </div>
+            </article>
+          ))
+        }
+      </TiltCard>
+
+      <TiltCard color="brown" class="rotate-1 p-6">
+        <Badge as="h2" class="mb-6">
+          <Icon name="ri:tools-fill" />
+          Skills
+        </Badge>
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          {
+            resume.skills.map(skill => (
+              <article class="border-cod-gray-1 rounded-xl border p-4">
+                <h3 class="mb-4 font-semibold">{skill.name}</h3>
+                <div class="flex flex-wrap gap-2">
+                  {skill.keywords.map(keyword => (
+                    <Badge>{keyword}</Badge>
+                  ))}
+                </div>
+              </article>
+            ))
+          }
+        </div>
+      </TiltCard>
+    </main>
+  </body>
+</html>

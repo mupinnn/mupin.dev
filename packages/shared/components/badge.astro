@@ -1,0 +1,19 @@
+---
+import { type HTMLTag, type Polymorphic } from "astro/types";
+
+type Props<Tag extends HTMLTag = "div"> = Polymorphic<{ as: Tag }>;
+
+const { as: Element = "div", class: cls, ...rest } = Astro.props;
+---
+
+<Element
+  {...rest}
+  class:list={[
+    "bg-cod-gray-1/15 inline-block w-fit rounded-full p-1 text-xs font-semibold whitespace-nowrap backdrop-blur-xs",
+    cls,
+  ]}
+>
+  <span class="inline-flex items-center gap-1 rounded-full bg-slate-50 px-2 py-1">
+    <slot />
+  </span>
+</Element>
