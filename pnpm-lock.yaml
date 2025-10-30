@@ -137,6 +137,12 @@ importers:
 
   apps/memoir:
     dependencies:
+      "@fontsource-variable/bricolage-grotesque":
+        specifier: ^5.2.8
+        version: 5.2.8
+      "@fontsource-variable/inter":
+        specifier: ^5.2.6
+        version: 5.2.6
       "@mupin.dev/shared":
         specifier: workspace:*
         version: link:../../packages/shared
@@ -146,9 +152,22 @@ importers:
       astro:
         specifier: "catalog:"
         version: 5.9.3(@types/node@24.0.1)(jiti@2.4.2)(lightningcss@1.30.1)(rollup@4.43.0)(typescript@5.8.3)(yaml@2.8.0)
+      astro-icon:
+        specifier: ^1.1.5
+        version: 1.1.5
       tailwindcss:
         specifier: ^4.1.10
         version: 4.1.10
+    devDependencies:
+      "@iconify-json/devicon":
+        specifier: ^1.2.29
+        version: 1.2.29
+      "@iconify-json/ri":
+        specifier: ^1.2.5
+        version: 1.2.5
+      wrangler:
+        specifier: ^4.34.0
+        version: 4.34.0
 
   apps/resume:
     dependencies:

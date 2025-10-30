@@ -1,0 +1,46 @@
+---
+import "@fontsource-variable/inter";
+import "@fontsource-variable/bricolage-grotesque";
+import "../styles/global.css";
+
+import { getCollection, render } from "astro:content";
+import { getOGImage } from "@mupin.dev/shared/lib/utils.lib.ts";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("memoir");
+  const promises = await Promise.all(
+    posts.map(async post => ({
+      params: { slug: post.id },
+      props: { post },
+    }))
+  );
+
+  return promises;
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <meta
+      name="description"
+      content="Faqih's personal memoir. Documenting life and all things happening. Occasions, thoughts or reflections. Anything."
+    />
+    <meta name="robots" content="index, follow" />
+    <meta name="og:title" content="Faqih's Memoir" />
+    <meta name="og:type" content="website" />
+    <meta name="og:image" content={getOGImage("Faqih's Memoir")} />
+    <title>Faqih's Memoir</title>
+  </head>
+  <body class="flex min-h-svh items-center justify-center">
+    <div class="prose prose-slate mx-auto pt-8 sm:pt-16">
+      <Content />
+    </div>
+  </body>
+</html>
