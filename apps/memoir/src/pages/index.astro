@@ -1,5 +1,12 @@
 ---
+import "@fontsource-variable/inter";
+import "@fontsource-variable/bricolage-grotesque";
+import "../styles/global.css";
 
+import { getCollection } from "astro:content";
+import { getOGImage } from "@mupin.dev/shared/lib/utils.lib.ts";
+
+const posts = await getCollection("memoir");
 ---
 
 <html lang="en">
@@ -8,9 +15,41 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
-    <title>Memoir</title>
+    <meta
+      name="description"
+      content="Faqih's personal memoir. Documenting life and all things happening. Occasions, thoughts or reflections. Anything."
+    />
+    <meta name="robots" content="index, follow" />
+    <meta name="og:title" content="Faqih's Memoir" />
+    <meta name="og:type" content="website" />
+    <meta name="og:image" content={getOGImage("Faqih's Memoir")} />
+    <title>Faqih's Memoir</title>
   </head>
-  <body>
-    <h1>Memoir. Under construction.</h1>
+  <body class="flex min-h-svh items-center justify-center">
+    <main class="relative mx-auto w-full max-w-md space-y-6 p-4">
+      <div class="bg-tangerine-3 absolute -top-4 right-2 size-10"></div>
+      <div class="bg-pink-2 absolute -top-6 right-10 size-4"></div>
+
+      <header class="flex flex-col gap-2">
+        <h1 class="font-bricolage text-5xl font-bold">Memoar</h1>
+        <p>
+          Sebuah memoar pribadi <span class="line-through decoration-4">Faqih</span>.
+          Mendokumentasikan kehidupan dan semua hal yang terjadi. Peristiwa, pikiran, atau refleksi.
+          Apa pun.
+        </p>
+      </header>
+
+      <section class="flex flex-col gap-4">
+        {
+          posts.map(post => (
+            <a href={`/${post.id}`} class="space-y-1">
+              <h2 class="font-bricolage text-xl font-medium underline decoration-dashed">
+                {post.data.title}
+              </h2>
+            </a>
+          ))
+        }
+      </section>
+    </main>
   </body>
 </html>
