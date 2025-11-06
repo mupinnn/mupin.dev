@@ -40,7 +40,7 @@
       "url": "https://dicoding.com/elite",
       "startDate": "2025-09-01",
       "highlights": [
-        "Responsible in reviewing student code submissions to ensure it aligns with the course objectives and providing constructive feedback and suggestions to improve their learning outcomes.",
+        "Responsible for reviewing student code submissions to ensure it aligns with the course objectives and providing constructive feedback and suggestions to improve their learning outcomes.",
         "Assisting students by answering their questions on the course discussion forum to help them overcome learning challenges."
       ]
     },
@@ -49,14 +49,19 @@
       "position": "Frontend Developer",
       "url": "https://juraganmaterial.id",
       "startDate": "2022-06-01",
+      "endDate": "2025-11-20",
       "highlights": [
-        "Develop and maintain an in-house content management system (CMS) and e-commerce platform to serve our primary business processes.",
-        "Develop and maintain the Juragan Vendor, inventory management system for our 200+ happy registered vendors.",
-        "Refactor and redesign the architecture of our e-commerce platform,from Nuxt v2 to Nuxt v3. Resulting in ~75% performance gain and a whole better DX.",
-        "Develop, maintain, and architect an in-house UI componentlibrary to reduce repetitive components across repositories and to standardize our brand identity across products.",
-        "Develop an in-house configurable survey form to replace the third-party survey form.",
-        "Develop and integrate an in-house customer service chatbot, leveraging SSE.",
-        "Develop an in-house sales portal to help the sales team to track their new customers onboarding progress"
+        "Developed and maintained an in-house ERP system and e-commerce platform to serve our primary business processes.",
+        "Developed and maintained the Juragan Vendor, inventory management system for our 200+ happy registered vendors.",
+        "Led the refactor and architecture change of our e-commerce platform, migrating from Nuxt v2 to Nuxt v3. Improving overall Core Web Vitals (CWV) scores ranging from 10-33 to 46-84 and a whole better DX.",
+        "Led the development, architect, and maintained an in-house UI component library that works in React & Vue to reduce repetitive components across repositories and to standardize our brand identity across products.",
+        "Designed and developed an in-house configurable survey form with great user experience to replace Typeform and saving costs.",
+        "Developed and integrated an in-house customer service chatbot, leveraging Server-sent events (SSE).",
+        "Developed an in-house sales portal to help the sales team to track their new customers onboarding progress and to replace WooBlazz CRM for saving costs.",
+        "Improved stability and maintainability across products by resolving code quality issues identified by SonarQube and proactively monitoring Bugsnag for real-time error resolution.",
+        "Partnered with the Product Manager on a company-wide SEO initiative by implementing critical frontend technical SEO enhancements, such as structured data (JSON-LD), automatic sitemap generation, headings structure, and prioritizing SEO-critical content to be server-side rendered to improve crawlability and indexing. Resulting in 230%+ growth in impressions, 216%+ growth in clicks and prolonged YoY improvement through 2025.",
+        "Provided key business insights by implementing custom event tracking via Google Tag Manager (GTM), providing key metrics on campaign performance such as promotion banner views and clicks, and allowing teams to measure the effectiveness of new features and promotions.",
+        "Implemented a scalable and configurable ad-serving module for our e-commerce platform, enabling targeted, page-specific banner placements."
       ]
     },
     {
@@ -69,7 +74,7 @@
         "Built a dashboard for a school management system using React and Ant Design (3-month engagement).",
         "Worked with a digital solutions company to slice design into 6 microsites using Gulp, Tailwind CSS, and jQuery.",
         "Develop and maintain 5 landing pages for a local convection sub-business using GatsbyJS and integrating order forms with Google Sheets via Apps Script.",
-        "Revamped a company profile website and integrating Google Drive and Sheets workflows with Apps Script."
+        "Revamped a company profile website and integrated Google Drive and Sheets workflows with Apps Script."
       ]
     },
     {
@@ -78,10 +83,11 @@
       "startDate": "2019-12-01",
       "endDate": "2020-10-01",
       "highlights": [
-        "Mainly responsible for translating design into front-end code and integrating with back-end services utilizing React, Redux, and SCSS.",
+        "Mainly responsible for translating design into frontend code and integrating with backend services utilizing React, Redux, and SCSS.",
         "Maintain and improve web and animation performance.",
-        "Contributed to the in-house front-end project boilerplate by creating an error reporting helper for an API call.",
-        "Handled 15 projects which each project has daily active users ranging from 10K to over 50K."
+        "Contributed to the in-house frontend project boilerplate by creating an error reporting helper for an API call.",
+        "Built the Garena's Free Fire India Tournament frontend utilizing Socket.IO for the chat system achieving more than 100k concurrent active users.",
+        "Handled 15 projects which each project has daily active users ranging from 25K to over 65K a day for the SEA region."
       ]
     }
   ],
@@ -127,7 +133,8 @@
         "Google Analytics",
         "Google Tag Manager",
         "Figma",
-        "GitHub Actions"
+        "GitHub Actions",
+        "PHP"
       ]
     }
   ],
@@ -140,7 +147,7 @@
     {
       "name": "Garena Intern Projects",
       "url": "http://bit.ly/4bRyvBk",
-      "description": "I'm handling 15 projects during my intern period as a Front-End Developer Intern at Garena Indonesia. (Stack: React, Redux, SCSS)."
+      "description": "I'm handling 15 projects during my intern period as a Frontend Developer Intern at Garena Indonesia. (Stack: React, Redux, SCSS)."
     }
   ]
 }
