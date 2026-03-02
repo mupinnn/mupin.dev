@@ -12,13 +12,13 @@ Docker Image that have been built, tested, and verified for use in different env
 at each step.
 
 Docker Image Promotion ensures consistent behavior between environments, so that the image that has been previously built and tested is the image that
-is deloyed to production. Apart from that, image promotion will also cut deployment time shorter by not doing a rebuild; for example, if the build is carried out
+is deployed to production. Apart from that, image promotion will also cut deployment time shorter by not doing a rebuild; for example, if the build is carried out
 at the deployment to staging stage, then when we want to deploy to production, we only need to "promote" the Docker Image, and not do a rebuild.
 
 ## Root of the problem
 
 We need to know that `ARG`/`--build-arg` is only available during build time on the image and `ENV`/`--env` is available during build time and runtime on the image.
-This means, if we have an environmen variables scheme as follows:
+This means, if we have an environment variables scheme as follows:
 | ENV | Staging | Production |
 | --------- | ----------------------- | --------------- |
 | `API_URL` | https://staging.api.com | https://api.com |
@@ -119,7 +119,7 @@ docker build -t mupinnn/inject-fe .
 ```
 
 If the build process is complete, you can ensure the image is ready by running the `docker image ls` command and seeing that the image with the name
-`mupinnn/inject-fe` already exists.
+`mupinnn/inject-fe` is on the list.
 ![Hasil perintah docker image ls](./images/docker-image-ls.png)
 
 Then, we will create and run a container based on the image we created earlier with the command:
@@ -208,7 +208,7 @@ declare global {
 The process above is a brief proof-of-concept and can be implemented in simple deployment scenarios. More complex and structured organizations typically
 label and tag images at each stage. Labeling and tagging facilitate tracking and rollback if an error occurs in the application or while running the container.
 
-Of course, labeling and tagging don't required a build process, so the process above is still relevant. Build once, multiple environments, deploy anywhere.
+Of course, this labeling and tagging doesn't require another build process, so the above process is still relevant. Build once, multiple environments, deploy anywhere.
 
 ## Conclusion
 

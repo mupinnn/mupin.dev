@@ -123,7 +123,7 @@ docker build -t mupinnn/inject-fe .
 ```
 
 Jika proses _build_ telah selesai, kamu bisa memastikan _image_-nya siap dengan menjalankan perintah `docker image ls`
-dan lihat _image_ dengan nama `mupinnn/inject-fe` sudah ada.
+dan lihat _image_ dengan nama `mupinnn/inject-fe` terdapat di daftar.
 ![Hasil perintah docker image ls](./images/docker-image-ls.png)
 
 Lalu, kita akan buat dan menjalankan kontainer berdasarkan _image_ yang sudah kita buat tadi dengan perintah:
@@ -211,10 +211,10 @@ declare global {
 ## _Workflow_ yang sesungguhnya
 
 Proses di atas merupakan _proof-of-concept_ singkat dan bisa diimplementasikan pada skenario deployment sederhana. Pada organisasi
-yang lebih kompleks dan terstruktur, biasanya mereka akan melakukan _labelling_ dan _tagging_ pada _image_ di tiap tahapnya.
-_Labelling_ dan _tagging_ ini berguna untuk mempermudah pelacakan dan _rollback_ jika suatu saat terjadi error pada aplikasi atau pada saat menjalankan kontainernya.
+yang lebih kompleks dan terstruktur, biasanya mereka akan melakukan _labeling_ dan _tagging_ pada _image_ di tiap tahapnya.
+_Labeling_ dan _tagging_ ini berguna untuk mempermudah pelacakan dan _rollback_ jika suatu saat terjadi error pada aplikasi atau pada saat menjalankan kontainernya.
 
-Tentu, _labelling_ dan _tagging_ ini tidak memerlukan proses _build_ sehingga proses di atas masih relevan. _Build once, multiple environments, deploy anywhere_.
+Tentu, _labeling_ dan _tagging_ ini tidak memerlukan proses _build_ lagi sehingga proses di atas masih relevan. _Build once, multiple environments, deploy anywhere_.
 
 ## Kesimpulan
 
