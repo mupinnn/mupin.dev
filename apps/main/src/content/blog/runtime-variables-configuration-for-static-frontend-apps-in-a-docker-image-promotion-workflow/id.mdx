@@ -1,0 +1,230 @@
+---
+title: Konfigurasi Runtime Variables untuk Aplikasi Frontend Statis dalam Docker Image Promotion Workflow
+description: A practical guide to configure runtime variables across your deployment that using Docker image promotion workflow
+slug: konfigurasi-runtime-variables-untuk-aplikasi-frontend-statis-dalam-docker-image-promotion-workflow
+isPublished: true
+publishedAt: 2026-03-02T08:06:50.115Z
+tags: [docker, frontend, deployment]
+---
+
+Men-_deploy_ Docker Image yang sama dari _staging_ hingga _production_ adalah hal yang umum ketika menggunakan _deployment_ berbasis kontainer.
+Docker Image Promotion adalah sebuah pendekatan untuk menggunakan Docker Image yang sudah di-_build_, diuji, dan diverifikasi untuk digunakan
+pada lingkungan yang berbeda seperti _staging_, _test_, dan _production_ tanpa perlu _build_ ulang pada setiap langkahnya.
+
+Docker Image Promotion menjamin konsistensi perilaku antar lingkungan, sehingga _image_ yang sudah di-_build_ dan diuji sebelumnya adalah _image_
+yang di-_deploy_ ke _production_. Selain itu, _image promotion_ juga akan memotong waktu _deployment_ menjadi lebih singkat dengan tidak melakukan _build_
+ulang; misal, jika _build_ dilakukan pada tahap _deployment_ ke _staging_, maka ketika ingin melakukan _deployment_ ke _production_, kita hanya perlu
+melakukan "promosi" ke _docker image_ tersebut, dan tidak melakukan _build_ ulang.
+
+## Akar Masalah
+
+Perlu kita ketahui, `ARG`/`--build-arg` hanya tersedia ketika _build time_ pada _image_ dan `ENV`/`--env` tersedia ketika _build time_ dan _runtime_
+pada _image_. Ini artinya, jika kita memiliki skema _environment variables_ sebagai berikut:
+
+| ENV       | Staging                 | Production      |
+| --------- | ----------------------- | --------------- |
+| `API_URL` | https://staging.api.com | https://api.com |
+
+Maka, ketika _image_ di-_build_ dan di dalamnya ada proses _build_ untuk aplikasi statis kita, umumnya _build tools_ seperti Vite akan mengganti
+referensi `import.meta.env.API_URL` ke nilainya langsung (_static replace_). Ini akan merusak proses "promosi" _image_ kita dari _staging_ ke _production_,
+karena _production_ akan mendapatkan nilai `API_URL` yang salah.
+
+Bagaimana dengan menggunakan `--env` ketika menjalankan kontainernya? Perlu diketahui, pemahaman konteks aplikasi itu sangat penting. Karena aplikasi kita
+adalah aplikasi statis, maka akses ke nilai _environment variables_ dengan `process.env` atau sejenisnya dari server tidak memungkinkan; aplikasi kita
+berjalan di browser dan tidak diproses terlebih dahulu di server (SSR).
+
+Untuk menanggulangi masalah tersebut, kita bisa memanfaatkan objek `window` untuk meletakkan nilai _environment variables_ yang dikirim melalui `--env`
+pada saat kontainer dijalankan. Tentu, ada satu hal yang perlu dipastikan sebelum menggunakan cara ini, yaitu pastikan nilai tersebut adalah hal yang aman
+untuk dilihat oleh publik seperti API URL; **sangat tidak disarankan untuk meletakkan _secrets_ apa pun ke objek `window`**.
+
+## Menguraikan Solusi
+
+Karena pada konteks ini aplikasi kita berjalan di lingkungan browser, kita bisa memanfaatkan objek _window_ untuk menampung segala nilai yang diperlukan
+dari `--env` ketika kontainer dijalankan. Hanya ada dua langkah inti yang akan kita lakukan:
+
+- Membuat _placeholder_ di berkas HTML pada bagian `<head>`
+- Membuat sebuah _bash script_ untuk meletakkan nilai yang dikirim melalui `--env` ke _placeholder_ yang sudah dibuat
+
+Sehingga, keseluruhan alur _deployment_ akan menjadi seperti berikut ini:
+![Gambaran besar keseluruhan workflow pada artikel ini](./images/workflow.png)
+
+Kita akan menggunakan [repositori ini](https://github.com/mupinnn/inject-env-static-fe-docker-image-promotion/tree/starter) untuk praktek,
+silakan _clone_ dan ikuti langkah-langkahnya!
+
+### Menyiapkan _placeholder_
+
+Pada berkas `index.html`, kita bisa menambahkan sebuah _placeholder_ di dalam _tag_ `<head>` seperti berikut:
+
+```html
+<script>
+  // ENV_PLACEHOLDERS
+</script>
+```
+
+### Membuat _shell script_ untuk mengganti _placeholder_
+
+_Shell script_ ini berguna untuk mengganti `ENV_PLACEHOLDERS` dengan nilai `window.env` yang valid. Ekspektasinya, objek `window.env`
+tersebut akan menjadi seperti berikut:
+
+```js
+window.env = {
+  API_URL: "https://staging.api.com",
+};
+```
+
+Kita bisa memanfaatkan `sed` untuk melakukan _text replacement_ terhadap _placeholder_ yang sudah disiapkan.
+
+```sh
+#!/bin/sh
+ENV_STRING='window.env = { \
+	"API_URL":"'"${API_URL}"'" \
+}'
+
+sed -i "s@// ENV_PLACEHOLDERS@${ENV_STRING}@" /usr/share/nginx/html/index.html
+exec "$@"
+
+nginx -g 'daemon off;'
+```
+
+Lalu, kita perlu menyalin berkas `init.sh` di atas ke dalam kontainer kita dan menjalankannya. Perbarui berkas `Dockerfile` menjadi seperti berikut:
+
+```Dockerfile
+FROM oven/bun:1.3.3 AS base
+
+WORKDIR /app
+
+COPY . /app/
+COPY package.json /app/package.json
+COPY bun.lock /app/bun.lock
+RUN bun install --frozen-lockfile
+
+FROM base AS builder
+RUN bun run build
+
+FROM nginx:alpine-slim AS runner
+COPY ./nginx /etc/nginx/conf.d
+COPY ./init.sh /app/init.sh
+COPY --from=builder /app/dist /usr/share/nginx/html
+
+EXPOSE 80
+CMD ["sh", "/app/init.sh"]
+```
+
+Ketika kontainer dibuat dan dijalankan, `init.sh` akan dieksekusi dan akan mengganti _placeholder_ dengan _environment variables_ yang cocok,
+lalu menjalankan Nginx agar aplikasi kita dapat diakses.
+
+### Mencoba dengan beberapa skenario pengujian
+
+Untuk percobaan pertama, kita hanya akan menjalankan kontainernya tanpa mengirimkan _environment variables_ apa pun. Sebelum itu,
+kita perlu melakukan _build image_ dengan `Dockerfile` yang sudah tersedia. Silakan jalankan perintah berikut:
+
+```sh
+docker build -t mupinnn/inject-fe .
+```
+
+Jika proses _build_ telah selesai, kamu bisa memastikan _image_-nya siap dengan menjalankan perintah `docker image ls`
+dan lihat _image_ dengan nama `mupinnn/inject-fe` sudah ada.
+![Hasil perintah docker image ls](./images/docker-image-ls.png)
+
+Lalu, kita akan buat dan menjalankan kontainer berdasarkan _image_ yang sudah kita buat tadi dengan perintah:
+
+```sh
+docker run -p 8181:80 \
+mupinnn/inject-fe:latest
+```
+
+Perintah di atas akan menjalankan kontainernya dan bisa diakses melalui http://localhost:8181. Kamu bisa memastikan bahwa `window.env`
+sudah tersedia dengan membuka _page source_ (<kbd>CTRL + u</kbd>) atau buka _console_ dan ketik `window.env`.
+![Page source dengan window.env kosong](./images/empty-page-source.png)
+![Console dengan window.env kosong](./images/empty-window-env.png)
+
+Okey, sampai sini kita berhasil mengganti _placeholder_ dengan objek _window_ yang kita inginkan. Selanjutnya kita harus melakukan
+uji coba dengan nilai _environment variables_ yang berbeda.
+
+---
+
+Berikutnya, kita akan menjalankannya dengan nilai `API_URL` untuk _staging_ seperti berikut:
+
+```sh
+docker run -p 8082:80 \
+--env API_URL="https://staging.api.com" \
+--name mupinnn-inject-fe-staging \
+mupinnn/inject-fe:latest
+```
+
+Akses melalui http://localhost:8082 dan pastikan kembali nilai `window.env` sudah tersedia seperti langkah sebelumnya. Hasil akhirnya akan menjadi seperti ini:
+![Page source dengan window.env staging](./images/staging-page-source.png)
+![Console dengan window.env staging](./images/staging-window-env.png)
+
+Kemudian, kita akan menjalankan kontainer untuk _production_ dari _image_ yang sama dengan perintah:
+
+```sh
+docker run -p 8083:80 \
+--env API_URL="https://api.com" \
+--name mupinnn-inject-fe-prd \
+mupinnn/inject-fe:latest
+```
+
+Akses melalui http://localhost:8083 dan pastikan kembali nilai `window.env` dengan cara yang sama sepert di atas.
+Kamu akan melihat bahwa nilai `API_URL` selalu berubah tergantung apa yang dikirim melalui `--env` dan kita melakukannya tanpa _rebuild!_
+![Page source dengan window.env production](./images/prod-page-source.png)
+![Console dengan window.env production](./images/prod-window-env.png)
+
+---
+
+Untuk mengaksesnya di _runtime_ aplikasi, kamu bisa gunakan `window.env.API_URL`. Mungkin, pada saat _development_ kamu tidak menggunakan
+Docker sama sekali, berarti `window.env` tidak akan tersedia. Kamu bisa mengakses nilainya dengan menggunakan _fallback_
+seperti `import.meta.env.API_URL ?? window.env.API_URL`. Untuk memudahkan penggunaan, kamu bisa membuat sebuah _helper function_ untuk mengakses _environment variables_.
+
+```js
+function getEnv(key) {
+  const envMap = {
+    API_URL: import.meta.env.API_URL,
+  };
+
+  return window?.env?.[key] || envMap[key];
+}
+```
+
+Jika kamu menggunakan TypeScript dan Vite, kamu bisa meningkatkan _developer experience_ dengan membuat fungsi `getEnv` menjadi lebih _type-safe_.
+
+```ts
+export function getEnv<K extends keyof ImportMetaEnv>(key: K) {
+  const envMap = {
+    API_URL: import.meta.env.API_URL,
+  };
+
+  return window?.env?.[key] || envMap[key];
+}
+```
+
+Lalu, kamu bisa me-_extend_ _type_ pada objek `window` dengan menambahkan kode di bawah ke dalam berkas `vite-env.d.ts`
+
+```ts
+declare global {
+  interface Window {
+    env?: ImportMetaEnv;
+  }
+}
+```
+
+## _Workflow_ yang sesungguhnya
+
+Proses di atas merupakan _proof-of-concept_ singkat dan bisa diimplementasikan pada skenario deployment sederhana. Pada organisasi
+yang lebih kompleks dan terstruktur, biasanya mereka akan melakukan _labelling_ dan _tagging_ pada _image_ di tiap tahapnya.
+_Labelling_ dan _tagging_ ini berguna untuk mempermudah pelacakan dan _rollback_ jika suatu saat terjadi error pada aplikasi atau pada saat menjalankan kontainernya.
+
+Tentu, _labelling_ dan _tagging_ ini tidak memerlukan proses _build_ sehingga proses di atas masih relevan. _Build once, multiple environments, deploy anywhere_.
+
+## Kesimpulan
+
+Dengan _shell script_ yang cukup sederhana, memahami proses _deployment_, memahami perbedaan antara _runtime_ dan _build time_, dan memahami lingkungan
+di mana aplikasi dijalankan—kamu akan bisa memaksimalkan segala potensi dan kemungkinan yang ada untuk melakukan optimisasi dari pengetahuan tersebut.
+
+Terima kasih!
+
+## Referensi
+
+- https://oneuptime.com/blog/post/2026-02-08-how-to-implement-docker-image-promotion-between-registries/view
+- https://stackoverflow.com/a/58327381
+- https://vite.dev/guide/env-and-mode#env-variables-and-modes
