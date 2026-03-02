@@ -1,6 +1,6 @@
 ---
 title: Konfigurasi Runtime Variables untuk Aplikasi Frontend Statis dalam Docker Image Promotion Workflow
-description: A practical guide to configure runtime variables across your deployment that using Docker image promotion workflow
+description: Panduan praktis untuk mengkonfigurasi runtime variables di seluruh deployment dengan menggunakan Docker Image Promotion workflow
 slug: konfigurasi-runtime-variables-untuk-aplikasi-frontend-statis-dalam-docker-image-promotion-workflow
 isPublished: true
 publishedAt: 2026-03-02T08:06:50.115Z
@@ -14,7 +14,7 @@ pada lingkungan yang berbeda seperti _staging_, _test_, dan _production_ tanpa p
 Docker Image Promotion menjamin konsistensi perilaku antar lingkungan, sehingga _image_ yang sudah di-_build_ dan diuji sebelumnya adalah _image_
 yang di-_deploy_ ke _production_. Selain itu, _image promotion_ juga akan memotong waktu _deployment_ menjadi lebih singkat dengan tidak melakukan _build_
 ulang; misal, jika _build_ dilakukan pada tahap _deployment_ ke _staging_, maka ketika ingin melakukan _deployment_ ke _production_, kita hanya perlu
-melakukan "promosi" ke _docker image_ tersebut, dan tidak melakukan _build_ ulang.
+melakukan "promosi" ke Docker Image tersebut, dan tidak melakukan _build_ ulang.
 
 ## Akar Masalah
 
@@ -43,7 +43,7 @@ Karena pada konteks ini aplikasi kita berjalan di lingkungan browser, kita bisa 
 dari `--env` ketika kontainer dijalankan. Hanya ada dua langkah inti yang akan kita lakukan:
 
 - Membuat _placeholder_ di berkas HTML pada bagian `<head>`
-- Membuat sebuah _bash script_ untuk meletakkan nilai yang dikirim melalui `--env` ke _placeholder_ yang sudah dibuat
+- Membuat sebuah _shell script_ untuk meletakkan nilai yang dikirim melalui `--env` ke _placeholder_ yang sudah dibuat
 
 Sehingga, keseluruhan alur _deployment_ akan menjadi seperti berikut ini:
 ![Gambaran besar keseluruhan workflow pada artikel ini](./images/workflow.png)
