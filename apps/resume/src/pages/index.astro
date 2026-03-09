@@ -63,7 +63,17 @@ import { getWorkersAsset, formatDate } from "@mupin.dev/shared/lib/utils.lib.ts"
             <article class="border-cod-gray-1 rounded-xl border p-4 not-last:mb-4">
               <div class="flex flex-col gap-1">
                 <div class="inline-flex flex-wrap items-center gap-2">
-                  <h3 class="font-semibold">{work.name}</h3>
+                  <h3 class="font-semibold">
+                    <a
+                      href={work.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="inline-flex items-center gap-2"
+                    >
+                      {work.name}
+                      <Icon name="ri:external-link-line" />
+                    </a>
+                  </h3>
                   <span class="text-slate-500">&bullet;</span>
                   <span class="text-slate-700">{work.position}</span>
                 </div>
@@ -142,7 +152,8 @@ import { getWorkersAsset, formatDate } from "@mupin.dev/shared/lib/utils.lib.ts"
                 </a>
               </h3>
               <p class="text-sm text-slate-700">
-                {education.studyType} &bullet; {education.area}
+                {education.studyType} &bullet; {education.area} &bullet; Current GPA:{" "}
+                {education.score}
               </p>
               <div class="inline-flex items-center gap-2 text-sm text-slate-700">
                 <span>
@@ -173,7 +184,7 @@ import { getWorkersAsset, formatDate } from "@mupin.dev/shared/lib/utils.lib.ts"
           <Icon name="ri:tools-fill" />
           Skills
         </Badge>
-        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+        <div class="grid grid-cols-1 gap-4">
           {
             resume.skills.map(skill => (
               <article class="border-cod-gray-1 rounded-xl border p-4">
