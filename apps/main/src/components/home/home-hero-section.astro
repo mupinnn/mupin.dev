@@ -1,3 +1,8 @@
+---
+import { Icon } from "astro-icon/components";
+import Badge from "@mupin.dev/shared/components/badge.astro";
+---
+
 <style>
   .gradient {
     background-color: hsla(0, 0%, 100%, 0);
@@ -7,8 +12,17 @@
   }
 </style>
 
-<section class="relative flex min-h-[calc(100svh-76px)] items-center justify-center py-16">
+<section
+  class="relative flex min-h-[calc(100svh-76px)] flex-col items-center justify-center gap-12 py-16"
+>
   <div class="gradient absolute -z-1 aspect-square max-h-full w-full"></div>
+  <Badge>
+    <div class="relative size-3">
+      <div class="bg-pink-2 absolute size-full animate-ping rounded-full opacity-65"></div>
+      <div class="drop-shadow-pink-2 bg-pink-2 size-full rounded-full"></div>
+    </div>
+    Available for projects
+  </Badge>
   <h1
     class="font-bricolage text-center text-3xl text-balance min-[440px]:text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl"
   >
