@@ -36,8 +36,8 @@
   "work": [
     {
       "name": "Dicoding",
-      "position": "External Code Reviewer (Elite)",
-      "url": "https://dicoding.com/elite",
+      "position": "External Code Reviewer",
+      "url": "https://www.dicoding.com/users/mupinnn/academies",
       "startDate": "2025-09-01",
       "highlights": [
         "Responsible for reviewing student code submissions to ensure it aligns with the course objectives and providing constructive feedback and suggestions to improve their learning outcomes.",
@@ -46,22 +46,23 @@
     },
     {
       "name": "Juragan Material",
-      "position": "Frontend Developer",
+      "position": "Frontend Engineer",
       "url": "https://juraganmaterial.id",
       "startDate": "2022-06-01",
       "endDate": "2025-11-20",
       "highlights": [
-        "Developed and maintained an in-house ERP system and e-commerce platform to serve our primary business processes.",
-        "Developed and maintained the Juragan Vendor, inventory management system for our 200+ happy registered vendors.",
-        "Led the refactor and architecture change of our e-commerce platform, migrating from Nuxt v2 to Nuxt v3. Improving overall Core Web Vitals (CWV) scores ranging from 10-33 to 46-84 and a whole better DX.",
-        "Led the development, architect, and maintained an in-house UI component library that works in React & Vue to reduce repetitive components across repositories and to standardize our brand identity across products.",
-        "Designed and developed an in-house configurable survey form with great user experience to replace Typeform and saving costs.",
-        "Developed and integrated an in-house customer service chatbot, leveraging Server-sent events (SSE).",
-        "Developed an in-house sales portal to help the sales team to track their new customers onboarding progress and to replace WooBlazz CRM for saving costs.",
+        "Grew impressions by 230% and clicks by 216% by implementing critical technical SEO enhancements such as structured data, automatic sitemap generation, and prioritizing SEO-critical content to be server-side rendered.",
+        "Improved overall Core Web Vitals scores ranging from 10-33 to 56-90 by implementing critical CSS, optimizing third-party scripts, images optimization, and interaction responsiveness through JavaScript optimization, leading to 10%-14% traffic increase.",
+        "Grew user registrations by 282% by implementing A/B testing on the register page redesign.",
+        "Led the development, architect, and maintained an in-house UI component library that works in Vue.js & React to reduce repetitive components across repositories and to standardize our brand identity across products.",
+        "Provided key business insights by implementing custom event tracking via Google Tag Manager, providing key metrics on campaign performance such as promotion banner views and clicks, and allowing teams to measure the effectiveness of new features and promotions.",
+        "Developed and maintained in-house ERP system to serve our primary business processes.",
+        "Developed and maintained inventory management system for our 200+ registered vendors leading to cutting non-value-added manual tasks by 75%.",
+        "Designed, developed, and maintained configurable survey form to replace Typeform leading to unlimited submissions, improved performance, and reducing monthly SaaS costs.",
+        "Owned the development of an in-house CRM to help sales teams to track their leads and reduce monthly SaaS costs.",
+        "Developed and integrated AI customer service chatbot to automate product inquiries, FAQ, and checkout assistance.",
         "Improved stability and maintainability across products by resolving code quality issues identified by SonarQube and proactively monitoring Bugsnag for real-time error resolution.",
-        "Partnered with the Product Manager on a company-wide SEO initiative by implementing critical frontend technical SEO enhancements, such as structured data (JSON-LD), automatic sitemap generation, headings structure, and prioritizing SEO-critical content to be server-side rendered to improve crawlability and indexing. Resulting in 230%+ growth in impressions, 216%+ growth in clicks and prolonged YoY improvement through 2025.",
-        "Provided key business insights by implementing custom event tracking via Google Tag Manager (GTM), providing key metrics on campaign performance such as promotion banner views and clicks, and allowing teams to measure the effectiveness of new features and promotions.",
-        "Implemented a scalable and configurable ad-serving module for our e-commerce platform, enabling targeted, page-specific banner placements."
+        "Designed, developed, and maintained scalable and configurable Ad module to our e-commerce platform, enabling targeted, page-specific Ad placements."
       ]
     },
     {
@@ -71,10 +72,10 @@
       "endDate": "2022-03-01",
       "summary": "Engaged on a project-by-project basis while preparing for a college entrance exam and sharpening skills",
       "highlights": [
-        "Built a dashboard for a school management system using React and Ant Design (3-month engagement).",
-        "Worked with a digital solutions company to slice design into 6 microsites using Gulp, Tailwind CSS, and jQuery.",
-        "Develop and maintain 5 landing pages for a local convection sub-business using GatsbyJS and integrating order forms with Google Sheets via Apps Script.",
-        "Revamped a company profile website and integrated Google Drive and Sheets workflows with Apps Script."
+        "Built a dashboard for a school management system using React and Ant Design.",
+        "Worked with a digital solutions company to build 6 microsites using Gulp, Tailwind CSS, and jQuery.",
+        "Built and maintained 5 landing pages for a local convection sub-business using Gatsby (React) and integrating custom order forms with Google Sheets via Apps Script.",
+        "Revamped a company profile website and integrated it with Google Drive and Google Sheets workflows with Apps Script."
       ]
     },
     {
@@ -83,11 +84,10 @@
       "startDate": "2019-12-01",
       "endDate": "2020-10-01",
       "highlights": [
-        "Mainly responsible for translating design into frontend code and integrating with backend services utilizing React, Redux, and SCSS.",
-        "Maintain and improve web and animation performance.",
+        "Built the Garena's Free Fire India Tournament frontend utilizing Socket.IO for the chat system achieving more than 100k concurrent active users",
+        "Handled 15 projects which each project has daily active users ranging from 25K to over 65K a day for the SEA region.",
         "Contributed to the in-house frontend project boilerplate by creating an error reporting helper for an API call.",
-        "Built the Garena's Free Fire India Tournament frontend utilizing Socket.IO for the chat system achieving more than 100k concurrent active users.",
-        "Handled 15 projects which each project has daily active users ranging from 25K to over 65K a day for the SEA region."
+        "Mainly responsible for translating design into frontend code and integrating with backend services utilizing React, Redux, and SCSS."
       ]
     }
   ],
@@ -97,57 +97,73 @@
       "url": "https://www.cakrawala.ac.id/",
       "area": "Data Science",
       "studyType": "Bachelor's Degree",
-      "startDate": "2025-09-08"
+      "startDate": "2025-09-08",
+      "score": "4.00/4.00"
     }
   ],
   "skills": [
     {
       "name": "Languages",
-      "keywords": ["HTML", "CSS", "SCSS", "JavaScript", "TypeScript"]
+      "keywords": ["HTML", "SCSS/SASS", "JavaScript", "TypeScript", "Python", "SQL", "PHP"]
     },
     {
-      "name": "Frameworks & Libraries",
+      "name": "Technologies",
       "keywords": [
         "React",
-        "Vue",
         "Next.js",
+        "Vue.js",
         "Nuxt",
-        "Quasar",
-        "Tailwind",
-        "Astro",
-        "Tanstack Query"
+        "Vite",
+        "Vitest",
+        "Jest",
+        "Webpack",
+        "Playwright",
+        "Node.js",
+        "Git",
+        "GitHub Actions",
+        "Figma",
+        "Docker",
+        "GraphQL",
+        "Vercel",
+        "Netlify",
+        "Laravel",
+        "PostgreSQL",
+        "Turborepo",
+        "Nix"
       ]
     },
     {
-      "name": "Tools",
-      "keywords": ["Vite", "Vitest", "Jest", "Webpack", "Gulp", "PNPM/NPM/Yarn", "Turborepo", "Git"]
-    },
-    {
-      "name": "Familiar",
+      "name": "Other",
       "keywords": [
-        "Node.js",
-        "GatsbyJS",
-        "Redux",
-        "GraphQL",
-        "WordPress (headless)",
+        "TDD",
         "Google Analytics",
         "Google Tag Manager",
-        "Figma",
-        "GitHub Actions",
-        "PHP"
+        "Design System",
+        "Atomic Design",
+        "Monorepo",
+        "CI/CD",
+        "Web Performance",
+        "Progressive Web Apps (PWA)",
+        "Slicing",
+        "Pixel Perfect"
       ]
     }
   ],
   "projects": [
     {
+      "name": "Chat DB",
+      "url": "https://chat-db.13121957.xyz/",
+      "description": "A simple app to chat with your database to gain insights using Gemini. Stack: React, shadcn/ui, Flask, Gemini 2.5 Flash, SQLite, Docker."
+    },
+    {
       "name": "KaGet: Kawan Budget",
       "url": "https://kaget.mupin.dev/",
-      "description": "A mobile-first, fully offline web-based budgeting app that meets your needs. (Stack: React, Tailwind, TypeScript, Tanstack Router & Query, PWA)."
+      "description": "A mobile-first, fully offline web-based budgeting app that meets your needs. Stack: React, Tailwind, TypeScript, Tanstack Router & Query, PWA."
     },
     {
       "name": "Garena Intern Projects",
       "url": "http://bit.ly/4bRyvBk",
-      "description": "I'm handling 15 projects during my intern period as a Frontend Developer Intern at Garena Indonesia. (Stack: React, Redux, SCSS)."
+      "description": "I'm handling 15 projects during my intern period as a Frontend Developer at Garena Indonesia. Stack: React, Redux, SCSS."
     }
   ]
 }
