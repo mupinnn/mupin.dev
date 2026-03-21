@@ -172,6 +172,8 @@ Kamu akan melihat bahwa nilai `API_URL` selalu berubah tergantung apa yang dikir
 
 ---
 
+## Membuat _helper function_ untuk mengakses _variables_
+
 Untuk mengaksesnya di _runtime_ aplikasi, kamu bisa gunakan `window.env.API_URL`. Mungkin, pada saat _development_ kamu tidak menggunakan
 Docker sama sekali, berarti `window.env` tidak akan tersedia. Kamu bisa mengakses nilainya dengan menggunakan _fallback_
 seperti `import.meta.env.API_URL ?? window.env.API_URL`. Untuk memudahkan penggunaan, kamu bisa membuat sebuah _helper function_ untuk mengakses _environment variables_.
@@ -182,7 +184,7 @@ function getEnv(key) {
     API_URL: import.meta.env.API_URL,
   };
 
-  return window?.env?.[key] || envMap[key];
+  return window?.env?.[key] ?? envMap[key];
 }
 ```
 
@@ -191,22 +193,41 @@ Jika kamu menggunakan TypeScript dan Vite, kamu bisa meningkatkan _developer exp
 ```ts
 export function getEnv<K extends keyof ImportMetaEnv>(key: K) {
   const envMap = {
+    BASE_URL: import.meta.env.BASE_URL,
+    DEV: import.meta.env.DEV,
+    MODE: import.meta.env.MODE,
+    PROD: import.meta.env.PROD,
+    SSR: import.meta.env.SSR,
     API_URL: import.meta.env.API_URL,
-  };
+  } satisfies ImportMetaEnv;
 
-  return window?.env?.[key] || envMap[key];
+  return window?.env?.[key] ?? envMap[key];
 }
 ```
 
 Lalu, kamu bisa me-_extend_ _type_ pada objek `window` dengan menambahkan kode di bawah ke dalam berkas `vite-env.d.ts`
 
 ```ts
-declare global {
-  interface Window {
-    env?: ImportMetaEnv;
-  }
+interface ViteTypeOptions {
+  strictImportMetaEnv: unknown;
+}
+
+interface ImportMetaEnv {
+  readonly API_URL: string;
+}
+
+interface ImportMeta {
+  readonly env: ImportMetaEnv;
+}
+
+interface Window {
+  env?: ImportMetaEnv;
 }
 ```
+
+Setelah itu, kamu akan mendapatkan hasil seperti ini:
+![TypeScript type-hint](./images/typescript-hint.png)
+![TypeScript type-error](./images/typescript-error.png)
 
 ## _Workflow_ yang sesungguhnya
 

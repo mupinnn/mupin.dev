@@ -167,6 +167,8 @@ passed through `--env`, and we did it without a rebuild!
 
 ---
 
+## Creating a helper function to access the variables
+
 To access it at runtime, you can now use `window.env.API_URL`. If you're not using Docker at all during development, `window.env` won't be available.
 You can access its value using a fallback like `import.meta.env.API_URL ?? window.env.API_URL`. For ease of use, you can create a helper function to
 access environment variable.
@@ -177,7 +179,7 @@ function getEnv(key) {
     API_URL: import.meta.env.API_URL,
   };
 
-  return window?.env?.[key] || envMap[key];
+  return window?.env?.[key] ?? envMap[key];
 }
 ```
 
@@ -186,22 +188,41 @@ If you're using TypeScript and Vite, you can improve the developer experience by
 ```ts
 export function getEnv<K extends keyof ImportMetaEnv>(key: K) {
   const envMap = {
+    BASE_URL: import.meta.env.BASE_URL,
+    DEV: import.meta.env.DEV,
+    MODE: import.meta.env.MODE,
+    PROD: import.meta.env.PROD,
+    SSR: import.meta.env.SSR,
     API_URL: import.meta.env.API_URL,
-  };
+  } satisfies ImportMetaEnv;
 
-  return window?.env?.[key] || envMap[key];
+  return window?.env?.[key] ?? envMap[key];
 }
 ```
 
 Then, you can extend the type of the `window` object by adding the code below to the `vite-env.d.ts` file.
 
 ```ts
-declare global {
-  interface Window {
-    env?: ImportMetaEnv;
-  }
+interface ViteTypeOptions {
+  strictImportMetaEnv: unknown;
+}
+
+interface ImportMetaEnv {
+  readonly API_URL: string;
+}
+
+interface ImportMeta {
+  readonly env: ImportMetaEnv;
+}
+
+interface Window {
+  env?: ImportMetaEnv;
 }
 ```
+
+After that, you'll get this kind of results:
+![TypeScript type-hint](./images/typescript-hint.png)
+![TypeScript type-error](./images/typescript-error.png)
 
 ## The real workflow
 
