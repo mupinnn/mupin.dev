@@ -1,0 +1,274 @@
+---
+title: Mengakali Batasan Secure Cookie di WebKit untuk Playwright Testing di Localhost
+description: Panduan untuk mengakali dan mengkonfigurasi Playwright agar bisa menjalankan pengujian di Safari dengan aplikasi web yang menggunakan Secure Cookie
+slug: mengakali-batasan-secure-cookie-di-webkit-untuk-playwright-testing-di-localhost
+isPublished: true
+publishedAt: 2026-03-25T12:09:13.720Z
+tags: [frontend, playwright, e2e]
+---
+
+_Cookie_ memiliki salah satu atribut yang cukup penting, yaitu `Secure`. Atribut `Secure` ini adalah sebuah opsi yang bisa dipasang dari server ketika mengirim sebuah _cookie_ ke pengguna melalui HTTP. Tujuan dari atribut ini adalah untuk mencegah _cookie_ bisa dilihat oleh orang yang tidak bertanggung jawab karena _cookie_ dikirim dalam bentuk teks biasa—sehingga, browser yang mendukung atribut `Secure` ini hanya akan mengirim/memasang _cookie_ ketika _request_ ke sebuah halaman atau _resource_ yang menggunakan HTTPS (terenkripsi).
+
+Pada implementasinya, jika kalian membuat sebuah aplikasi web yang dapat berjalan di semua browser, akan terdapat masalah ketika mencobanya di browser dengan _engine_ WebKit, seperti Safari. Salah satu [laporan _bug_](https://bugs.webkit.org/show_bug.cgi?id=281149) menyebutkan bahwa terdapat perilaku yang inkonsisten pada WebKit dalam menentukan apakah localhost termasuk ke dalam _secure origin_ atau bukan. Laporan tersebut juga didukung oleh status konsensus dan standarisasi fitur untuk memperlakukan localhost atau _loopback address_ sebagai _secure context_ pada [Chrome Platform Status](https://chromestatus.com/feature/6269417340010496) yang menyatakan bahwa WebKit masih belum mendukungnya.
+
+Untuk mengatasi masalah tersebut selama pengembangan, setidaknya ada beberapa cara yang bisa dilakukan, seperti:
+
+- Mengkonfigurasi HTTPS untuk pengembangan di lokal
+- Mengirim `Secure` atribut secara kondisional berdasarkan _origin_ dari _request_
+- Memasang _proxy server_ untuk mengubah _cookie_ sebelum dikirim ke _client_
+
+Jika kalian mencoba contoh yang paling sederhana, yaitu mengkonfigurasi HTTPS di lokal, mungkin sekarang _secure cookie_ kalian sudah bisa terpasang dengan baik di Safari. Namun, diperlukan konfigurasi berbeda jika kalian menggunakan _end-to-end, cross-browser testing_ seperti Playwright di CI/CD kalian. _Well_, sangat mungkin kita melakukan hal yang sama untuk mengkonfigurasi HTTPS di CI/CD seperti yang disebutkan di [artikel ini](https://codeshare.co.uk/blog/how-to-run-a-local-https-site-inside-a-github-action-without-the-dev-certificate-trust-issue/)—hanya saja, kita memerlukan hal yang lebih sederhana yaitu tetap menggunakan localhost tanpa HTTPS dan mengkonfigurasi _test suites_ yang kita punya, pada kasus kali ini menggunakan Playwright.
+
+> Untuk E2E _framework_ lain seperti Cypress, seharusnya kalian juga bisa menyesuaikan dengan mencari konfigurasi padanannya.
+
+Kasus yang menjadi contoh untuk artikel ini adalah pengujian _end-to-end_ untuk aplikasi [_to-do list_ ](https://github.com/mupinnn/todo-docker/tree/main/e2e)yang saya buat di mana autentikasinya menggunakan `HttpOnly` dan `Secure` _cookie_ yang akan gagal ketika dijalankan di Safari. Untuk ini, kita bisa memanfaatkan _project dependencies_ dan membuat _setup_ untuk masing-masing browser, yang mana setiap browser akan memiliki akun pengguna yang berbeda.
+
+## Mengenal Projects di Playwright
+
+Playwright memiliki satu hal yang bernama _project_. _Project_ ini adalah cara untuk mengelompokkan pengujian yang akan berjalan dengan konfigurasi yang sama. _Projects_ digunakan untuk menjalankan pengujian pada browser dan perangkat yang berbeda. Inilah yang digunakan untuk menguji apakah aplikasi web kita bisa berjalan normal di mayoritas browser (Chrome, Firefox, dan Safari).
+
+Berikut adalah contoh konfigurasi _projects_ di Playwright:
+
+```ts
+import { defineConfig, devices } from "@playwright/test";
+
+export default defineConfig({
+  projects: [
+    {
+      name: "chromium",
+      use: { ...devices["Desktop Chrome"] },
+    },
+
+    {
+      name: "firefox",
+      use: { ...devices["Desktop Firefox"] },
+    },
+
+    {
+      name: "webkit",
+      use: { ...devices["Desktop Safari"] },
+    },
+
+    /* Test against mobile viewports. */
+    {
+      name: "Mobile Chrome",
+      use: { ...devices["Pixel 5"] },
+    },
+    {
+      name: "Mobile Safari",
+      use: { ...devices["iPhone 12"] },
+    },
+
+    /* Test against branded browsers. */
+    {
+      name: "Microsoft Edge",
+      use: {
+        ...devices["Desktop Edge"],
+        channel: "msedge",
+      },
+    },
+    {
+      name: "Google Chrome",
+      use: {
+        ...devices["Desktop Chrome"],
+        channel: "chrome",
+      },
+    },
+  ],
+});
+```
+
+Selain itu, ada juga _project dependencies_ yang biasa digunakan untuk _setup_ sebelum menjalankan semua _tests_ pada _project_. _Setup_ ini berguna untuk [mengkonfigurasi autentikasi](https://playwright.dev/docs/auth).
+
+## Membuat _setup_ untuk masing-masing browser
+
+Langkah pertama, kita perlu membuat _setup_ untuk masing-masing browser. _Setup_ ini sebenarnya hanya menggunakan abstraksi dari _setup_ autentikasi yang di mana alur autentikasi didefinisikan di sana, hanya saja kita memerlukan tempat penyimpanan yang berbeda untuk masing-masing browser dan untuk memodifikasi perilaku browser tertentu—pada kasus ini, Safari.
+
+Buatlah beberapa berkas _setup_ seperti berikut:
+
+```
+my-app/
+├─ tests/
+│  ├─ auth.setup.ts
+│  ├─ chromium.setup.ts
+│  ├─ firefox.setup.ts
+│  ├─ webkit.setup.ts
+```
+
+## Menjadikan _setup_ autentikasi sebagai abstraksi
+
+Pada berkasi `auth.setup.ts`, kita akan membuat sebuah fungsi yang akan mengabstraksi keseluruhan alur autentikasi ditambah dengan sebuah _callback_ untuk menambahkan modifikasi di alur autentikasi jika diperlukan.
+
+```ts
+import { test as setup, expect, type Page } from "@playwright/test";
+
+type SetupAuth = {
+  email: string;
+  password: string;
+  authStorePath: string;
+  alterStoreCallback?: ({ page }: { page: Page }) => Promise<void>;
+};
+
+export function setupAuth({ email, password, authStorePath, alterStoreCallback }: SetupAuth) {
+  setup.describe.configure({ mode: "serial" });
+  setup.describe("Authentication", () => {
+    setup("Register", async ({ page }) => {
+      await page.goto("/register");
+      await page.getByLabel("Email").fill(email);
+      await page.getByLabel("Password").fill(password);
+      await page.getByRole("button", { name: "Create account" }).click();
+      await page.waitForURL("/login");
+
+      await expect(page.getByText("Login to your account", { exact: true })).toBeVisible();
+    });
+
+    setup("Login", async ({ page }) => {
+      await page.goto("/login");
+      await page.getByLabel("Email").fill(email);
+      await page.getByLabel("Password").fill(password);
+      await page.getByRole("button", { name: "Login" }).click();
+      await page.waitForURL("/todo");
+
+      await expect(page.getByText("To-Do", { exact: true })).toBeVisible();
+      await expect(page.getByText("Please, do something.", { exact: true })).toBeVisible();
+
+      await alterStoreCallback?.({ page });
+      await page.context().storageState({ path: authStorePath });
+    });
+  });
+}
+```
+
+Fungsi `setupAuth` akan diekspor dan digunakan di dalam berkas _setup_ untuk masing-masing browser. Ini memungkinkan kita untuk mendefinisikan di mana Playwright akan menyimpan _auth state_ untuk tiap browser, juga untuk memodifikasi _auth state_ tersebut.
+
+## Memperbarui `playwright.config.ts`
+
+Kita perlu memastikan bahwa masing-masing _projects_ sudah dipasangkan dengan _dependency_-nya yang sesuai.
+
+```ts
+import path from "node:path";
+import { defineConfig, devices } from "@playwright/test";
+
+export const CHROMIUM_AUTH_FILE = path.join(import.meta.dirname, "./.auth/user-chromium.json");
+export const FIREFOX_AUTH_FILE = path.join(import.meta.dirname, "./.auth/user-firefox.json");
+export const WEBKIT_AUTH_FILE = path.join(import.meta.dirname, "./.auth/user-webkit.json");
+
+export default defineConfig({
+  /* Other configuration is hidden for conciseness */
+
+  /* Configure projects for major browsers */
+  projects: [
+    // { name: "setup", testMatch: /.*\.setup\.ts/ },
+
+    //--begin-chromium
+    {
+      name: "chromium-setup",
+      testMatch: /chromium.setup.ts/,
+      use: { ...devices["Desktop Chrome"] },
+    },
+    {
+      name: "chromium",
+      use: {
+        ...devices["Desktop Chrome"],
+        storageState: CHROMIUM_AUTH_FILE,
+      },
+      dependencies: ["chromium-setup"],
+    },
+    //--end-chromium
+
+    //--begin-firefox
+    {
+      name: "firefox-setup",
+      testMatch: /firefox.setup.ts/,
+      use: { ...devices["Desktop Firefox"] },
+    },
+    {
+      name: "firefox",
+      use: {
+        ...devices["Desktop Firefox"],
+        storageState: FIREFOX_AUTH_FILE,
+      },
+      dependencies: ["firefox-setup"],
+    },
+    //--end-firefox
+
+    //--begin-webkit
+    // setup using chromium to get the secure cookies and alter it later
+    {
+      name: "webkit-setup",
+      testMatch: /webkit.setup.ts/,
+    },
+    {
+      name: "webkit",
+      use: {
+        ...devices["Desktop Safari"],
+        storageState: WEBKIT_AUTH_FILE,
+      },
+      dependencies: ["webkit-setup"],
+    },
+    //--end-webkit
+  ],
+});
+```
+
+Bisa kita lihat, di atas konfigurasi tersebut terdapat konstanta yang mendefinisikan di mana _auth state_ untuk masing-masing _project_ akan disimpan. Konstanta tersebut juga diekspor agar bisa digunakan di tiap berkas _setup_.
+
+`webkit-setup` akan dijalankan sebelum menjalankan _project_ bernama `webkit` yang mana menggunakan Safari versi _desktop_. Pada berkas `webkit.setup.ts` nanti kita akan memodifikasi _cookie_ yang disimpan agar bisa berjalan di localhost, yaitu dengan mematikan atribut `Secure`.
+
+## _Setup_ untuk masing-masing browser
+
+Untuk Chrome dan Firefox, sederhana saja, berkas _setup_-nya akan terlihat seperti ini:
+
+```ts
+import { CHROMIUM_AUTH_FILE } from "../../playwright.config";
+import { setupAuth } from "./auth.setup";
+
+setupAuth({
+  email: "chromium@test.com",
+  password: "chromium",
+  authStorePath: CHROMIUM_AUTH_FILE,
+});
+```
+
+```ts
+import { FIREFOX_AUTH_FILE } from "../../playwright.config";
+import { setupAuth } from "./auth.setup";
+
+setupAuth({
+  email: "firefox@test.com",
+  password: "firefox",
+  authStorePath: FIREFOX_AUTH_FILE,
+});
+```
+
+Khusus untuk Safari (WebKit), kita akan memanfaatkan _parameter callback_ yang sudah disediakan oleh `setupAuth` untuk memodifikasi _cookie_ yang diterima.
+
+```ts
+import { WEBKIT_AUTH_FILE } from "../../playwright.config";
+import { setupAuth } from "./auth.setup";
+
+setupAuth({
+  email: "webkit@test.com",
+  password: "webkit",
+  authStorePath: WEBKIT_AUTH_FILE,
+  async alterStoreCallback({ page }) {
+    /**
+     * workaround to make `Set-Cookie` work in unsecure context (localhost) for webkit.
+     * https://chromestatus.com/feature/6269417340010496
+     * https://bugs.webkit.org/show_bug.cgi?id=281149
+     */
+    const storageState = await page.context().storageState();
+    const cookies = storageState.cookies;
+    const unsecureCookies = cookies.map(cookie => ({
+      ...cookie,
+      secure: false,
+    }));
+
+    await page.context().addCookies(unsecureCookies);
+  },
+});
+```
+
+`alterStoreCallback` dipanggil sesaat sebelum Playwright menyimpan _page context_, sehingga _cookie_ yang dimodifikasi dapat digunakan dalam pengujian.
+
+Jika ini tidak dilakukan, maka pengujian di Safari akan selalu gagal karena WebKit (_engine_ yang digunakan di Safari) tidak menyimpan _cookie_ dengan atribut _Secure_ di localhost atau tanpa HTTPS. Oleh karena itu, untuk pengujian, kita perlu memodifikasi _cookie_ yang disimpan dan hanya pada Safari, agar semua atribut `Secure` pada _cookie_ dimatikan.

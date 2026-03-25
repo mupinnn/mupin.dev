@@ -1,0 +1,274 @@
+---
+title: Bypassing Secure Cookie Limitation in WebKit for Localhost Playwright Testing
+description: A guide to bypassing and configuring Playwright to be able to run tests on Safari with web application that using Secure Cookie
+slug: bypassing-secure-cookie-limitation-in-webkit-for-localhost-playwright-testing
+isPublished: true
+publishedAt: 2026-03-25T12:09:13.720Z
+tags: [frontend, playwright, e2e]
+---
+
+Cookie have one of the most crucial attribute, the `Secure` attribute. This `Secure` attribute is an option that the server can set when sending cookies to users over HTTP. The purpose of this attribute is to prevent unauthorized access to cookies because they are sent in plain text—thus, browsers that support the `Secure` attribute will only send/set cookies when requesting a page or resource that uses HTTPS (encrypted).
+
+In practice, if you create a web application that can run on all browsers, there will be issues when trying to run it on browsers with the WebKit engine, such as Safari. [One bug report](https://bugs.webkit.org/show_bug.cgi?id=281149) mentions inconsistent behavior in WebKit when determining whether localhost is a secure origin. This report is also supported by the consensus status and standardization of the feature to treat localhost or loopback address as secure context in [Chrome Platform Status](https://chromestatus.com/feature/6269417340010496) which states that WebKit still does not support it.
+
+To address this issue during development, there are several ways to address it, such as:
+
+- Configuring HTTPS for local development
+- Conditionally sending the `Secure` attribute based on the origin of the request
+- Installing a proxy server to modify cookies before sending them to the client
+
+If you tried the simplest example, configuring HTTPS locally, your secure cookie should now be set properly in Safari. However, a different configuration is required if you're using end-to-end, cross-browser testing like Playwright in your CI/CD. Well, it's quite possible to do the same thing to configure HTTPS in CI/CD as mentioned in [this article](https://codeshare.co.uk/blog/how-to-run-a-local-https-site-inside-a-github-action-without-the-dev-certificate-trust-issue/)—but we need to do something simpler: keep using localhost without HTTPS and configure our existing test suites, in this case using Playwright.
+
+> For other E2E framework like Cypress, you should be able to adapt by finding the equivalent configuration
+
+The example case for this article is an end-to-end test for a [to-do list application](https://github.com/mupinnn/todo-docker/tree/main/e2e) I created where the authentication uses `HttpOnly` and `Secure` cookies which will fail when run in Safari. For this, we can utilize project dependencies and create a setup for each browser, where each browser will have a different user account.
+
+## Getting to know projects in Playwright
+
+Playwright has something called **projects**. A project is a way to group tests that will run with the same configuration. Projects are used to run tests on different browsers and devices. This is what we use to test whether our web application runs normally in most browsers (Chrome, Firefox, and Safari).
+
+Here's an example for a project configuration in Playwright:
+
+```ts
+import { defineConfig, devices } from "@playwright/test";
+
+export default defineConfig({
+  projects: [
+    {
+      name: "chromium",
+      use: { ...devices["Desktop Chrome"] },
+    },
+
+    {
+      name: "firefox",
+      use: { ...devices["Desktop Firefox"] },
+    },
+
+    {
+      name: "webkit",
+      use: { ...devices["Desktop Safari"] },
+    },
+
+    /* Test against mobile viewports. */
+    {
+      name: "Mobile Chrome",
+      use: { ...devices["Pixel 5"] },
+    },
+    {
+      name: "Mobile Safari",
+      use: { ...devices["iPhone 12"] },
+    },
+
+    /* Test against branded browsers. */
+    {
+      name: "Microsoft Edge",
+      use: {
+        ...devices["Desktop Edge"],
+        channel: "msedge",
+      },
+    },
+    {
+      name: "Google Chrome",
+      use: {
+        ...devices["Desktop Chrome"],
+        channel: "chrome",
+      },
+    },
+  ],
+});
+```
+
+Additionally, there are also project dependencies that are usually used for setup before running all tests on project. This setup is useful for [configuring authentication](https://playwright.dev/docs/auth).
+
+## Creating setup for each browser
+
+The first step is to create a setup for each browser. This setup is essentially just an abstraction of the authentication setup, where the authentication flow is defined, except we need a different storage location for each browser and to modify the behavior of that particular browser—in this case, Safari.
+
+Create several setup files like the following:
+
+```
+my-app/
+├─ tests/
+│  ├─ auth.setup.ts
+│  ├─ chromium.setup.ts
+│  ├─ firefox.setup.ts
+│  ├─ webkit.setup.ts
+```
+
+## Making authentication setup an abstraction
+
+In the `auth.setup.ts` file, we will create a function that will abstract the entire authentication flow plus a callback to add modifications to the authentication flow if needed.
+
+```ts
+import { test as setup, expect, type Page } from "@playwright/test";
+
+type SetupAuth = {
+  email: string;
+  password: string;
+  authStorePath: string;
+  alterStoreCallback?: ({ page }: { page: Page }) => Promise<void>;
+};
+
+export function setupAuth({ email, password, authStorePath, alterStoreCallback }: SetupAuth) {
+  setup.describe.configure({ mode: "serial" });
+  setup.describe("Authentication", () => {
+    setup("Register", async ({ page }) => {
+      await page.goto("/register");
+      await page.getByLabel("Email").fill(email);
+      await page.getByLabel("Password").fill(password);
+      await page.getByRole("button", { name: "Create account" }).click();
+      await page.waitForURL("/login");
+
+      await expect(page.getByText("Login to your account", { exact: true })).toBeVisible();
+    });
+
+    setup("Login", async ({ page }) => {
+      await page.goto("/login");
+      await page.getByLabel("Email").fill(email);
+      await page.getByLabel("Password").fill(password);
+      await page.getByRole("button", { name: "Login" }).click();
+      await page.waitForURL("/todo");
+
+      await expect(page.getByText("To-Do", { exact: true })).toBeVisible();
+      await expect(page.getByText("Please, do something.", { exact: true })).toBeVisible();
+
+      await alterStoreCallback?.({ page });
+      await page.context().storageState({ path: authStorePath });
+    });
+  });
+}
+```
+
+The `setupAuth` function will be exported and used in the setup file for each browser. This allows us to define where Playwright will store the auth state for each browser, as well as to modify that auth state.
+
+## Updating `playwright.config.ts`
+
+We need to ensure that each of the projects is paired with its appropriate dependency.
+
+```ts
+import path from "node:path";
+import { defineConfig, devices } from "@playwright/test";
+
+export const CHROMIUM_AUTH_FILE = path.join(import.meta.dirname, "./.auth/user-chromium.json");
+export const FIREFOX_AUTH_FILE = path.join(import.meta.dirname, "./.auth/user-firefox.json");
+export const WEBKIT_AUTH_FILE = path.join(import.meta.dirname, "./.auth/user-webkit.json");
+
+export default defineConfig({
+  /* Other configuration is hidden for conciseness */
+
+  /* Configure projects for major browsers */
+  projects: [
+    // { name: "setup", testMatch: /.*\.setup\.ts/ },
+
+    //--begin-chromium
+    {
+      name: "chromium-setup",
+      testMatch: /chromium.setup.ts/,
+      use: { ...devices["Desktop Chrome"] },
+    },
+    {
+      name: "chromium",
+      use: {
+        ...devices["Desktop Chrome"],
+        storageState: CHROMIUM_AUTH_FILE,
+      },
+      dependencies: ["chromium-setup"],
+    },
+    //--end-chromium
+
+    //--begin-firefox
+    {
+      name: "firefox-setup",
+      testMatch: /firefox.setup.ts/,
+      use: { ...devices["Desktop Firefox"] },
+    },
+    {
+      name: "firefox",
+      use: {
+        ...devices["Desktop Firefox"],
+        storageState: FIREFOX_AUTH_FILE,
+      },
+      dependencies: ["firefox-setup"],
+    },
+    //--end-firefox
+
+    //--begin-webkit
+    // setup using chromium to get the secure cookies and alter it later
+    {
+      name: "webkit-setup",
+      testMatch: /webkit.setup.ts/,
+    },
+    {
+      name: "webkit",
+      use: {
+        ...devices["Desktop Safari"],
+        storageState: WEBKIT_AUTH_FILE,
+      },
+      dependencies: ["webkit-setup"],
+    },
+    //--end-webkit
+  ],
+});
+```
+
+As we can see, above the configuration, there are constants that define where the auth state for each project will be stored. These constants are also exported for use in each setup file.
+
+`webkit-setup` will be run before running the project named `webkit`, which uses the desktop version of Safari. In the `webkit.setup.ts` file, we will modify the stored cookies to allow them to run on localhost by disabling the `Secure` attribute.
+
+## Setup for each browser
+
+For Chrome and Firefox, very simple, the setup file will look like this:
+
+```ts
+import { CHROMIUM_AUTH_FILE } from "../../playwright.config";
+import { setupAuth } from "./auth.setup";
+
+setupAuth({
+  email: "chromium@test.com",
+  password: "chromium",
+  authStorePath: CHROMIUM_AUTH_FILE,
+});
+```
+
+```ts
+import { FIREFOX_AUTH_FILE } from "../../playwright.config";
+import { setupAuth } from "./auth.setup";
+
+setupAuth({
+  email: "firefox@test.com",
+  password: "firefox",
+  authStorePath: FIREFOX_AUTH_FILE,
+});
+```
+
+Specifically for Safari (WebKit), we will utilize the callback parameter provided by `setupAuth` to modify the cookie received.
+
+```ts
+import { WEBKIT_AUTH_FILE } from "../../playwright.config";
+import { setupAuth } from "./auth.setup";
+
+setupAuth({
+  email: "webkit@test.com",
+  password: "webkit",
+  authStorePath: WEBKIT_AUTH_FILE,
+  async alterStoreCallback({ page }) {
+    /**
+     * workaround to make `Set-Cookie` work in unsecure context (localhost) for webkit.
+     * https://chromestatus.com/feature/6269417340010496
+     * https://bugs.webkit.org/show_bug.cgi?id=281149
+     */
+    const storageState = await page.context().storageState();
+    const cookies = storageState.cookies;
+    const unsecureCookies = cookies.map(cookie => ({
+      ...cookie,
+      secure: false,
+    }));
+
+    await page.context().addCookies(unsecureCookies);
+  },
+});
+```
+
+`alterStoreCallback` is called just before Playwright saves the page context, so the modified cookie can be used in the rest of the test.
+
+If this not done, the test in Safari will always fail because WebKit (the engine used in Safari) does not store cookies with the `Secure` attribute on localhost or without HTTPS. Therefore, for testing, we need to modify the stored cookie in Safari only, so that all cookies have the `Secure` attribute disabled.
