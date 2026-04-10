@@ -6,6 +6,7 @@ import Alert from "@/components/ui/alert.astro";
 import SeoHead from "@/components/seo-head.astro";
 import PageHeader from "@/components/page-header.astro";
 import TagList from "@/components/blog/tag-list.astro";
+import BlogPostComments from "@/components/blog/blog-post-comments.astro";
 import { getPublishedBlogPosts, getPostTranslations } from "@/lib/content.lib";
 
 export async function getStaticPaths() {
@@ -78,4 +79,6 @@ const postTranslations = await getPostTranslations(post.data.path, post.data.loc
   <div class="prose prose-slate mx-auto pt-8 sm:pt-16">
     <Content />
   </div>
+
+  <BlogPostComments />
 </DefaultLayout>
