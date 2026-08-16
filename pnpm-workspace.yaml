@@ -1,8 +1,11 @@
 packages:
   - "apps/*"
-  - "packages/*"
+
+allowBuilds:
+  esbuild: true
+  lefthook: true
+  workerd: true
 
 catalog:
-  astro: ^5.9.3
-
-shamefullyHoist: true
+  astro: 7.2.2
+  typescript: 6.0.2

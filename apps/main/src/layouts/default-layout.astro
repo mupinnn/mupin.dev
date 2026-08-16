@@ -3,11 +3,11 @@ import "@fontsource-variable/inter";
 import "@fontsource-variable/bricolage-grotesque";
 import "../styles/global.css";
 
-import SeoHead from "@/components/seo-head.astro";
 import Footer from "@/components/footer.astro";
 import Navbar from "@/components/navbar.astro";
-import { type Locale } from "@/types";
+import SeoHead from "@/components/seo-head.astro";
 import { cn } from "@/lib/utils.lib";
+import { type Locale } from "@/types";
 
 interface Props {
   lang: Locale;
@@ -25,13 +25,13 @@ const { lang = "en", containerClass } = Astro.props;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <slot name="seo">
-      {/* @ts-expect-error: this is expected since it's inside a layout */}
+      <!-- @ts-expect-error: this is expected since it's inside a layout -->
       <SeoHead />
     </slot>
   </head>
   <body class="text-cod-gray-3 relative flex min-h-svh flex-col bg-slate-100">
     <Navbar />
-    <main class={cn("mx-auto max-w-6xl w-full px-4 grow", containerClass)}>
+    <main class={cn("mx-auto w-full max-w-6xl grow px-4", containerClass)}>
       <slot />
     </main>
     <Footer />

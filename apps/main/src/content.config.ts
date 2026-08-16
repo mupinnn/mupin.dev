@@ -1,7 +1,8 @@
-import { defineCollection, z } from "astro:content";
+import { defineCollection } from "astro:content";
 import { glob, type Loader } from "astro/loaders";
-import { getOGImage } from "@mupin.dev/shared/lib/utils.lib.ts";
-import { LocaleSchema, type Locale } from "./types";
+import { z } from "astro/zod";
+import { getOGImage } from "@/lib/utils.lib.ts";
+import { type Locale, LocaleSchema } from "./types";
 
 function blogContentLoader(): Loader {
   const defaultGlob = glob({ pattern: "**/*.{md,mdx}", base: "./src/content/blog" });
@@ -16,12 +17,12 @@ function blogContentLoader(): Loader {
       await defaultGlob.load({
         ...ctx,
         async parseData(entry) {
-          let path = "",
-            locale: Locale = "en";
+          let path = "";
+          let locale: Locale = "en";
 
           if (entry.filePath) {
             const splittedPath = entry.filePath.split("/");
-            locale = splittedPath.pop()?.split(".").shift()! as Locale;
+            locale = splittedPath.pop()?.split(".").shift() as Locale;
             path = splittedPath.join("/");
           }
 
@@ -31,7 +32,7 @@ function blogContentLoader(): Loader {
               ...entry.data,
               path,
               locale,
-              languageName: localeLanguageNameMap[locale],
+              languageName: localeLanguageNameMap[locale] as string,
               ogImage: getOGImage(entry.data.title as string),
             },
           });

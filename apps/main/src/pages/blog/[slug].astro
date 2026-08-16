@@ -1,13 +1,13 @@
 ---
 import { render } from "astro:content";
-import { formatDate } from "@mupin.dev/shared/lib/utils.lib.ts";
-import DefaultLayout from "@/layouts/default-layout.astro";
-import Alert from "@/components/ui/alert.astro";
-import SeoHead from "@/components/seo-head.astro";
-import PageHeader from "@/components/page-header.astro";
-import TagList from "@/components/blog/tag-list.astro";
 import BlogPostComments from "@/components/blog/blog-post-comments.astro";
-import { getPublishedBlogPosts, getPostTranslations } from "@/lib/content.lib";
+import TagList from "@/components/blog/tag-list.astro";
+import PageHeader from "@/components/page-header.astro";
+import SeoHead from "@/components/seo-head.astro";
+import Alert from "@/components/ui/alert.astro";
+import DefaultLayout from "@/layouts/default-layout.astro";
+import { getPostTranslations, getPublishedBlogPosts } from "@/lib/content.lib";
+import { formatDate } from "@/lib/utils.lib.ts";
 
 export async function getStaticPaths() {
   const posts = await getPublishedBlogPosts();
@@ -49,14 +49,11 @@ const postTranslations = await getPostTranslations(post.data.path, post.data.loc
 
   <PageHeader title={post.data.title} backLink="/blog">
     <div class="space-y-2 text-xs sm:text-sm">
-      <p>
-        {formatDate(post.data.publishedAt)} — {remarkPluginFrontmatter.readingTime}
-      </p>
+      <p>{formatDate(post.data.publishedAt)} — {remarkPluginFrontmatter.readingTime}</p>
       <TagList tags={post.data.tags} />
     </div>
 
-    {
-      postTranslations.length > 0 && (
+    {postTranslations.length > 0 && (
         <Alert>
           <p>
             This article is available in other language(s):{" "}
@@ -72,8 +69,7 @@ const postTranslations = await getPostTranslations(post.data.path, post.data.loc
             })}
           </p>
         </Alert>
-      )
-    }
+      )}
   </PageHeader>
 
   <div class="prose prose-slate mx-auto pt-8 sm:pt-16">

@@ -3,29 +3,20 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "turbo build",
     "dev": "turbo dev",
-    "lint": "turbo lint",
-    "deploy": "turbo deploy",
-    "format": "prettier -w -c \"**/*.{ts,tsx,md,mdx,js,jsx,json,yaml,yml,html,css,scss,sass,astro}\"",
-    "prepare": "husky"
+    "build": "turbo build",
+    "check": "biome check .",
+    "lint": "biome lint",
+    "format": "biome check --write .",
+    "prepare": "lefthook install"
   },
-  "packageManager": "pnpm@10.10.0",
-  "engines": {
-    "node": ">=20",
-    "pnpm": ">=10"
-  },
-  "lint-staged": {
-    "**/*.{ts,tsx,md,mdx,js,jsx,json,yaml,yml,html,css,scss,sass,astro}": "prettier -w"
-  },
+  "packageManager": "pnpm@11.20.0",
   "devDependencies": {
-    "@commitlint/cli": "^19.8.1",
-    "@commitlint/config-conventional": "^19.8.1",
-    "husky": "^9.1.7",
-    "lint-staged": "^16.1.1",
-    "prettier": "^3.5.3",
-    "prettier-plugin-astro": "^0.14.1",
-    "prettier-plugin-tailwindcss": "^0.6.12",
-    "turbo": "^2.5.4"
+    "@biomejs/biome": "2.5.8",
+    "@commitlint/cli": "21.2.2",
+    "@commitlint/config-conventional": "21.2.2",
+    "lefthook": "2.1.10",
+    "turbo": "2.10.10",
+    "typescript": "catalog:"
   }
 }

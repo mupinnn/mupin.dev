@@ -1,13 +1,12 @@
 {
-  "$schema": "https://turborepo.com/schema.json",
-  "tasks": {
-    "build": {
-      "outputs": ["dist/**"]
-    },
-    "deploy": {},
-    "dev": {
-      "persistent": true,
-      "cache": false
-    }
-  }
+	"$schema": "./node_modules/turbo/schema.json",
+	"tasks": {
+		"build": {
+			"outputs": ["dist/**"]
+		},
+		"dev": {
+			"persistent": true,
+			"cache": false
+		}
+	}
 }
