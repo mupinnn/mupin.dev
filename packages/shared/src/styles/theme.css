@@ -1,6 +1,10 @@
+@import "@fontsource-variable/inter";
+@import "@fontsource-variable/bricolage-grotesque";
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 @config "../../tailwind.config.js";
+@source "../astro";
+@source "../react";
 
 @theme {
   --font-sans:

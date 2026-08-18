@@ -1,13 +1,13 @@
 ---
 import { Image } from "astro:assets";
 import { getEntry } from "astro:content";
+import resume from "@mupin.dev/shared/data/resume";
+import { formatDate } from "@mupin.dev/shared/utils";
 import { Icon } from "astro-icon/components";
 import featuredProjectKagetImage from "@/assets/images/featured-project-kaget.png";
 import Badge from "@/components/ui/badge.astro";
 import { OrbitingCircles } from "@/components/ui/orbiting-circles.tsx";
-import resume from "@/data/resume.json";
 import { getLatestBlogPost } from "@/lib/content.lib";
-import { formatDate } from "@/lib/utils.lib.js";
 
 const socialIcons = [
   ...resume.basics.profiles.map(profile => {

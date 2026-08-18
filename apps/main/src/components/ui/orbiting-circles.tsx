@@ -1,5 +1,5 @@
+import { cn } from "@mupin.dev/shared/utils";
 import React from "react";
-import { cn } from "@/lib/utils.lib";
 
 export interface OrbitingCirclesProps extends React.HTMLAttributes<HTMLDivElement> {
   className?: string;

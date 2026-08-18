@@ -17,8 +17,8 @@ export function formatDate(date: string | Date, options?: Intl.DateTimeFormatOpt
   }).format(new Date(date));
 }
 
-export function getOGImage(title: string) {
-  return `${WORKERS_URL}/og?title=${title}&origin=main`;
+export function getOGImage(title: string, origin: string) {
+  return `${WORKERS_URL}/og?title=${title}&origin=${origin}`;
 }
 
 export function getWorkersAsset(path: string) {

@@ -1,7 +1,7 @@
 import { defineCollection } from "astro:content";
+import { getOGImage } from "@mupin.dev/shared/utils";
 import { glob, type Loader } from "astro/loaders";
 import { z } from "astro/zod";
-import { getOGImage } from "@/lib/utils.lib.ts";
 import { type Locale, LocaleSchema } from "./types";
 
 function blogContentLoader(): Loader {
@@ -33,7 +33,7 @@ function blogContentLoader(): Loader {
               path,
               locale,
               languageName: localeLanguageNameMap[locale] as string,
-              ogImage: getOGImage(entry.data.title as string),
+              ogImage: getOGImage(entry.data.title as string, "main"),
             },
           });
         },

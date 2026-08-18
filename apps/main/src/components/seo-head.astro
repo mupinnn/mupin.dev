@@ -1,6 +1,6 @@
 ---
+import { getWorkersAsset } from "@mupin.dev/shared/utils";
 import { SEO as AstroSEO, type Props as SEOProps } from "astro-seo";
-import { getWorkersAsset } from "@/lib/utils.lib.ts";
 
 interface Props extends Omit<SEOProps, "openGraph"> {
   slot: "seo";

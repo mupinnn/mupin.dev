@@ -1,8 +1,7 @@
 ---
 import { type CollectionEntry } from "astro:content";
+import { cn, formatDate } from "@mupin.dev/shared/utils";
 import { type HTMLAttributes } from "astro/types";
-import { cn } from "@/lib/utils.lib";
-import { formatDate } from "@/lib/utils.lib.ts";
 import TagList from "./tag-list.astro";
 
 type Props = {
