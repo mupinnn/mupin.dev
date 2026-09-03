@@ -1,9 +1,9 @@
 ---
 import { Image } from "astro:assets";
 import { Icon } from "astro-icon/components";
-import DefaultLayout from "@/layouts/default-layout.astro";
-import SeoHead from "@/components/seo-head.astro";
 import PageHeader from "@/components/page-header.astro";
+import SeoHead from "@/components/seo-head.astro";
+import DefaultLayout from "@/layouts/default-layout.astro";
 import { getProjects } from "@/lib/content.lib";
 
 const projects = await getProjects();
@@ -20,15 +20,14 @@ const projects = await getProjects();
   <section
     class="grid grid-cols-1 gap-4 pt-8 min-[560px]:grid-cols-2 sm:pt-16 md:grid-cols-3 lg:grid-cols-4"
   >
-    {
-      projects.map(project => (
+    {projects.map(project => (
         <a
           href={`/projects/${project.id}`}
-          class="border-lemon-3 space-y-4 rounded-xl border border-dashed p-4"
+          class="space-y-4 rounded-xl border border-lemon-3 border-dashed p-4"
         >
           <Image src={project.data.thumbnail} alt="" class="col-span-2 col-start-7 rounded-lg" />
           <div class="space-y-1">
-            <h2 class="font-bricolage text-xl font-bold">{project.data.title}</h2>
+            <h2 class="font-bold font-bricolage text-xl">{project.data.title}</h2>
             <p class="text-sm">{project.data.description}</p>
           </div>
           <div class="inline-flex items-center gap-2">
@@ -37,7 +36,6 @@ const projects = await getProjects();
             ))}
           </div>
         </a>
-      ))
-    }
+      ))}
   </section>
 </DefaultLayout>

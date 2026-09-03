@@ -2,7 +2,13 @@ packages:
   - "apps/*"
   - "packages/*"
 
-catalog:
-  astro: ^5.9.3
+allowBuilds:
+  esbuild: true
+  lefthook: true
+  workerd: true
 
-shamefullyHoist: true
+catalog:
+  astro: 7.2.2
+  react: 19.1.0
+  react-dom: 19.1.0
+  typescript: 6.0.2

@@ -1,9 +1,9 @@
 ---
 import { render } from "astro:content";
 import { Icon } from "astro-icon/components";
-import DefaultLayout from "@/layouts/default-layout.astro";
-import SeoHead from "@/components/seo-head.astro";
 import PageHeader from "@/components/page-header.astro";
+import SeoHead from "@/components/seo-head.astro";
+import DefaultLayout from "@/layouts/default-layout.astro";
 import { getProjects } from "@/lib/content.lib";
 
 export async function getStaticPaths() {
@@ -25,8 +25,7 @@ const { Content } = await render(project);
   <SeoHead slot="seo" title={project.data.title} description={project.data.description} />
   <PageHeader title={project.data.title} subtitle={project.data.description} backLink="/projects">
     <div class="inline-flex items-center gap-2">
-      {
-        project.data.githubUrl && (
+      {project.data.githubUrl && (
           <a
             href={project.data.githubUrl}
             target="_blank"
@@ -36,11 +35,9 @@ const { Content } = await render(project);
             <Icon name="devicon:github" size="18" />
             GitHub
           </a>
-        )
-      }
+        )}
 
-      {
-        project.data.appUrl && (
+      {project.data.appUrl && (
           <a
             href={project.data.appUrl}
             target="_blank"
@@ -50,8 +47,7 @@ const { Content } = await render(project);
             <Icon name="ri:external-link-line" size="18" />
             Visit the app
           </a>
-        )
-      }
+        )}
     </div>
   </PageHeader>
 

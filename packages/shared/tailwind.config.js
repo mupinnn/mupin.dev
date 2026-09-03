@@ -1,5 +1,5 @@
 /** @type {import("tailwindcss").Config} */
-module.exports = {
+export default {
   theme: {
     extend: {
       typography: ({ theme }) => ({
@@ -17,7 +17,7 @@ module.exports = {
             "h1, h2, h3, h4, h5, h6": {
               scrollMarginTop: "calc(var(--spacing) * 6)",
 
-              "a": {
+              a: {
                 display: "inline-block",
                 textDecoration: "none",
                 fontWeight: theme("fontWeight.bold"),

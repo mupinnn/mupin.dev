@@ -1,12 +1,12 @@
+import { cn } from "@mupin.dev/shared/utils";
 import { useId } from "react";
-import { cn } from "@/lib/utils.lib";
 
 interface GridPatternProps extends React.SVGProps<SVGSVGElement> {
   width?: number;
   height?: number;
   x?: number;
   y?: number;
-  squares?: Array<[x: number, y: number]>;
+  squares?: [x: number, y: number][];
   strokeDasharray?: string;
   className?: string;
   [key: string]: unknown;
@@ -28,7 +28,7 @@ export function GridPattern({
     <svg
       aria-hidden="true"
       className={cn(
-        "fill-cod-gray-1/30 stroke-cod-gray-1/30 pointer-events-none absolute inset-0 h-full w-full",
+        "pointer-events-none absolute inset-0 h-full w-full fill-cod-gray-1/30 stroke-cod-gray-1/30",
         className
       )}
       {...props}

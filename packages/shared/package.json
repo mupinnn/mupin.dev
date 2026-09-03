@@ -1,19 +1,30 @@
 {
   "name": "@mupin.dev/shared",
-  "version": "0.0.0",
   "private": true,
+  "type": "module",
+  "version": "0.0.1",
   "exports": {
-    "./tailwind.css": "./tailwind.css",
-    "./components/*": "./components/*",
-    "./data/*": "./data/*",
-    "./lib/*": "./lib/*"
+    "./utils": "./src/utils/index.ts",
+    "./data/resume": "./src/data/resume.json",
+    "./styles": "./src/styles/theme.css",
+    "./astro/ui/*": "./src/astro/ui/*.astro",
+    "./react/ui/*": "./src/react/ui/*.tsx"
   },
   "dependencies": {
-    "astro": "catalog:",
-    "tailwind-variants": "^1.0.0",
+    "@tailwindcss/typography": "^0.5.16",
+    "clsx": "^2.1.1",
+    "tailwind-merge": "^3.3.1",
     "tailwindcss": "^4.1.10"
   },
+  "peerDependencies": {
+    "astro": "catalog:",
+    "react": "catalog:",
+    "react-dom": "catalog:"
+  },
   "devDependencies": {
-    "@tailwindcss/typography": "^0.5.16"
+    "astro": "catalog:",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "typescript": "catalog:"
   }
 }

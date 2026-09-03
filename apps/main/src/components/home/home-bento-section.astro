@@ -1,12 +1,12 @@
 ---
 import { Image } from "astro:assets";
 import { getEntry } from "astro:content";
+import resume from "@mupin.dev/shared/data/resume";
+import { formatDate } from "@mupin.dev/shared/utils";
 import { Icon } from "astro-icon/components";
-import resume from "@mupin.dev/shared/data/resume.json";
-import { formatDate } from "@mupin.dev/shared/lib/utils.lib.js";
+import featuredProjectKagetImage from "@/assets/images/featured-project-kaget.png";
 import Badge from "@/components/ui/badge.astro";
 import { OrbitingCircles } from "@/components/ui/orbiting-circles.tsx";
-import featuredProjectKagetImage from "@/assets/images/featured-project-kaget.png";
 import { getLatestBlogPost } from "@/lib/content.lib";
 
 const socialIcons = [
@@ -117,8 +117,7 @@ const techStacks = [
         </Badge>
 
         <div class="space-y-2">
-          {
-            resume.work.map(work => (
+          {resume.work.map(work => (
               <div class="space-y-1 text-sm">
                 <p class="font-medium">
                   {work.name === "Freelance"
@@ -141,8 +140,7 @@ const techStacks = [
                     : "Present"}
                 </p>
               </div>
-            ))
-          }
+            ))}
         </div>
       </div>
     </div>
@@ -199,8 +197,7 @@ const techStacks = [
 
   <div class="flex flex-1 flex-col gap-4 lg:flex-row">
     <div class="grid grid-cols-3 gap-4 sm:grid-cols-6 lg:flex-1 lg:grid-cols-3">
-      {
-        socialIcons.map(social => (
+      {socialIcons.map(social => (
           <a
             href={social.link}
             rel="noopener noreferrer"
@@ -213,8 +210,7 @@ const techStacks = [
             <span class="sr-only">Visit my {social.name}</span>
             <Icon name={social.icon} size="40" />
           </a>
-        ))
-      }
+        ))}
     </div>
 
     <a
