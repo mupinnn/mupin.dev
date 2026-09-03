@@ -4,7 +4,7 @@ import mdx from "@astrojs/mdx";
 import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
 import tailwindcss from "@tailwindcss/vite";
-import { defineConfig } from "astro/config";
+import { defineConfig, fontProviders } from "astro/config";
 import icon from "astro-icon";
 import { fromHtmlIsomorphic } from "hast-util-from-html-isomorphic";
 import { h } from "hastscript";
@@ -71,9 +71,25 @@ function remarkReadingTime() {
 // https://astro.build/config
 export default defineConfig({
   site: "https://mupin.dev",
+
   vite: {
     plugins: [tailwindcss()],
   },
+
+  fonts: [
+    {
+      provider: fontProviders.fontsource(),
+      name: "Inter",
+      cssVariable: "--font-inter",
+      weights: ["100 900"]
+    },
+    {
+      provider: fontProviders.fontsource(),
+      name: "Bricolage Grotesque",
+      cssVariable: "--font-bricolage-grotesque",
+      weights: ["100 900"]
+    }
+  ],
 
   markdown: {
     processor: unified({
